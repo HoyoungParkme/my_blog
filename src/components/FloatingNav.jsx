@@ -12,14 +12,14 @@ const FloatingNav = () => {
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-center space-y-4 z-50">
       <button
-        onClick={() => handleCopy("youremail@example.com")}
+        onClick={() => handleCopy("hoyoungpark.ds@gmail.com")}
         className="bg-white rounded-full p-3 shadow-lg hover:scale-110 transition"
       >
         <img src={emailIcon} alt="이메일" className="w-6 h-6" />
       </button>
 
       <button
-        onClick={() => handleCopy("010-1234-5678")}
+        onClick={() => handleCopy("010-8663-4225")}
         className="bg-white rounded-full p-3 shadow-lg hover:scale-110 transition"
       >
         <img src={phoneIcon} alt="전화번호" className="w-6 h-6" />
