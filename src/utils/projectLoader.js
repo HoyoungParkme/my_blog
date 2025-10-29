@@ -19,8 +19,10 @@ export const projectFiles = {
 // 프로젝트 파일 로드
 export async function loadProject(fileName) {
   try {
-    console.log(`Attempting to load: /projects/${fileName}`);
-    const response = await fetch(`/projects/${fileName}`);
+    const basePath = process.env.PUBLIC_URL || "";
+    const url = `${basePath}/projects/${fileName}`;
+    console.log(`Attempting to load: ${url}`);
+    const response = await fetch(url);
     if (!response.ok) {
       console.warn(
         `Failed to load project ${fileName}: ${response.status} ${response.statusText}`
