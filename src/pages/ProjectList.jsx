@@ -2,23 +2,23 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { loadProjectsFromMarkdown } from "../data/projectData";
 import { projectsKo } from "../data/projectData";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "../components/ProjectCard";
 
 /**
- * 메인 페이지의 프로젝트 섹션
- * "자세히 보기"를 누르기 전의 미리보기 카드들
+ * 프로젝트 목록 페이지
+ * 모든 프로젝트를 카드 형태로 보여주는 페이지
  */
-export default function Projects({ lang }) {
+export default function ProjectList({ lang }) {
   const categories = ["전체", "실무", "개인"];
   const [filter, setFilter] = useState("전체");
-  const [projects, setProjects] = useState({ 실무: [], 개인: [] });
+  const [projects, setProjects] = useState(projectsKo);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // 마크다운 파일에서 프로젝트 로드
     loadProjectsFromMarkdown()
       .then((loadedProjects) => {
-        console.log("Loaded projects in Projects component:", loadedProjects);
+        console.log("Loaded projects:", loadedProjects);
         console.log("실무 프로젝트 개수:", loadedProjects.실무?.length || 0);
         console.log("개인 프로젝트 개수:", loadedProjects.개인?.length || 0);
         setProjects(loadedProjects);
@@ -26,8 +26,6 @@ export default function Projects({ lang }) {
       })
       .catch((error) => {
         console.error("Failed to load projects:", error);
-        // 에러 발생 시 기본 데이터 사용
-        setProjects(projectsKo);
         setLoading(false);
       });
   }, []);
@@ -36,22 +34,43 @@ export default function Projects({ lang }) {
   const filteredList = filter === "전체" ? fullList : projects[filter] || [];
 
   return (
-    <section id="projects" className="py-20 bg-neutral-100 text-black">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="mb-8 border-b border-zinc-400 pb-2">
-          <h2 className="text-3xl font-bold">
+    <div className="min-h-screen bg-neutral-100 py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="mb-8">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 border border-gray-200 hover:border-gray-300"
+          >
+            <svg
+              className="w-4 h-4 transition-transform hover:-translate-x-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            홈으로 돌아가기
+          </Link>
+          <h1 className="text-4xl font-bold mt-4 border-b border-zinc-400 pb-3">
             {lang === "ko" ? "프로젝트" : "Projects"}
-          </h2>
+          </h1>
         </div>
 
         {/* 필터 버튼 */}
-        <div className="flex gap-3 mb-6">
+        <div className="flex gap-3 mb-8">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-4 py-1.5 text-sm rounded ${
-                filter === cat ? "bg-black text-white" : "bg-zinc-300"
+              className={`px-4 py-2 text-sm rounded transition ${
+                filter === cat
+                  ? "bg-black text-white"
+                  : "bg-zinc-300 hover:bg-zinc-400"
               }`}
             >
               {cat}
@@ -59,18 +78,18 @@ export default function Projects({ lang }) {
           ))}
         </div>
 
-        {/* 프로젝트 카드 - 미리보기 */}
+        {/* 프로젝트 카드 그리드 */}
         {loading ? (
           <div className="text-center py-16">
             <p className="text-gray-500">프로젝트를 불러오는 중...</p>
           </div>
         ) : filteredList.length > 0 ? (
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredList.map((project, idx) => (
               <ProjectCard
                 key={project.id || idx}
                 project={project}
-                variant="default"
+                variant="list"
               />
             ))}
           </div>
@@ -80,6 +99,6 @@ export default function Projects({ lang }) {
           </div>
         )}
       </div>
-    </section>
+    </div>
   );
 }
