@@ -44,7 +44,7 @@ function App() {
   const t = translations[lang];
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL || "/my_blog"}>
       <div className="font-sans text-black bg-neutral-100">
         <Routes>
           <Route
