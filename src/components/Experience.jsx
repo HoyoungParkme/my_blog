@@ -6,53 +6,57 @@ export default function Experience({ lang }) {
       highlightsTitle: "주요 경험",
       skills: [
         "Python",
-        "Pandas",
-        "SQL",
-        "BeautifulSoup",
-        "TensorFlow",
-        "PyTorch",
-        "Django",
+        "TypeScript",
+        "Node.js",
         "React",
-        "Tableau",
+        "Next.js",
+        "FastAPI",
+        "Django",
+        "TensorFlow",
+        "LangChain",
+        "OpenAI",
         "Docker",
-        "Metabase",
+        "Kubernetes",
+        "AWS",
+        "GCP",
       ],
       highlights: [
-        "ETL 자동화 및 데이터 정제 파이프라인 구축 경험",
-        "Tableau를 활용한 대시보드 구축 및 사용자 맞춤 시각화 제공",
-        "Django REST API 개발 및 프론트와 통신 설계",
-        "머신러닝 모델 서빙 및 웹 연동 경험",
-        "Git과 협업 툴을 이용한 팀 프로젝트 진행",
-      ],
-    },
-    en: {
-      title: "Skills & Experience",
-      skillsTitle: "Skills",
-      highlightsTitle: "Highlights",
-      skills: [
-        "Python",
-        "Pandas",
-        "SQL",
-        "BeautifulSoup",
-        "TensorFlow",
-        "PyTorch",
-        "Django",
-        "React",
-        "Tableau",
-        "Docker",
-        "Metabase",
-      ],
-      highlights: [
-        "Built automated ETL pipelines for data collection and cleansing",
-        "Designed user-centric dashboards using Tableau",
-        "Developed REST APIs with Django and frontend integration",
-        "Deployed machine learning models into production systems",
-        "Led team projects with Git and collaboration tools",
+        "현대글로비스 ERP 데이터 기반 KPI 설계 및 실시간 대시보드 구축",
+        "삼성물산 Tableau REST API + FabricX + LangChain으로 AI Agent PoC 구현",
+        "현대모비스 COBOL → Java 전환 에이전트 개발 PoC",
+        "이상 패턴 탐지 모델에 RAG 개념을 접목해 영상 메타를 Vector DB로 관리하고, 학습 없이 유사 영상 탐지 연구",
       ],
     },
   };
 
-  const t = content[lang];
+  const t = content[lang] || content.ko;
+
+  // Map for shields.io badge styling
+  const badgeMeta = {
+    Python: { color: "3776AB", logo: "python", logoColor: "white" },
+    "TypeScript": { color: "3178C6", logo: "typescript", logoColor: "white" },
+    "Node.js": { color: "339933", logo: "nodedotjs", logoColor: "white" },
+    React: { color: "20232A", logo: "react", logoColor: "61DAFB" },
+    "Next.js": { color: "000000", logo: "nextdotjs", logoColor: "white" },
+    FastAPI: { color: "05998B", logo: "fastapi", logoColor: "white" },
+    Django: { color: "092E20", logo: "django", logoColor: "white" },
+    TensorFlow: { color: "FF6F00", logo: "tensorflow", logoColor: "white" },
+    LangChain: { color: "2C3E50" },
+    OpenAI: { color: "000000", logo: "openai", logoColor: "white" },
+    Docker: { color: "2496ED", logo: "docker", logoColor: "white" },
+    Kubernetes: { color: "326CE5", logo: "kubernetes", logoColor: "white" },
+    AWS: { color: "232F3E", logo: "amazonaws", logoColor: "FF9900" },
+    GCP: { color: "4285F4", logo: "googlecloud", logoColor: "white" },
+  };
+
+  const badgeUrl = (label) => {
+    const meta = badgeMeta[label] || { color: "555" };
+    const base = `https://img.shields.io/badge/${encodeURIComponent(label)}-${meta.color}`;
+    const params = new URLSearchParams({ style: "for-the-badge" });
+    if (meta.logo) params.set("logo", meta.logo);
+    if (meta.logoColor) params.set("logoColor", meta.logoColor);
+    return `${base}?${params.toString()}`;
+  };
 
   return (
     <section id="experience" className="py-20 bg-neutral-100 text-black">
@@ -65,12 +69,13 @@ export default function Experience({ lang }) {
           <h3 className="text-xl font-semibold mb-3">{t.skillsTitle}</h3>
           <div className="flex flex-wrap gap-2">
             {t.skills.map((skill, idx) => (
-              <span
+              <img
                 key={idx}
-                className="bg-white border border-zinc-300 text-sm px-3 py-1 rounded shadow-sm"
-              >
-                {skill}
-              </span>
+                src={badgeUrl(skill)}
+                alt={skill}
+                className="h-7 md:h-8"
+                loading="lazy"
+              />
             ))}
           </div>
         </div>

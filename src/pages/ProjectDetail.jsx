@@ -27,7 +27,7 @@ export default function ProjectDetail({ lang }) {
   }, []);
 
   // 모든 프로젝트 합치기
-  const allProjects = [...projects.실무, ...projects.개인];
+  const allProjects = [...projects.실무, ...projects.연구];
 
   // ID로 프로젝트 찾기 (숫자인 경우 인덱스로 변환)
   const project =
@@ -54,10 +54,12 @@ export default function ProjectDetail({ lang }) {
         <div className="max-w-4xl mx-auto px-6 py-4">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors duration-200 border border-gray-200 hover:border-gray-300"
+            aria-label="홈으로"
+            className="inline-flex items-center justify-center w-9 h-9 mb-4 rounded-full border border-zinc-300 text-zinc-600 hover:text-black hover:bg-zinc-100 hover:border-zinc-400 transition"
+            title="홈으로"
           >
             <svg
-              className="w-4 h-4 transition-transform hover:-translate-x-0.5"
+              className="w-4 h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -69,7 +71,6 @@ export default function ProjectDetail({ lang }) {
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-            홈으로
           </Link>
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-gray-900">

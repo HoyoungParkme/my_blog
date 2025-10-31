@@ -4,15 +4,13 @@
 // 프로젝트 목록을 정의 (마크다운 파일 이름들)
 export const projectFiles = {
   실무: [
-    "hyundai-glovis.md",
-    "hyundai-glovis-tableau-ai.md",
-    "samsung-fabric-chatbot.md",
-    "hyundai-mobis-cobol-java.md",
-    // 여기에 실무 프로젝트 파일 이름 추가
+    "hyundai-glovis/index.md",
+    "hyundai-glovis-tableau-ai/index.md",
+    "samsung-fabric-chatbot/index.md",
+    "hyundai-mobis-cobol-java/index.md",
   ],
-  개인: [
-    "stock-analysis.md",
-    // 여기에 개인 프로젝트 파일 이름 추가
+  연구: [
+    "rag-video-anomaly/index.md",
   ],
 };
 
@@ -42,7 +40,7 @@ export async function loadProject(fileName) {
 
 // 모든 프로젝트 로드
 export async function loadAllProjects() {
-  const allProjects = { 실무: [], 개인: [] };
+  const allProjects = { 실무: [], 연구: [] };
 
   console.log("Loading projects from files:", projectFiles);
 
@@ -58,13 +56,13 @@ export async function loadAllProjects() {
     }
   }
 
-  // 개인 프로젝트 로드
-  for (const file of projectFiles.개인) {
-    console.log(`Loading 개인 project: ${file}`);
+  // 연구 프로젝트 로드
+  for (const file of projectFiles.연구) {
+    console.log(`Loading 연구 project: ${file}`);
     const content = await loadProject(file);
     if (content) {
       console.log(`✓ Successfully loaded: ${file}`);
-      allProjects.개인.push({ fileName: file, content });
+      allProjects.연구.push({ fileName: file, content });
     } else {
       console.warn(`✗ Failed to load: ${file}`);
     }
@@ -72,7 +70,7 @@ export async function loadAllProjects() {
 
   console.log("Final loaded projects:", {
     실무: allProjects.실무.length,
-    개인: allProjects.개인.length,
+    연구: allProjects.연구.length,
   });
 
   return allProjects;

@@ -9,9 +9,9 @@ import ProjectCard from "./ProjectCard";
  * "자세히 보기"를 누르기 전의 미리보기 카드들
  */
 export default function Projects({ lang }) {
-  const categories = ["전체", "실무", "개인"];
+  const categories = ["전체", "실무", "연구"];
   const [filter, setFilter] = useState("전체");
-  const [projects, setProjects] = useState({ 실무: [], 개인: [] });
+  const [projects, setProjects] = useState({ 실무: [], 연구: [] });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Projects({ lang }) {
       .then((loadedProjects) => {
         console.log("Loaded projects in Projects component:", loadedProjects);
         console.log("실무 프로젝트 개수:", loadedProjects.실무?.length || 0);
-        console.log("개인 프로젝트 개수:", loadedProjects.개인?.length || 0);
+        console.log("연구 프로젝트 개수:", loadedProjects.연구?.length || 0);
         setProjects(loadedProjects);
         setLoading(false);
       })
@@ -32,7 +32,7 @@ export default function Projects({ lang }) {
       });
   }, []);
 
-  const fullList = [...projects.실무, ...projects.개인];
+  const fullList = [...projects.실무, ...projects.연구];
   const filteredList = filter === "전체" ? fullList : projects[filter] || [];
 
   return (

@@ -133,6 +133,15 @@ export function parseMarkdownToBlocks(markdown) {
         language: language || "text",
       });
     }
+    // 이미지 (![alt](src))
+    else if (line.match(/^!\[(.*?)\]\((.*?)\)/)) {
+      flushParagraph();
+      flushList();
+      const imgMatch = line.match(/^!\[(.*?)\]\((.*?)\)/);
+      const alt = imgMatch[1] || "";
+      const src = imgMatch[2] || "";
+      blocks.push({ type: "image", src, alt, caption: "" });
+    }
     // 구분선 (---)
     else if (line.match(/^---+$/)) {
       flushParagraph();
@@ -306,7 +315,7 @@ export function parseProjectMarkdown(content) {
   return {
     id: data.id || data.title?.toLowerCase().replace(/\s+/g, "-"),
     title: data.title,
-    type: data.type || "개인",
+    type: data.type || "연구",
     period: data.period || "",
     description: data.description || "",
     stack: Array.isArray(data.stack) ? data.stack : [],

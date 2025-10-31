@@ -11,7 +11,7 @@ export async function loadProjectsFromMarkdown() {
     const projects = await projectLoader.loadAllProjects();
     const parsed = {
       실무: [],
-      개인: [],
+      연구: [],
     };
 
     for (const { content } of projects.실무) {
@@ -24,10 +24,10 @@ export async function loadProjectsFromMarkdown() {
       }
     }
 
-    for (const { content } of projects.개인) {
+    for (const { content } of projects.연구) {
       if (content) {
         try {
-          parsed.개인.push(parseProjectMarkdown(content));
+          parsed.연구.push(parseProjectMarkdown(content));
         } catch (error) {
           console.error("Error parsing project:", error);
         }
@@ -35,7 +35,7 @@ export async function loadProjectsFromMarkdown() {
     }
 
     // 로드된 프로젝트가 없으면 기본 데이터 사용
-    if (parsed.실무.length === 0 && parsed.개인.length === 0) {
+    if (parsed.실무.length === 0 && parsed.연구.length === 0) {
       console.warn("No projects loaded from markdown, using default data");
       return projectsKo;
     }
@@ -359,61 +359,31 @@ export const projectsKo = {
       ],
     },
   ],
-  개인: [
+  연구: [
     {
-      id: "stock-analysis",
-      type: "개인",
-      title: "맞춤형 주가 데이터 분석 시스템 개발",
-      period: "2025.01.27 ~ 2025.02.11",
+      id: "rag-video-anomaly",
+      type: "연구",
+      title: "RAG 기반 영상 이상 패턴 탐지 연구",
+      period: "2025.01 ~ 진행 중",
       description:
-        "웹 크롤링 기반 주가 데이터 수집 및 투자 리포트 자동 생성 시스템을 구축했습니다.",
-      stack: ["Pandas", "BeautifulSoup", "requests"],
-      link: "https://www.naver.com",
+        "영상 메타를 Vector DB로 관리하고, 학습 없이 유사 영상 탐지를 수행하는 RAG 개념 적용 연구",
+      stack: ["Vector DB", "RAG", "Python"],
+      link: "",
       blocks: [
-        {
-          type: "heading2",
-          content: "프로젝트 개요",
-        },
+        { type: "heading2", content: "연구 개요" },
         {
           type: "paragraph",
           content:
-            "웹 크롤링 기술을 활용하여 주가 데이터를 수집하고, 수집된 데이터를 분석하여 투자 리포트를 자동으로 생성하는 시스템을 개발했습니다.",
+            "이상 패턴 탐지 모델에 RAG 개념을 접목하여, 영상에 대한 메타 정보를 Vector DB에 저장하고 학습 없이 유사 영상 탐지를 수행하는 접근을 연구하고 있습니다.",
         },
+        { type: "heading2", content: "핵심 아이디어" },
         {
-          type: "heading2",
-          content: "주요 기능",
-        },
-        {
-          type: "numberedList",
+          type: "bulletedList",
           items: [
-            "웹 크롤링을 통한 실시간 주가 데이터 수집",
-            "Pandas를 활용한 데이터 전처리 및 분석",
-            "투자 리포트 템플릿 기반 자동 리포트 생성",
-            "데이터 시각화를 통한 트렌드 분석",
+            "영상 프레임/클립의 임베딩과 메타를 Vector DB에 저장",
+            "질의 영상 임베딩과의 유사도 검색으로 후보 탐색",
+            "RAG 파이프라인으로 컨텍스트 생성 및 이상 판단 보조",
           ],
-        },
-        {
-          type: "heading2",
-          content: "기술 스택 상세",
-        },
-        {
-          type: "paragraph",
-          content: [
-            "데이터 수집을 위해 ",
-            { type: "bold", text: "requests" },
-            "와 ",
-            { type: "bold", text: "BeautifulSoup" },
-            "을 사용했으며, 데이터 처리 및 분석에는 ",
-            { type: "code", text: "Pandas" },
-            "를 활용했습니다.",
-          ],
-        },
-        {
-          type: "callout",
-          icon: "💡",
-          calloutType: "info",
-          content:
-            "이 프로젝트를 통해 웹 크롤링과 데이터 분석의 실무 경험을 쌓을 수 있었습니다.",
         },
       ],
     },

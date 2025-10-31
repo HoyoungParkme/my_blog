@@ -5,6 +5,7 @@ import About from "./components/About";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import FloatingNav from "./components/FloatingNav";
+import Footer from "./components/Footer";
 import AnimatedSection from "./components/AnimatedSection";
 import ProjectList from "./pages/ProjectList";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -30,11 +31,12 @@ function HomePage({ lang, setLang, t }) {
         <About lang={lang} />
       </AnimatedSection>
       <AnimatedSection>
-        <Projects lang={lang} />
-      </AnimatedSection>
-      <AnimatedSection>
         <Experience lang={lang} />
       </AnimatedSection>
+      <AnimatedSection>
+        <Projects lang={lang} />
+      </AnimatedSection>
+      <Footer />
     </>
   );
 }
@@ -60,14 +62,7 @@ function App() {
 
         <FloatingNav />
 
-        <div className="fixed top-4 right-4 z-50">
-          <button
-            onClick={() => setLang(lang === "ko" ? "en" : "ko")}
-            className="px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 rounded text-sm"
-          >
-            {t.toggle}
-          </button>
-        </div>
+        {/* Language toggle removed as requested */}
       </div>
     </Router>
   );
