@@ -1,15 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Code, Layout, Smartphone } from "lucide-react";
 import { Link } from "wouter";
-import { useProjects } from "@/hooks/use-projects";
 import { ProjectCard } from "@/components/ProjectCard";
+import { projects, profileInfo } from "@/data/portfolio";
 
 export default function Home() {
-  const { data: projects, isLoading } = useProjects();
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-accent/5 via-background to-background" />
         
@@ -20,7 +17,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="inline-block px-4 py-1.5 mb-6 text-sm font-medium rounded-full bg-accent/10 text-accent border border-accent/20"
           >
-            Available for freelance work
+            {profileInfo.availableForWork ? "Available for freelance work" : "Currently unavailable"}
           </motion.span>
           
           <motion.h1 
@@ -29,7 +26,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 text-balance"
           >
-            Crafting digital <span className="text-accent">experiences</span> with purpose.
+            {profileInfo.tagline.split(" ").slice(0, -1).join(" ")} <span className="text-accent">{profileInfo.tagline.split(" ").slice(-1)[0]}</span>
           </motion.h1>
           
           <motion.p 
@@ -38,7 +35,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            I'm a full-stack developer and designer who builds accessible, pixel-perfect, and performant web applications.
+            {profileInfo.bio}
           </motion.p>
           
           <motion.div 
@@ -58,7 +55,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services/Skills Section */}
       <section className="py-24 bg-secondary/30">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -98,7 +94,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Selected Projects Preview */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex justify-between items-end mb-12">
@@ -112,9 +107,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {isLoading ? (
-              <div className="col-span-full py-20 text-center text-muted-foreground">Loading projects...</div>
-            ) : projects?.slice(0, 3).map((project, index) => (
+            {projects.slice(0, 3).map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>

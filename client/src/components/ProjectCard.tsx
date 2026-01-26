@@ -1,6 +1,6 @@
-import { Project } from "@shared/schema";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Project } from "@/data/portfolio";
 
 interface ProjectCardProps {
   project: Project;
@@ -15,6 +15,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+      data-testid={`card-project-${project.id}`}
     >
       <div className="aspect-video overflow-hidden bg-muted">
         <img 
@@ -25,7 +26,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       </div>
       
       <div className="p-6">
-        <div className="flex justify-between items-start mb-4">
+        <div className="flex justify-between items-start mb-4 gap-2">
           <h3 className="font-serif text-2xl font-bold group-hover:text-accent transition-colors">
             {project.title}
           </h3>
@@ -33,7 +34,8 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             href={project.link} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="p-2 bg-secondary rounded-full hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+            className="p-2 bg-secondary rounded-full hover:bg-accent hover:text-accent-foreground transition-all duration-300 flex-shrink-0"
+            data-testid={`link-project-${project.id}`}
           >
             <ArrowUpRight className="w-5 h-5" />
           </a>

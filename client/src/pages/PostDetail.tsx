@@ -1,23 +1,15 @@
-import { usePost } from "@/hooks/use-posts";
 import { Link, useRoute } from "wouter";
 import { format } from "date-fns";
-import { ArrowLeft, Calendar, Loader2 } from "lucide-react";
+import { ArrowLeft, Calendar } from "lucide-react";
+import { posts } from "@/data/portfolio";
 import NotFound from "./not-found";
 
 export default function PostDetail() {
   const [, params] = useRoute("/blog/:slug");
   const slug = params?.slug || "";
-  const { data: post, isLoading, error } = usePost(slug);
+  const post = posts.find(p => p.slug === slug);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen pt-32 flex justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
-      </div>
-    );
-  }
-
-  if (error || !post) {
+  if (!post) {
     return <NotFound />;
   }
 
@@ -31,8 +23,8 @@ export default function PostDetail() {
         <header className="mb-12">
           <div className="flex items-center gap-2 text-sm text-accent font-medium mb-4">
             <Calendar className="w-4 h-4" />
-            <time dateTime={post.createdAt?.toString()}>
-              {post.createdAt ? format(new Date(post.createdAt), 'MMMM dd, yyyy') : 'Draft'}
+            <time dateTime={post.createdAt}>
+              {format(new Date(post.createdAt), 'MMMM dd, yyyy')}
             </time>
           </div>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8">
@@ -44,7 +36,6 @@ export default function PostDetail() {
         </header>
         
         <div className="prose prose-lg dark:prose-invert max-w-none">
-          {/* In a real app, use a markdown renderer here */}
           <div className="whitespace-pre-wrap">{post.content}</div>
         </div>
       </div>
