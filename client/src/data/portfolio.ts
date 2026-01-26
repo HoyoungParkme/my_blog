@@ -22,7 +22,7 @@ export const projects: Project[] = [
     title: "E-Commerce Dashboard",
     description: "A comprehensive dashboard for managing online stores with real-time analytics.",
     imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-    link: "#",
+    link: "https://www.notion.so/test-2dcacd78299e8046909fce0dbc35efea?source=copy_link",
     tags: ["React", "TypeScript", "Tailwind"]
   },
   {
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     title: "Task Management App",
     description: "Collaborative task manager with team features and drag-and-drop interface.",
     imageUrl: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800",
-    link: "#",
+    link: "https://www.notion.so/test-2dcacd78299e8046909fce0dbc35efea?source=copy_link",
     tags: ["Node.js", "PostgreSQL", "Socket.io"]
   },
   {
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     title: "Weather Forecast",
     description: "Beautiful weather application using external APIs for accurate global forecasting.",
     imageUrl: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&q=80&w=800",
-    link: "#",
+    link: "https://www.notion.so/test-2dcacd78299e8046909fce0dbc35efea?source=copy_link",
     tags: ["Vue", "API Integration", "CSS Grid"]
   }
 ];

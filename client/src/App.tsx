@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { FloatingNav } from "@/components/FloatingNav";
 
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
@@ -33,6 +34,7 @@ function App() {
           <Router />
         </main>
         <Footer />
+        <FloatingNav />
       </div>
       <Toaster />
     </TooltipProvider>
