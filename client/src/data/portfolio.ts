@@ -70,15 +70,32 @@ export const posts: Post[] = [
   }
 ];
 
+export interface Experience {
+  company: string;
+  position: string;
+  period: string;
+  description?: string;
+}
+
+export const experiences: Experience[] = [
+  {
+    company: "디포커스",
+    position: "선임",
+    period: "2024.07 ~ 현재",
+    description: "AI 서비스 개발 및 LLM/Agent/RAG 시스템 구축"
+  }
+];
+
 export const profileInfo = {
-  name: "Alex Kim",
-  title: "Full-Stack Developer",
-  tagline: "Crafting digital experiences with purpose.",
-  bio: "I'm a full-stack developer and designer who builds accessible, pixel-perfect, and performant web applications.",
-  email: "hello@alex.dev",
-  location: "San Francisco, CA",
+  name: "박호영",
+  title: "AI 서비스 개발자 (LLM·Agent/RAG)",
+  tagline: "직관적인 코드, 명확한 설계",
+  bio: "옆집 할아버지 할머니도 협업이 가능한 직관적인 코드와 명확한 설계를 추구합니다. 안녕하세요, AI 서비스 개발자 박호영입니다.",
+  email: "hello@example.dev",
+  location: "South Korea",
   availableForWork: true,
   github: "https://github.com",
   linkedin: "https://linkedin.com",
-  twitter: "https://twitter.com"
+  twitter: "https://twitter.com",
+  profileImage: ""
 };
