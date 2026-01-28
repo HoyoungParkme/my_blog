@@ -17,14 +17,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       className="group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-accent/50 hover:shadow-xl transition-all duration-300"
       data-testid={`card-project-${project.id}`}
     >
-      <div className="aspect-video overflow-hidden bg-muted">
-        <img 
-          src={project.imageUrl} 
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-      
       <div className="p-6">
         <div className="flex justify-between items-start mb-4 gap-2">
           <h3 className="font-serif text-2xl font-bold group-hover:text-accent transition-colors">
