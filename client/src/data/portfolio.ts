@@ -142,6 +142,8 @@ export const posts: Post[] = [
   }
 ];
 
+import myPhoto from "@/assets/images/my-photo.jpg";
+
 export interface Experience {
   company: string;
   position: string;
@@ -169,5 +171,5 @@ export const profileInfo = {
   github: "https://github.com",
   linkedin: "https://linkedin.com",
   twitter: "https://twitter.com",
-  profileImage: ""
+  profileImage: myPhoto
 };

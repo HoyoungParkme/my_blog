@@ -135,8 +135,8 @@ export default function Home() {
             {[
               {
                 icon: <Brain className="w-8 h-8" />,
-                title: "LLM 개발",
-                desc: "대규모 언어 모델 기반 서비스 설계 및 구축"
+                title: "Video Anomaly Detection",
+                desc: "Computer Vision 기반 영상 이상 탐지 시스템 개발"
               },
               {
                 icon: <Bot className="w-8 h-8" />,
