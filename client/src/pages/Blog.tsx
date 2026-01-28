@@ -1,21 +1,31 @@
+import { useState } from "react";
 import { format } from "date-fns";
 import { Link } from "wouter";
-import { Calendar, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { posts } from "@/data/portfolio";
+import { Button } from "@/components/ui/button";
+
+const POSTS_PER_PAGE = 5;
 
 export default function Blog() {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const currentPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+
   return (
     <div className="min-h-screen pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
           <h1 className="font-serif text-5xl font-bold mb-6">Thoughts</h1>
           <p className="text-xl text-muted-foreground">
-            Insights on development, design, and technology.
+            AI 개발, 디자인, 그리고 기술에 대한 통찰.
           </p>
         </div>
 
         <div className="space-y-12">
-          {posts.map((post) => (
+          {currentPosts.map((post) => (
             <article key={post.id} className="group relative py-8 border-b border-border/50 last:border-0 hover:border-border transition-colors">
               <div className="flex flex-col md:flex-row gap-6 md:items-start">
                 <div className="md:w-32 flex-shrink-0 text-sm text-muted-foreground flex items-center gap-2 pt-2">
@@ -33,13 +43,43 @@ export default function Blog() {
                     {post.summary}
                   </p>
                   <Link href={`/blog/${post.slug}`} className="inline-flex items-center text-sm font-medium text-foreground hover:text-accent transition-colors">
-                    Read more <ArrowRight className="w-4 h-4 ml-1" />
+                    더 보기 <ArrowRight className="w-4 h-4 ml-1" />
                   </Link>
                 </div>
               </div>
             </article>
           ))}
         </div>
+
+        {totalPages > 1 && (
+          <div className="mt-16 flex items-center justify-center gap-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="gap-2"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              이전
+            </Button>
+            
+            <div className="text-sm font-medium">
+              {currentPage} / {totalPages}
+            </div>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className="gap-2"
+            >
+              다음
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
