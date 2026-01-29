@@ -27,7 +27,7 @@
   --muted: 0 0% 96%;
   --muted-foreground: 0 0% 45%;
   
-  --accent: 250 84% 54%; /* Deep modern purple accent */
+  --accent: 210 100% 50%; /* Modern deep blue accent */
   --accent-foreground: 0 0% 98%;
   
   --destructive: 0 84% 60%;
@@ -59,7 +59,7 @@
   --muted: 0 0% 10%;
   --muted-foreground: 0 0% 60%;
   
-  --accent: 250 84% 60%;
+  --accent: 210 100% 60%;
   --accent-foreground: 0 0% 98%;
   
   --destructive: 0 62% 30%;
