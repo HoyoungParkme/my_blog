@@ -61,7 +61,7 @@ export default function Blog() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+              onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className="gap-2"
             >
@@ -76,7 +76,7 @@ export default function Blog() {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+              onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className="gap-2"
             >

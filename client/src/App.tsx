@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { FloatingNav } from "@/components/FloatingNav";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
@@ -28,6 +29,7 @@ function Router() {
 function App() {
   return (
     <TooltipProvider>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-background font-sans text-foreground">
         <Navigation />
         <main className="flex-grow">
