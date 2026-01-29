@@ -19,9 +19,16 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     >
       <div className="p-6">
         <div className="flex justify-between items-start mb-4 gap-2">
-          <h3 className="font-serif text-2xl font-bold group-hover:text-accent transition-colors">
-            {project.title}
-          </h3>
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group/title"
+          >
+            <h3 className="font-serif text-2xl font-bold group-hover/title:text-accent transition-colors">
+              {project.title}
+            </h3>
+          </a>
           <a 
             href={project.link} 
             target="_blank" 

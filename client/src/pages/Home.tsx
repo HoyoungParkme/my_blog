@@ -18,7 +18,7 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="flex-shrink-0"
             >
-              <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-accent/10 border-4 border-accent/20 flex items-center justify-center overflow-hidden">
+              <div className="w-48 h-64 md:w-56 md:h-72 rounded-xl bg-accent/10 border-4 border-accent/20 flex items-center justify-center overflow-hidden">
                 {profileInfo.profileImage ? (
                   <img 
                     src={profileInfo.profileImage} 
