@@ -1,5 +1,5 @@
-import { Mail, MapPin, ExternalLink } from "lucide-react";
-import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
+import { Mail, Phone, ExternalLink } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { profileInfo } from "@/data/portfolio";
@@ -14,9 +14,9 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h1 className="font-serif text-5xl font-bold mb-6">Get in Touch</h1>
+          <h1 className="font-serif text-5xl font-bold mb-6">Contact</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Have a project in mind or just want to say hi? I'm always open to discussing new opportunities and ideas.
+            새로운 프로젝트 제안이나 협업 문의는 언제든 환영합니다.
           </p>
         </motion.div>
         
@@ -46,19 +46,19 @@ export default function Contact() {
               
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-secondary rounded-lg text-foreground">
-                  <MapPin className="w-6 h-6" />
+                  <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1">Location</h3>
+                  <h3 className="font-semibold text-lg mb-1">Phone</h3>
                   <p className="text-muted-foreground">
-                    {profileInfo.location}<br/>Available for Remote Work
+                    {profileInfo.phone}
                   </p>
                 </div>
               </div>
             </div>
             
             <div className="flex flex-col justify-center">
-              <h3 className="font-semibold text-lg mb-4">Connect with me</h3>
+              <h3 className="font-semibold text-lg mb-4">Github</h3>
               <div className="flex gap-4">
                 <a 
                   href={profileInfo.github}
@@ -68,24 +68,6 @@ export default function Contact() {
                   data-testid="link-github"
                 >
                   <SiGithub className="w-6 h-6" />
-                </a>
-                <a 
-                  href={profileInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-secondary rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-                  data-testid="link-linkedin"
-                >
-                  <SiLinkedin className="w-6 h-6" />
-                </a>
-                <a 
-                  href={profileInfo.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-secondary rounded-lg text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-                  data-testid="link-twitter"
-                >
-                  <SiX className="w-6 h-6" />
                 </a>
               </div>
             </div>
@@ -98,7 +80,7 @@ export default function Contact() {
               className="px-8"
             >
               <a href={`mailto:${profileInfo.email}`} data-testid="button-send-email">
-                Send me an email <ExternalLink className="w-4 h-4 ml-2" />
+                이메일 보내기 <ExternalLink className="w-4 h-4 ml-2" />
               </a>
             </Button>
           </div>

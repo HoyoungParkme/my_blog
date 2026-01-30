@@ -22,24 +22,6 @@ export function Footer() {
             <SiGithub className="w-5 h-5" />
           </a>
           <a 
-            href={profileInfo.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors hover:-translate-y-1 transform duration-200"
-            data-testid="footer-link-twitter"
-          >
-            <SiX className="w-5 h-5" />
-          </a>
-          <a 
-            href={profileInfo.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors hover:-translate-y-1 transform duration-200"
-            data-testid="footer-link-linkedin"
-          >
-            <SiLinkedin className="w-5 h-5" />
-          </a>
-          <a 
             href={`mailto:${profileInfo.email}`}
             className="text-muted-foreground hover:text-foreground transition-colors hover:-translate-y-1 transform duration-200"
             data-testid="footer-link-email"

@@ -165,11 +165,10 @@ export const profileInfo = {
   title: "AI 서비스 개발자 (LLM·Agent/RAG)",
   tagline: "직관적인 코드, 명확한 설계",
   bio: "옆집 할아버지 할머니도 협업이 가능한 직관적인 코드와 명확한 설계를 추구합니다. 안녕하세요, AI 서비스 개발자 박호영입니다.",
-  email: "hello@example.dev",
+  email: "hoyoungpark.ds@gmail.com",
+  phone: "010-8663-4225",
   location: "South Korea",
   availableForWork: true,
-  github: "https://github.com",
-  linkedin: "https://linkedin.com",
-  twitter: "https://twitter.com",
+  github: "https://github.com/HoyoungParkme",
   profileImage: myPhoto
 };
