@@ -151,12 +151,58 @@ export interface Experience {
   description?: string;
 }
 
+export interface Education {
+  name: string;
+  period: string;
+  organizer: string;
+}
+
 export const experiences: Experience[] = [
   {
     company: "디포커스",
     position: "선임",
     period: "2024.07 ~ 현재",
     description: "AI 서비스 개발 및 LLM/Agent/RAG 시스템 구축"
+  }
+];
+
+export const certifications: string[] = [
+  "빅데이터 분석기사",
+  "SQLD",
+  "ADSP",
+  "Salesforce Data Cloud Certification"
+];
+
+export const education: Education[] = [
+  {
+    name: "온디바이스 AI",
+    period: "2025.10.13 - 2025.11.13",
+    organizer: "정보통신산업진흥원"
+  },
+  {
+    name: "데이터 엔지니어링",
+    period: "2025.05.03 - 2025.07.06",
+    organizer: "정보통신산업진흥원"
+  },
+  {
+    name: "블록체인",
+    period: "2024.11.11 - 2024.12.06",
+    organizer: "정보통신산업진흥원"
+  },
+  {
+    name: "인공지능(DQN)",
+    period: "2024.11.04 - 2024.11.15",
+    organizer: "정보통신산업진흥원"
+  },
+  {
+    name: "인공지능(언어)",
+    period: "2024.06.03 - 2024.06.28",
+    organizer: "정보통신산업진흥원"
+  },
+  {
+    name: "빅데이터 기반 비즈니스 분석가 양성과정",
+    period: "2024.03.06 - 2024.05.22",
+    organizer: "한국직업개발원"
   }
 ];
 
