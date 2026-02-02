@@ -166,6 +166,14 @@ export const experiences: Experience[] = [
   }
 ];
 
+export const academicHistory: Education[] = [
+  {
+    name: "고려대학교 세종캠퍼스",
+    period: "2016.03 ~ 2023.08",
+    organizer: "응용통계학과"
+  }
+];
+
 export const certifications: string[] = [
   "빅데이터 분석기사",
   "SQLD",
@@ -216,5 +224,6 @@ export const profileInfo = {
   location: "South Korea",
   availableForWork: true,
   github: "https://github.com/HoyoungParkme",
+  blog: "https://hypark.tistory.com/",
   profileImage: myPhoto
 };

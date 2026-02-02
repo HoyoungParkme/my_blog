@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Code, Brain, Bot, User, Award, GraduationCap } from "lucide-react";
+import { ArrowRight, Code, Brain, Bot, User, Award, GraduationCap, School } from "lucide-react";
 import { Link } from "wouter";
 import { ProjectCard } from "@/components/ProjectCard";
-import { projects, profileInfo, experiences, certifications, education } from "@/data/portfolio";
+import { projects, profileInfo, experiences, certifications, education, academicHistory } from "@/data/portfolio";
 
 export default function Home() {
   return (
@@ -71,6 +71,47 @@ export default function Home() {
                 </Link>
               </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-secondary/30">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <h2 className="font-serif text-3xl font-bold mb-4">경력</h2>
+            <p className="text-muted-foreground">Career Experience</p>
+          </motion.div>
+          
+          <div className="space-y-6">
+            {experiences.map((exp, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex gap-6 p-6 bg-background rounded-xl border border-border"
+              >
+                <div className="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                  <Code className="w-6 h-6 text-accent" />
+                </div>
+                <div className="flex-grow">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+                    <h3 className="font-semibold text-lg">{exp.company}</h3>
+                    <span className="text-sm text-muted-foreground">{exp.period}</span>
+                  </div>
+                  <p className="text-accent font-medium mb-2">{exp.position}</p>
+                  {exp.description && (
+                    <p className="text-muted-foreground text-sm">{exp.description}</p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -146,7 +187,37 @@ export default function Home() {
 
       <section className="py-24 bg-background">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <School className="w-8 h-8 text-accent" />
+                <h2 className="font-serif text-3xl font-bold">학력</h2>
+              </div>
+
+              <div className="space-y-4">
+                {academicHistory.map((edu, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="p-4 bg-card rounded-xl border border-border hover:border-accent/50 transition-colors"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                      <h3 className="font-semibold text-sm">{edu.name}</h3>
+                      <span className="text-xs text-muted-foreground">{edu.period}</span>
+                    </div>
+                    <p className="text-xs text-accent font-medium">{edu.organizer}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -173,80 +244,42 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-3 mb-8">
-                <GraduationCap className="w-8 h-8 text-accent" />
-                <h2 className="font-serif text-3xl font-bold">교육 사항</h2>
-              </div>
-
-              <div className="space-y-4">
-                {education.map((edu, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="p-4 bg-card rounded-xl border border-border hover:border-accent/50 transition-colors"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                      <h3 className="font-semibold text-sm">{edu.name}</h3>
-                      <span className="text-xs text-muted-foreground">{edu.period}</span>
-                    </div>
-                    <p className="text-xs text-accent font-medium">{edu.organizer}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
-        </div>
-      </section>
 
-      <section className="py-24 bg-secondary/30">
-        <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12"
           >
-            <h2 className="font-serif text-3xl font-bold mb-4">경력</h2>
-            <p className="text-muted-foreground">Career Experience</p>
-          </motion.div>
-          
-          <div className="space-y-6">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex gap-6 p-6 bg-background rounded-xl border border-border"
-              >
-                <div className="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                  <Code className="w-6 h-6 text-accent" />
-                </div>
-                <div className="flex-grow">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
-                    <h3 className="font-semibold text-lg">{exp.company}</h3>
-                    <span className="text-sm text-muted-foreground">{exp.period}</span>
+            <div className="flex items-center gap-3 mb-8">
+              <GraduationCap className="w-8 h-8 text-accent" />
+              <h2 className="font-serif text-3xl font-bold">교육 사항</h2>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {education.map((edu, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-4 bg-card rounded-xl border border-border hover:border-accent/50 transition-colors"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                    <h3 className="font-semibold text-sm">{edu.name}</h3>
+                    <span className="text-xs text-muted-foreground">{edu.period}</span>
                   </div>
-                  <p className="text-accent font-medium mb-2">{exp.position}</p>
-                  {exp.description && (
-                    <p className="text-muted-foreground text-sm">{exp.description}</p>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  <p className="text-xs text-accent font-medium">{edu.organizer}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
+    </div>
+  );
+}
     </div>
   );
 }

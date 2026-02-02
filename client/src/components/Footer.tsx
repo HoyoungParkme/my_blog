@@ -1,4 +1,4 @@
-import { Mail, Phone, Copy, Check } from "lucide-react";
+import { Mail, Phone, Copy, Check, ExternalLink } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { profileInfo } from "@/data/portfolio";
 import { useState } from "react";
@@ -39,6 +39,21 @@ export function Footer() {
           >
             <SiGithub className="w-6 h-6" />
           </a>
+
+          {profileInfo.blog && (
+            <a 
+              href={profileInfo.blog}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-background rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-accent/50 transition-all hover:-translate-y-1 transform duration-200 shadow-sm relative group"
+              data-testid="footer-link-blog"
+            >
+              <ExternalLink className="w-6 h-6" />
+              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                Visit Blog
+              </span>
+            </a>
+          )}
 
           <button
             onClick={() => copyToClipboard(profileInfo.email, "Email")}
