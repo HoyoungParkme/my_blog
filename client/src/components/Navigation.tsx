@@ -8,7 +8,7 @@ import { profileInfo } from "@/data/portfolio";
 const links = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
+  { href: "/blog", label: "Memoirs" },
 ];
 
 export function Navigation() {

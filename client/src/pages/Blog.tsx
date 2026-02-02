@@ -23,9 +23,9 @@ export default function Blog() {
     <div className="min-h-screen pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <h1 className="font-serif text-5xl font-bold mb-6">Thoughts</h1>
+          <h1 className="font-serif text-5xl font-bold mb-6">Memoirs</h1>
           <p className="text-xl text-muted-foreground">
-            AI 개발, 디자인, 그리고 기술에 대한 통찰.
+            기록을 통한 성장과 문제 해결의 여정.
           </p>
         </div>
 
