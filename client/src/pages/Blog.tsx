@@ -38,19 +38,19 @@ export default function Blog() {
                   {format(new Date(post.createdAt), 'MMM dd, yyyy')}
                 </div>
                 
-                <div className="flex-grow">
-                  <Link href={`/blog/${post.slug}`}>
-                    <h2 className="font-serif text-2xl font-bold mb-3 group-hover:text-accent transition-colors cursor-pointer">
-                      {post.title}
-                    </h2>
-                  </Link>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    {post.summary}
-                  </p>
-                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center text-sm font-medium text-foreground hover:text-accent transition-colors">
-                    더 보기 <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                </div>
+              <div className="flex-grow">
+                <a href={post.link} target="_blank" rel="noopener noreferrer">
+                  <h2 className="font-serif text-2xl font-bold mb-3 group-hover:text-accent transition-colors cursor-pointer">
+                    {post.title}
+                  </h2>
+                </a>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  {post.summary}
+                </p>
+                <a href={post.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-medium text-foreground hover:text-accent transition-colors">
+                  노션에서 읽기 <ArrowRight className="w-4 h-4 ml-1" />
+                </a>
+              </div>
               </div>
             </article>
           ))}

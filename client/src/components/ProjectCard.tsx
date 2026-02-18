@@ -79,17 +79,19 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 </Button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6 md:p-8">
-                <div className="aspect-video w-full rounded-xl overflow-hidden mb-8 bg-muted">
-                  <img 
-                    src={project.imageUrl} 
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              <div className="flex-1 overflow-hidden bg-muted relative">
+                <iframe 
+                  src={project.link.replace("www.notion.so", "www.notion.so/embed")}
+                  className="w-full h-full border-0"
+                  title={`${project.title} Preview`}
+                  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                  sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                />
+              </div>
 
-                <div className="max-w-2xl mx-auto">
-                  <div className="flex flex-wrap gap-2 mb-6">
+              <div className="p-6 md:p-8 bg-card border-t border-border">
+                <div className="max-w-2xl mx-auto text-center">
+                  <div className="flex flex-wrap justify-center gap-2 mb-6">
                     {project.tags?.map((tag) => (
                       <span 
                         key={tag} 
@@ -104,10 +106,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                     {project.description}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-border">
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
                     <Button asChild className="flex-1 rounded-full py-6 text-base font-semibold">
                       <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                        페이지 바로가기 <ExternalLink className="w-5 h-5" />
+                        노션에서 전체 보기 <ExternalLink className="w-5 h-5" />
                       </a>
                     </Button>
                     <Button variant="outline" onClick={() => setIsPreviewOpen(false)} className="flex-1 rounded-full py-6 text-base font-semibold">

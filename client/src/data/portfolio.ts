@@ -13,6 +13,7 @@ export interface Post {
   slug: string;
   summary: string;
   content: string;
+  link?: string;
   createdAt: string;
 }
 
@@ -22,7 +23,7 @@ export const projects: Project[] = [
     title: "AI 에이전트 시스템 고도화",
     description: "vLLM 서버 기반 로컬 LLM 환경에서 멀티 턴 도구 사용 최적화 및 안정성 확보 프로젝트",
     imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
-    link: "https://www.notion.so/test-2dcacd78299e8046909fce0dbc35efea?source=copy_link",
+    link: "https://www.notion.so/2fcacd78299e80fabb16e4f3ca34f31b?source=copy_link",
     tags: ["vLLM", "LLM", "AI Agent"]
   },
   {
@@ -49,29 +50,8 @@ export const posts: Post[] = [
     title: "vLLM 도구 호출 오류 해결: Tool Name 64자 제한 이슈 회고",
     slug: "vllm-tool-name-limit-issue",
     summary: "vLLM 기반 로컬 LLM 환경에서 긴 도구 이름으로 인해 발생한 도구 호출(Tool Calling) 실패 문제를 분석하고 해결한 과정을 공유합니다.",
-    content: `## 문제 상황
-
-프로젝트 진행 중 vLLM 서버에 배포된 로컬 LLM을 사용하여 AI 에이전트를 구축하던 중, 특정 도구(Tool)들을 호출할 때 모델이 도구의 존재를 인식하지 못하거나 엉뚱한 응답을 내놓는 현상이 발생했습니다.
-
-특히 여러 API를 조합하여 사용하는 복잡한 워크플로우에서 이 문제가 두드러졌습니다.
-
-## 원인 분석
-
-디버깅 과정에서 모델로 전달되는 프롬프트와 vLLM의 내부 로그를 대조해본 결과, **도구의 이름(Tool Name)이 64자를 초과할 경우** vLLM의 특정 토크나이저 처리 과정이나 내부 스키마 검증에서 문제가 발생한다는 사실을 발견했습니다.
-
-당시 사용 중인 도구들은 자동 생성된 식별자를 포함하고 있어 \`get_user_financial_transaction_history_with_detailed_analytics_v1_beta\`와 같이 매우 긴 이름을 가지고 있었습니다.
-
-## 해결 방법
-
-문제를 해결하기 위해 다음과 같은 조치를 취했습니다:
-
-1. **도구 명명 규칙 재정립**: 모든 도구의 이름을 32자 이내로 단축했습니다. (예: \`get_user_history_v1\`)
-2. **별칭(Alias) 시스템 도입**: 내부적으로는 긴 이름을 유지하더라도 LLM에게 전달될 때는 짧은 이름을 사용하고, 실제 실행 단계에서 다시 매핑하는 계층을 추가했습니다.
-3. **스키마 검증 강화**: 도구 정의 시 이름 길이를 사전에 체크하는 유효성 검사 로직을 추가하여 재발을 방지했습니다.
-
-## 결과 및 교훈
-
-이후 도구 호출 성공률이 100%에 가깝게 향상되었으며, 모델의 응답 속도 또한 미세하게 개선되었습니다. 로컬 LLM 환경에서는 인프라의 제약뿐만 아니라 이러한 소프트웨어적 제약 사항들을 꼼꼼히 체크하는 것이 중요하다는 것을 다시 한번 깨달았습니다.`,
+    content: "",
+    link: "https://www.notion.so/2fcacd78299e80fabb16e4f3ca34f31b?source=copy_link",
     createdAt: "2026-02-02T10:00:00.000Z"
   },
   {
