@@ -65,10 +65,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-4xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-5xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[85vh]"
             >
               <div className="p-4 border-b border-border flex items-center justify-between bg-card/50 backdrop-blur-md sticky top-0 z-10">
-                <h2 className="font-serif text-xl font-bold px-2">{project.title} 미리보기</h2>
+                <h2 className="font-serif text-xl font-bold px-2">{project.title}</h2>
                 <Button 
                   variant="ghost" 
                   size="icon" 
@@ -89,33 +89,16 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 />
               </div>
 
-              <div className="p-6 md:p-8 bg-card border-t border-border">
-                <div className="max-w-2xl mx-auto text-center">
-                  <div className="flex flex-wrap justify-center gap-2 mb-6">
-                    {project.tags?.map((tag) => (
-                      <span 
-                        key={tag} 
-                        className="px-3 py-1 text-xs font-medium rounded-full bg-accent/10 text-accent border border-accent/20"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                    <Button asChild className="flex-1 rounded-full py-6 text-base font-semibold">
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                        노션에서 전체 보기 <ExternalLink className="w-5 h-5" />
-                      </a>
-                    </Button>
-                    <Button variant="outline" onClick={() => setIsPreviewOpen(false)} className="flex-1 rounded-full py-6 text-base font-semibold">
-                      닫기
-                    </Button>
-                  </div>
+              <div className="p-4 md:p-6 bg-card border-t border-border">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Button asChild variant="default" className="w-full sm:w-auto rounded-full px-8 h-12 text-sm font-semibold">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                      노션에서 전체 보기 <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" onClick={() => setIsPreviewOpen(false)} className="w-full sm:w-auto rounded-full px-8 h-12 text-sm font-semibold">
+                    닫기
+                  </Button>
                 </div>
               </div>
             </motion.div>
