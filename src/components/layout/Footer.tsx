@@ -1,6 +1,6 @@
-import { Mail, Phone, Copy, Check, ExternalLink } from "lucide-react";
+﻿import { Mail, Phone, Copy, Check, ExternalLink } from "lucide-react";
 import { SiGithub } from "react-icons/si";
-import { profileInfo } from "@/data/portfolio";
+import { profileInfo } from "@/content/portfolio";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -85,3 +85,4 @@ export function Footer() {
     </footer>
   );
 }
+

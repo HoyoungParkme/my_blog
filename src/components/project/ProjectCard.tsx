@@ -1,8 +1,8 @@
-import { ArrowUpRight, X, ExternalLink } from "lucide-react";
+﻿import { ArrowUpRight, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import type { Project } from "@/data/portfolio";
+import type { Project } from "@/content/portfolio";
 
 interface ProjectCardProps {
   project: Project;
@@ -108,3 +108,4 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     </>
   );
 }
+

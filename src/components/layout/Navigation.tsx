@@ -1,14 +1,15 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { profileInfo } from "@/data/portfolio";
+import { profileInfo } from "@/content/portfolio";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Memoirs" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navigation() {
@@ -88,3 +89,4 @@ export function Navigation() {
     </header>
   );
 }
+

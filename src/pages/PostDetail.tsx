@@ -1,7 +1,7 @@
-import { Link, useRoute } from "wouter";
+﻿import { Link, useRoute } from "wouter";
 import { format } from "date-fns";
 import { ArrowLeft, Calendar } from "lucide-react";
-import { posts } from "@/data/portfolio";
+import { posts } from "@/content/portfolio";
 import NotFound from "./not-found";
 
 export default function PostDetail() {
@@ -42,3 +42,4 @@ export default function PostDetail() {
     </article>
   );
 }
+

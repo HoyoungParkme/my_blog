@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { ArrowRight, Code, Brain, Bot, User, Award, GraduationCap, School } from "lucide-react";
 import { Link } from "wouter";
-import { ProjectCard } from "@/components/ProjectCard";
-import { projects, profileInfo, experiences, certifications, education, academicHistory } from "@/data/portfolio";
+import { ProjectCard } from "@/components/project/ProjectCard";
+import { projects, profileInfo, experiences, certifications, education, academicHistory } from "@/content/portfolio";
 
 export default function Home() {
   return (
@@ -280,3 +280,4 @@ export default function Home() {
     </div>
   );
 }
+

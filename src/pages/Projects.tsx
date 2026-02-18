@@ -1,5 +1,5 @@
-import { ProjectCard } from "@/components/ProjectCard";
-import { projects } from "@/data/portfolio";
+﻿import { ProjectCard } from "@/components/project/ProjectCard";
+import { projects } from "@/content/portfolio";
 
 export default function Projects() {
   return (
@@ -21,3 +21,4 @@ export default function Projects() {
     </div>
   );
 }
+

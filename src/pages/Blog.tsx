@@ -1,8 +1,8 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { format } from "date-fns";
 import { Link } from "wouter";
 import { Calendar, ArrowRight, ChevronLeft, ChevronRight, X, ExternalLink } from "lucide-react";
-import { posts, type Post } from "@/data/portfolio";
+import { posts, type Post } from "@/content/portfolio";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -160,3 +160,4 @@ export default function Blog() {
     </div>
   );
 }
+

@@ -1,15 +1,16 @@
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
-import { FloatingNav } from "@/components/FloatingNav";
-import { ScrollToTop } from "@/components/ScrollToTop";
+import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/Footer";
+import { FloatingNav } from "@/components/layout/FloatingNav";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import Blog from "@/pages/Blog";
 import PostDetail from "@/pages/PostDetail";
+import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/projects" component={Projects} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={PostDetail} />
+      <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );

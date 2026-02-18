@@ -1,8 +1,8 @@
-import { Mail, Phone, ExternalLink } from "lucide-react";
+﻿import { Mail, Phone, ExternalLink } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { profileInfo } from "@/data/portfolio";
+import { profileInfo } from "@/content/portfolio";
 
 export default function Contact() {
   return (
@@ -89,3 +89,4 @@ export default function Contact() {
     </div>
   );
 }
+
