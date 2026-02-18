@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Router as WouterRouter, Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/layout/Navigation";
@@ -13,7 +13,7 @@ import PostDetail from "@/pages/PostDetail";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 
-function Router() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -27,19 +27,26 @@ function Router() {
 }
 
 function App() {
+  const basePath =
+    import.meta.env.BASE_URL === "/"
+      ? undefined
+      : import.meta.env.BASE_URL.replace(/\/$/, "");
+
   return (
-    <TooltipProvider>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-background font-sans text-foreground">
-        <Navigation />
-        <main className="flex-grow">
-          <Router />
-        </main>
-        <Footer />
-        <FloatingNav />
-      </div>
-      <Toaster />
-    </TooltipProvider>
+    <WouterRouter base={basePath}>
+      <TooltipProvider>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen bg-background font-sans text-foreground">
+          <Navigation />
+          <main className="flex-grow">
+            <AppRoutes />
+          </main>
+          <Footer />
+          <FloatingNav />
+        </div>
+        <Toaster />
+      </TooltipProvider>
+    </WouterRouter>
   );
 }
 
