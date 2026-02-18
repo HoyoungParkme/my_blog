@@ -3,7 +3,12 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
+const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1];
+const pagesBasePath =
+  process.env.GITHUB_ACTIONS && repositoryName ? `/${repositoryName}/` : "/";
+
 export default defineConfig({
+  base: pagesBasePath,
   plugins: [
     react(),
     runtimeErrorOverlay(),
