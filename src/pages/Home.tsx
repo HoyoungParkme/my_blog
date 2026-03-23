@@ -41,22 +41,24 @@ export default function Home() {
                 {profileInfo.title}
               </motion.span>
               
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+                className="font-serif text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-6 break-keep leading-relaxed"
               >
-                안녕하세요, <span className="text-accent">{profileInfo.name}</span>입니다
+                옆집 할아버지도 이해하는 <span className="text-accent">코드</span>
+                <br />
+                설명 없이도 의도가 보이는 <span className="text-accent">설계</span>
               </motion.h1>
-              
-              <motion.p 
+
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8 leading-relaxed"
               >
-                {profileInfo.bio}
+                안녕하세요, <span className="text-foreground font-semibold">{profileInfo.name}</span>입니다.
               </motion.p>
               
               <motion.div 
