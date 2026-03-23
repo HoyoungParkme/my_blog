@@ -8,8 +8,7 @@ import { profileInfo } from "@/content/portfolio";
 const links = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Memoirs" },
-  { href: "/contact", label: "Contact" },
+  { href: "/blog", label: "Troubleshooting" },
 ];
 
 export function Navigation() {
