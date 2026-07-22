@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "cmd",
+      "args": ["/c", "npx", "@playwright/mcp@latest"]
+    },
+    "context7": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@upstash/context7-mcp"]
+    },
+    "mermaid": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@peng-shawn/mermaid-mcp-server"]
+    },
+    "plantuml": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "plantuml-mcp-server"]
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}

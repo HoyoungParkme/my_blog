@@ -3,3 +3,4 @@ dist
 .DS_Store
 vite.config.ts.*
 *.tar.gz
+.playwright-mcp/

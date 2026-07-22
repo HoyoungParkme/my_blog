@@ -10,6 +10,7 @@ import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import Blog from "@/pages/Blog";
 import PostDetail from "@/pages/PostDetail";
+import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 
 function AppRoutes() {
@@ -19,6 +20,7 @@ function AppRoutes() {
       <Route path="/projects" component={Projects} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={PostDetail} />
+      <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );

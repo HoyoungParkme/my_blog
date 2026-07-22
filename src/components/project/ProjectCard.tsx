@@ -13,6 +13,8 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const hasLink = Boolean(project.link);
+
   return (
     <>
       <motion.div
@@ -20,7 +22,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-accent/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
+        className={`group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-accent/50 hover:shadow-xl transition-all duration-300 ${hasLink ? "cursor-pointer" : ""}`}
         data-testid={`card-project-${project.id}`}
         onClick={() => { if (project.link) { setIsLoaded(false); setIsOpen(true); } }}
       >
@@ -30,19 +32,37 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               <Calendar className="w-4 h-4" />
               {project.period}
             </div>
-            <div className="p-2 bg-secondary rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300 flex-shrink-0">
-              <ArrowUpRight className="w-5 h-5" />
-            </div>
+            {hasLink && (
+              <div className="p-2 bg-secondary rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300 flex-shrink-0">
+                <ArrowUpRight className="w-5 h-5" />
+              </div>
+            )}
           </div>
 
           <h3 className="font-serif text-2xl font-bold mb-1 group-hover:text-accent transition-colors">
             {project.title}
           </h3>
-          <p className="text-sm text-accent font-medium mb-3">{project.company}</p>
+          {project.company && (
+            <p className="text-sm text-accent font-medium mb-1">{project.company}</p>
+          )}
+          {project.role && (
+            <p className="text-sm text-accent font-medium mb-3">역할: {project.role}</p>
+          )}
 
-          <p className="text-muted-foreground mb-5 line-clamp-2">
-            {project.description}
-          </p>
+          {project.description && (
+            <p className="text-muted-foreground mb-5">{project.description}</p>
+          )}
+
+          {project.highlights && project.highlights.length > 0 && (
+            <ul className="space-y-2 mb-5">
+              {project.highlights.map((highlight) => (
+                <li key={highlight} className="flex gap-2 text-sm text-muted-foreground">
+                  <span className="text-accent flex-shrink-0">•</span>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div className="flex flex-wrap gap-2">
             {project.tags?.map((tag) => (

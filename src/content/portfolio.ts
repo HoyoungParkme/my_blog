@@ -9,12 +9,18 @@ export function getNotionEmbedUrl(notionLink: string): string {
 export interface Project {
   id: number;
   title: string;
-  company: string;
-  description: string;
-  imageUrl: string;
-  link?: string;
-  tags: string[];
   period: string;
+  tags: string[];
+  /** 담당 역할 (예: "아키텍처 설계 및 개발") */
+  role?: string;
+  /** 핵심 성과·작업 항목. 카드에 불릿 목록으로 표시된다. */
+  highlights?: string[];
+  /** 회사/소속명. 없으면 표시하지 않는다. */
+  company?: string;
+  /** 한 줄 요약. highlights 대신 간단히 표현할 때 사용. */
+  description?: string;
+  /** Notion 등 상세 페이지 링크. 있으면 카드 클릭 시 모달로 표시된다. */
+  link?: string;
 }
 
 export interface Post {
@@ -31,63 +37,82 @@ export interface Post {
 export const projects: Project[] = [
   {
     id: 1,
-    title: "카지노 이상행동 탐지 모델 개발",
-    company: "P사 (호텔·카지노)",
-    description: "카지노 내 이상행동 탐지를 위한 딥러닝 모델 개발 및 MLOps 파이프라인 구축. 파인튜닝과 룰엔진을 결합한 탐지 고도화",
-    imageUrl: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800",
-    link: "https://www.notion.so/MLOps-32cacd78299e8196ba71dc5b6536a714?source=copy_link",
-    tags: ["YOLOv8", "FFmpeg", "OpenCLIP", "FAISS", "FastAPI", "React"],
-    period: "2025.11 ~ 현재"
+    title: "뉴럴-심볼릭 기반 보험청구 심사 어시스턴트 에이전트",
+    period: "2026.03 ~ 현재",
+    role: "아키텍처 설계 및 개발",
+    highlights: [
+      "각 보험사 상품 약관을 GraphRAG + RAG 이중 구조로 적재하여 복잡한 보험 상품 간 관계 탐색 구현",
+      "뉴럴(LLM 추론) + 심볼릭(규칙 기반 판단) 하이브리드 아키텍처로 청구 심사 정확도 향상",
+      "마이데이터 API 연동을 가정한 사용자 가입 보험 자동 조회 및 상품별 맞춤 검색 구현",
+      "사용자 채팅 질의 기반 보험금 수령 가능성 판단 기능 설계",
+      "보험 청구 심사 로직을 심볼릭 규칙으로 명시화하여 LLM 환각 최소화"
+    ],
+    tags: ["GraphRAG", "RAG", "Neural-Symbolic", "LLM", "마이데이터"]
   },
   {
     id: 2,
-    title: "Tableau AI Platform",
-    company: "H사 (물류)",
-    description: "Tableau 기반 데이터 분석 플랫폼에 AI 기능을 통합하여 자동화된 인사이트 도출 및 예측 분석 환경 구축",
-    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
-    link: "https://www.notion.so/Tableau-AI-32cacd78299e81f69160db33cf54ea6e?source=copy_link",
-    tags: ["Agent", "Qdrant", "Jina", "Tableau", "FastAPI", "Docker"],
-    period: "2025.12 ~ 2026.03"
+    title: "국내 대형 SI기업 간접재 구매 플랫폼 AI 개발",
+    period: "2026.04 ~ 2026.06",
+    role: "서비스 설계 및 AI 기능 개발",
+    highlights: [
+      "요청부서·구매부서·협력사 3개 사용자 유형 기반 플랫폼 서비스 구조 설계",
+      "구매 요청(PR) 생성 시 AI 기반 구매 양식 자동완성 기능 개발",
+      "사용자 요구 기반 상품 추천 챗봇 설계 및 구현",
+      "RAG 기반 유사상품 검색으로 중복 구매 방지 기능 개발 (구매부서용)",
+      "과거 유사 견적 데이터 검색 및 현재 가격 적정성 판단 기능 구현"
+    ],
+    tags: ["RAG", "추천 챗봇", "LLM", "유사상품 검색"]
   },
   {
     id: 3,
-    title: "Cobol to Java",
-    company: "H사 (자동차부품)",
-    description: "레거시 COBOL 시스템을 Java 기반으로 전환하는 마이그레이션 프로젝트. LLM Agent와 GraphRAG를 활용한 코드 변환 자동화",
-    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
-    link: "https://www.notion.so/COBOL-2025-32cacd78299e812ea4c2c76e75cb94d7?source=copy_link",
-    tags: ["Agent", "Neo4j", "GraphRAG", "FastAPI"],
-    period: "2025.09 ~ 2025.10"
+    title: "국내 대형 물류 기업 Tableau AI Agent",
+    period: "2026.01 ~ 2026.04",
+    role: "AI 아키텍처 설계 및 개발",
+    highlights: [
+      "Tableau 대시보드와 연동되는 LLM 기반 AI 에이전트 시스템 설계 및 구현",
+      "GraphQL / REST 하이브리드 방식으로 Tableau 메타데이터 및 데이터 소스 연동",
+      "Qdrant 기반 벡터 저장소 구성 및 RAG 파이프라인 설계",
+      "자연어 질의 → 대시보드 인사이트 추출 에이전트 오케스트레이션 구현"
+    ],
+    tags: ["AI Agent", "Qdrant", "RAG", "GraphQL", "Tableau"]
   },
   {
     id: 4,
-    title: "AI Chatbot",
-    company: "S사 (종합상사)",
-    description: "사내 업무 프로세스 AI 자동화 가능성 검증을 위한 챗봇 PoC. Agent 기반 대화형 인터페이스와 Tableau 데이터 연동 구현",
-    imageUrl: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&q=80&w=800",
-    link: "https://www.notion.so/Tableau-AI-2025-08-2025-09-32cacd78299e81eb9f74fad171edbec2?source=copy_link",
-    tags: ["Agent", "Tableau", "FastAPI"],
-    period: "2025.08 ~ 2025.09"
+    title: "국내 대형 카지노 테이블 게임 이상탐지",
+    period: "2025.11 ~ 2026.04",
+    role: "모델 설계·학습·레이블링 플랫폼 개발",
+    highlights: [
+      "카지노 테이블 영역별 행동 이상 탐지를 위한 YOLOv8 모델 파인튜닝",
+      "ROI 기반 공간 분석 로직 및 탐지 파이프라인 설계",
+      "학습 데이터 구축을 위한 자체 ROI 레이블링 웹 플랫폼 직접 개발"
+    ],
+    tags: ["YOLOv8", "Computer Vision", "ROI 분석", "레이블링 플랫폼"]
   },
   {
     id: 5,
-    title: "SAP → Tableau 마이그레이션",
-    company: "L사 (IT서비스)",
-    description: "L사 주관 하에 전자·화학·배터리 등 다수 계열사의 SAP 기반 리포트 환경을 Tableau로 전환. 계열사별 데이터 연동 및 대시보드 재구성",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-    link: "https://www.notion.so/SAP-Tableau-2025-07-2025-08-32cacd78299e81c3b4c6e215b65f6732?source=copy_link",
-    tags: ["Tableau", "SAP"],
-    period: "2025.07 ~ 2025.08"
+    title: "국내 대형 물류 기업 외부데이터 자산화 및 리스크관리 시스템 Tableau 개발",
+    period: "2024.09 ~ 2025.05",
+    role: "Tableau 화면 개발 및 망분리 환경 기반 데이터 연계 아키텍처 설계",
+    highlights: [
+      "내부 데이터를 클라우드와 연계하기 위한 망분리 환경 기반 데이터 연계 아키텍처 설계",
+      "현업 담당자와 직접 미팅하며 단순 수치 조회가 아닌 리스크 판단에 실질적으로 필요한 인사이트 도출",
+      "도출된 인사이트 기반으로 대시보드 화면 구성 및 Tableau 직접 개발"
+    ],
+    tags: ["Tableau", "망분리 아키텍처", "데이터 연계"]
   },
   {
     id: 6,
-    title: "사내 ERP BI 구축",
-    company: "H사 (물류)",
-    description: "사내 ERP 데이터를 Tableau로 시각화하여 KPI 대시보드 및 자동화 리포트 환경 구축",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
-    link: "https://www.notion.so/ERP-BI-2024-09-2025-04-32cacd78299e816f8952d63f6b97633e?source=copy_link",
-    tags: ["Tableau", "Tableau Pulse", "Tableau Einstein"],
-    period: "2024.09 ~ 2025.04"
+    title: "ERP 연동 LLM 챗봇 유지보수 및 고도화",
+    period: "2024.07 ~ 현재",
+    role: "유지보수 및 추가 개발",
+    highlights: [
+      "카니아스 ERP 시스템에 가젯 형태로 삽입되는 LLM 챗봇 백엔드 운영",
+      "소켓 연결 누적 → DB 커넥션 풀 고갈 → 컨테이너 교체 반복 장애 원인 분석 및 해결",
+      "pgbouncer 도입으로 DB 커넥션 풀 관리 개선, 커넥션 고갈 문제 근본 해소",
+      "소켓 재연결 로직 구현 및 챗봇 컨테이너·DB 컨테이너 분리로 장애 전파 차단",
+      "Django / FastAPI 기반 기존 코드베이스 인수 후 추가 기능 개발 및 안정화"
+    ],
+    tags: ["FastAPI", "Django", "pgbouncer", "PostgreSQL", "WebSocket"]
   }
 ];
 
@@ -198,7 +223,7 @@ export const education: Education[] = [
 
 export const profileInfo = {
   name: "박호영",
-  title: "AI 서비스 개발자 (LLM·Agent/RAG)",
+  title: "AI 에이전트 개발자 (Backend · Gen AI)",
   tagline: "옆집 할아버지도 이해하는 코드\n설명 없이도 의도가 보이는 설계",
   bio: "안녕하세요, AI 서비스 개발자 박호영입니다.",
   email: "hoyoungpark.ds@gmail.com",
