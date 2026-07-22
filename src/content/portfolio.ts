@@ -54,7 +54,9 @@ export const projects: Project[] = [
       "보험 청구 심사 로직을 심볼릭 규칙으로 명시화하여 LLM 환각 최소화"
     ],
     tags: ["GraphRAG", "RAG", "Neural-Symbolic", "LLM", "마이데이터"],
-    oneLiner: "GraphRAG 이중 구조 + 심볼릭 규칙으로 LLM 환각을 최소화한 청구 심사"
+    oneLiner: "GraphRAG 이중 구조 + 심볼릭 규칙으로 LLM 환각을 최소화한 청구 심사",
+    // TODO: 실제 프로젝트 노션 페이지로 교체 필요. 임시로 Troubleshooting 링크 재사용.
+    link: "https://www.notion.so/WebSocket-PostgreSQL-32cacd78299e81289e6cf1ac171a9ca4?source=copy_link"
   },
   {
     id: 2,
@@ -69,7 +71,9 @@ export const projects: Project[] = [
       "과거 유사 견적 데이터 검색 및 현재 가격 적정성 판단 기능 구현"
     ],
     tags: ["RAG", "추천 챗봇", "LLM", "유사상품 검색"],
-    oneLiner: "PR 자동완성 · 추천 챗봇 · 유사상품 검색 기반 중복 구매 방지"
+    oneLiner: "PR 자동완성 · 추천 챗봇 · 유사상품 검색 기반 중복 구매 방지",
+    // TODO: 실제 프로젝트 노션 페이지로 교체 필요. 임시로 Troubleshooting 링크 재사용.
+    link: "https://www.notion.so/Tool-name-64-tool-call-32cacd78299e81f187cdd59da3843cf7?source=copy_link"
   },
   {
     id: 3,
@@ -83,7 +87,9 @@ export const projects: Project[] = [
       "자연어 질의 → 대시보드 인사이트 추출 에이전트 오케스트레이션 구현"
     ],
     tags: ["AI Agent", "Qdrant", "RAG", "GraphQL", "Tableau"],
-    oneLiner: "자연어 질의 → 대시보드 인사이트 추출 에이전트 오케스트레이션"
+    oneLiner: "자연어 질의 → 대시보드 인사이트 추출 에이전트 오케스트레이션",
+    // TODO: 실제 프로젝트 노션 페이지로 교체 필요. 임시로 Troubleshooting 링크 재사용.
+    link: "https://www.notion.so/Agent-32cacd78299e81afbe92f05824e01858?source=copy_link"
   },
   {
     id: 4,
@@ -96,7 +102,9 @@ export const projects: Project[] = [
       "학습 데이터 구축을 위한 자체 ROI 레이블링 웹 플랫폼 직접 개발"
     ],
     tags: ["YOLOv8", "Computer Vision", "ROI 분석", "레이블링 플랫폼"],
-    oneLiner: "YOLOv8 파인튜닝 + ROI 공간 분석, 자체 레이블링 플랫폼 개발"
+    oneLiner: "YOLOv8 파인튜닝 + ROI 공간 분석, 자체 레이블링 플랫폼 개발",
+    // TODO: 실제 프로젝트 노션 페이지로 교체 필요. 임시로 Troubleshooting 링크 재사용.
+    link: "https://www.notion.so/WebSocket-PostgreSQL-32cacd78299e81289e6cf1ac171a9ca4?source=copy_link"
   },
   {
     id: 5,
@@ -109,7 +117,9 @@ export const projects: Project[] = [
       "도출된 인사이트 기반으로 대시보드 화면 구성 및 Tableau 직접 개발"
     ],
     tags: ["Tableau", "망분리 아키텍처", "데이터 연계"],
-    oneLiner: "망분리 환경 데이터 연계 아키텍처와 리스크 인사이트 대시보드"
+    oneLiner: "망분리 환경 데이터 연계 아키텍처와 리스크 인사이트 대시보드",
+    // TODO: 실제 프로젝트 노션 페이지로 교체 필요. 임시로 Troubleshooting 링크 재사용.
+    link: "https://www.notion.so/Tool-name-64-tool-call-32cacd78299e81f187cdd59da3843cf7?source=copy_link"
   },
   {
     id: 6,
@@ -124,7 +134,9 @@ export const projects: Project[] = [
       "Django / FastAPI 기반 기존 코드베이스 인수 후 추가 기능 개발 및 안정화"
     ],
     tags: ["FastAPI", "Django", "pgbouncer", "PostgreSQL", "WebSocket"],
-    oneLiner: "pgbouncer 도입과 컨테이너 분리로 챗봇 장애를 근본 해소"
+    oneLiner: "pgbouncer 도입과 컨테이너 분리로 챗봇 장애를 근본 해소",
+    // TODO: 실제 프로젝트 노션 페이지로 교체 필요. 임시로 Troubleshooting 링크 재사용.
+    link: "https://www.notion.so/Agent-32cacd78299e81afbe92f05824e01858?source=copy_link"
   }
 ];
 
