@@ -1,88 +1,66 @@
-﻿import { Mail, Phone, Copy, Check, ExternalLink } from "lucide-react";
-import { SiGithub } from "react-icons/si";
-import { profileInfo } from "@/content/portfolio";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { profileInfo } from "@/content/portfolio";
 
 export function Footer() {
-  const { toast } = useToast();
-  const [copiedType, setCopiedType] = useState<string | null>(null);
+  const [copiedType, setCopiedType] = useState<"Email" | "Phone" | null>(null);
 
-  const copyToClipboard = async (text: string, type: string) => {
+  const copyToClipboard = async (text: string, type: "Email" | "Phone") => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedType(type);
-      toast({
-        title: "Copied!",
-        description: `${type} has been copied to clipboard.`,
-      });
       setTimeout(() => setCopiedType(null), 2000);
-    } catch (err) {
-      toast({
-        title: "Error",
-        description: "Failed to copy to clipboard.",
-        variant: "destructive",
-      });
+    } catch {
+      // 클립보드 접근이 차단된 환경에서는 조용히 무시한다.
     }
   };
 
   return (
-    <footer className="bg-secondary/50 py-16 mt-20 border-t border-border">
-      <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-8">
-        <div className="flex gap-4">
-          <a 
+    <footer className="py-8 border-t border-border">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="text-[13px] text-muted-foreground">
+          {new Date().getFullYear()} {profileInfo.name}. All rights reserved.
+        </div>
+
+        <div className="flex items-center gap-7">
+          <a
             href={profileInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 bg-background rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-accent/50 transition-all hover:-translate-y-1 transform duration-200 shadow-sm"
+            className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
             data-testid="footer-link-github"
           >
-            <SiGithub className="w-6 h-6" />
+            GitHub
           </a>
 
           {profileInfo.blog && (
-            <a 
+            <a
               href={profileInfo.blog}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-background rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-accent/50 transition-all hover:-translate-y-1 transform duration-200 shadow-sm relative group"
+              className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
               data-testid="footer-link-blog"
             >
-              <ExternalLink className="w-6 h-6" />
-              <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                Visit Blog
-              </span>
+              Blog
             </a>
           )}
 
           <button
             onClick={() => copyToClipboard(profileInfo.email, "Email")}
-            className="p-3 bg-background rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-accent/50 transition-all hover:-translate-y-1 transform duration-200 shadow-sm relative group"
+            className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
             data-testid="footer-copy-email"
           >
-            {copiedType === "Email" ? <Check className="w-6 h-6 text-green-500" /> : <Mail className="w-6 h-6" />}
-            <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              Copy Email
-            </span>
+            {copiedType === "Email" ? "복사됨 ✓" : profileInfo.email}
           </button>
 
           <button
             onClick={() => copyToClipboard(profileInfo.phone!, "Phone")}
-            className="p-3 bg-background rounded-xl border border-border text-muted-foreground hover:text-foreground hover:border-accent/50 transition-all hover:-translate-y-1 transform duration-200 shadow-sm relative group"
+            className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
             data-testid="footer-copy-phone"
           >
-            {copiedType === "Phone" ? <Check className="w-6 h-6 text-green-500" /> : <Phone className="w-6 h-6" />}
-            <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              Copy Phone
-            </span>
+            {copiedType === "Phone" ? "복사됨 ✓" : profileInfo.phone}
           </button>
-        </div>
-        
-        <div className="text-sm text-muted-foreground">
-          {new Date().getFullYear()} {profileInfo.name}. All rights reserved.
         </div>
       </div>
     </footer>
   );
 }
-

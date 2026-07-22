@@ -21,6 +21,8 @@ export interface Project {
   description?: string;
   /** Notion 등 상세 페이지 링크. 있으면 카드 클릭 시 모달로 표시된다. */
   link?: string;
+  /** Home 화면 경량 카드에 표시되는 한 줄 요약. */
+  oneLiner?: string;
 }
 
 export interface Post {
@@ -32,6 +34,10 @@ export interface Post {
   link?: string;
   createdAt: string;
   tags?: string[];
+  /** 이슈 로그 형태(Troubleshooting 목록)에 표시되는 문제 상황. */
+  problem?: string;
+  /** 이슈 로그 형태(Troubleshooting 목록)에 표시되는 해결 방안. */
+  solution?: string;
 }
 
 export const projects: Project[] = [
@@ -47,7 +53,8 @@ export const projects: Project[] = [
       "사용자 채팅 질의 기반 보험금 수령 가능성 판단 기능 설계",
       "보험 청구 심사 로직을 심볼릭 규칙으로 명시화하여 LLM 환각 최소화"
     ],
-    tags: ["GraphRAG", "RAG", "Neural-Symbolic", "LLM", "마이데이터"]
+    tags: ["GraphRAG", "RAG", "Neural-Symbolic", "LLM", "마이데이터"],
+    oneLiner: "GraphRAG 이중 구조 + 심볼릭 규칙으로 LLM 환각을 최소화한 청구 심사"
   },
   {
     id: 2,
@@ -61,7 +68,8 @@ export const projects: Project[] = [
       "RAG 기반 유사상품 검색으로 중복 구매 방지 기능 개발 (구매부서용)",
       "과거 유사 견적 데이터 검색 및 현재 가격 적정성 판단 기능 구현"
     ],
-    tags: ["RAG", "추천 챗봇", "LLM", "유사상품 검색"]
+    tags: ["RAG", "추천 챗봇", "LLM", "유사상품 검색"],
+    oneLiner: "PR 자동완성 · 추천 챗봇 · 유사상품 검색 기반 중복 구매 방지"
   },
   {
     id: 3,
@@ -74,7 +82,8 @@ export const projects: Project[] = [
       "Qdrant 기반 벡터 저장소 구성 및 RAG 파이프라인 설계",
       "자연어 질의 → 대시보드 인사이트 추출 에이전트 오케스트레이션 구현"
     ],
-    tags: ["AI Agent", "Qdrant", "RAG", "GraphQL", "Tableau"]
+    tags: ["AI Agent", "Qdrant", "RAG", "GraphQL", "Tableau"],
+    oneLiner: "자연어 질의 → 대시보드 인사이트 추출 에이전트 오케스트레이션"
   },
   {
     id: 4,
@@ -86,7 +95,8 @@ export const projects: Project[] = [
       "ROI 기반 공간 분석 로직 및 탐지 파이프라인 설계",
       "학습 데이터 구축을 위한 자체 ROI 레이블링 웹 플랫폼 직접 개발"
     ],
-    tags: ["YOLOv8", "Computer Vision", "ROI 분석", "레이블링 플랫폼"]
+    tags: ["YOLOv8", "Computer Vision", "ROI 분석", "레이블링 플랫폼"],
+    oneLiner: "YOLOv8 파인튜닝 + ROI 공간 분석, 자체 레이블링 플랫폼 개발"
   },
   {
     id: 5,
@@ -98,7 +108,8 @@ export const projects: Project[] = [
       "현업 담당자와 직접 미팅하며 단순 수치 조회가 아닌 리스크 판단에 실질적으로 필요한 인사이트 도출",
       "도출된 인사이트 기반으로 대시보드 화면 구성 및 Tableau 직접 개발"
     ],
-    tags: ["Tableau", "망분리 아키텍처", "데이터 연계"]
+    tags: ["Tableau", "망분리 아키텍처", "데이터 연계"],
+    oneLiner: "망분리 환경 데이터 연계 아키텍처와 리스크 인사이트 대시보드"
   },
   {
     id: 6,
@@ -112,7 +123,8 @@ export const projects: Project[] = [
       "소켓 재연결 로직 구현 및 챗봇 컨테이너·DB 컨테이너 분리로 장애 전파 차단",
       "Django / FastAPI 기반 기존 코드베이스 인수 후 추가 기능 개발 및 안정화"
     ],
-    tags: ["FastAPI", "Django", "pgbouncer", "PostgreSQL", "WebSocket"]
+    tags: ["FastAPI", "Django", "pgbouncer", "PostgreSQL", "WebSocket"],
+    oneLiner: "pgbouncer 도입과 컨테이너 분리로 챗봇 장애를 근본 해소"
   }
 ];
 
@@ -125,7 +137,9 @@ export const posts: Post[] = [
     content: "",
     link: "https://www.notion.so/WebSocket-PostgreSQL-32cacd78299e81289e6cf1ac171a9ca4?source=copy_link",
     createdAt: "2026-03-01T10:00:00.000Z",
-    tags: ["WebSocket", "Streaming", "Debugging"]
+    tags: ["WebSocket", "Streaming", "Debugging"],
+    problem: "실시간 스트리밍 중 WebSocket 연결이 반복적으로 끊김",
+    solution: "재연결 로직 구현과 커넥션 관리 구조 개선으로 해소"
   },
   {
     id: 2,
@@ -135,7 +149,9 @@ export const posts: Post[] = [
     content: "",
     link: "https://www.notion.so/Tool-name-64-tool-call-32cacd78299e81f187cdd59da3843cf7?source=copy_link",
     createdAt: "2026-02-15T10:00:00.000Z",
-    tags: ["LLM", "AI Agent", "Tool Calling", "Debugging"]
+    tags: ["LLM", "AI Agent", "Tool Calling", "Debugging"],
+    problem: "LLM Agent의 Tool Calling에서 반복되는 실패 패턴 발생",
+    solution: "실패 패턴 분류 후 재시도 전략으로 안정성 확보"
   },
   {
     id: 3,
@@ -145,7 +161,9 @@ export const posts: Post[] = [
     content: "",
     link: "https://www.notion.so/Agent-32cacd78299e81afbe92f05824e01858?source=copy_link",
     createdAt: "2026-02-01T10:00:00.000Z",
-    tags: ["BI", "Tableau", "AI", "Architecture"]
+    tags: ["BI", "Tableau", "AI", "Architecture"],
+    problem: "집계 데이터와 AI가 참조하는 필드명이 불일치",
+    solution: "BI + AI 통합 아키텍처 설계 기준 정리로 해소"
   }
 ];
 

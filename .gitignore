@@ -4,3 +4,11 @@ dist
 vite.config.ts.*
 *.tar.gz
 .playwright-mcp/
+
+# Claude Code 툴링 (로컬 전용, 저장소에는 포함하지 않음)
+.claude/
+.claude-plugin/
+.mcp.json
+CLAUDE.md
+USAGE.md
+docs/

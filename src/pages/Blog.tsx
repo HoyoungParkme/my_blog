@@ -1,6 +1,6 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
-import { Calendar, ArrowUpRight, ChevronLeft, ChevronRight, X, ExternalLink } from "lucide-react";
+import { ArrowUpRight, X, ExternalLink } from "lucide-react";
 import { posts, type Post, getNotionEmbedUrl } from "@/content/portfolio";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,9 +26,8 @@ function PostModal({ post, onClose }: { post: Post; onClose: () => void }) {
         className="relative w-full max-w-4xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[85vh]"
       >
         <div className="p-5 border-b border-border flex items-center justify-between">
-          <span className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Calendar className="w-4 h-4" />
-            {format(new Date(post.createdAt), 'MMM dd, yyyy')}
+          <span className="font-mono text-sm text-muted-foreground">
+            {format(new Date(post.createdAt), 'yyyy.MM.dd')}
           </span>
           <Button variant="ghost" size="icon" onClick={onClose} className="rounded-full hover:bg-accent/10">
             <X className="w-5 h-5" />
@@ -70,7 +69,7 @@ function PostModal({ post, onClose }: { post: Post; onClose: () => void }) {
 export default function Blog() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  
+
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const currentPosts = posts.slice(startIndex, startIndex + POSTS_PER_PAGE);
@@ -84,55 +83,48 @@ export default function Blog() {
     <div className="min-h-screen pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-16">
-          <h1 className="font-serif text-5xl font-bold mb-6">Troubleshooting</h1>
-          <p className="text-xl text-muted-foreground">
+          <h1 className="font-serif text-[44px] font-bold mb-3 tracking-[-0.02em]">Troubleshooting</h1>
+          <p className="text-[17px] text-muted-foreground">
             이슈 발생 원인 분석 및 해결 방안 정리
           </p>
         </div>
 
-        <div className="space-y-6">
-          {currentPosts.map((post, index) => (
-            <motion.article
+        <div className="border-t-2 border-foreground">
+          {currentPosts.map((post) => (
+            <div
               key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-accent/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className="flex gap-6 py-[26px] px-2 border-b border-border cursor-pointer transition-colors hover:bg-[#fafafa]"
               onClick={() => post.link && setSelectedPost(post)}
             >
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-3 gap-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
-                    {format(new Date(post.createdAt), 'MMM dd, yyyy')}
-                  </div>
-                  <div className="p-2 bg-secondary rounded-full group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300 flex-shrink-0">
-                    <ArrowUpRight className="w-5 h-5" />
-                  </div>
+              <div className="flex-shrink-0 w-[88px]">
+                <div className="font-mono text-xs text-[#737373]">
+                  {format(new Date(post.createdAt), 'yyyy.MM.dd')}
                 </div>
-
-                <h2 className="font-serif text-2xl font-bold mb-3 group-hover:text-accent transition-colors">
-                  {post.title}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-5 line-clamp-2">
-                  {post.summary}
-                </p>
-
                 {post.tags && post.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground border border-border"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="font-mono text-[10.5px] text-accent mt-1">#{post.tags[0]}</div>
+                )}
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <h2 className="text-[16.5px] font-semibold mb-2">{post.title}</h2>
+                {post.problem && (
+                  <div className="flex items-center gap-2 text-[13px] text-[#525252] mb-1">
+                    <span className="w-[7px] h-[7px] rounded-full bg-destructive flex-shrink-0" />
+                    <span>{post.problem}</span>
+                  </div>
+                )}
+                {post.solution && (
+                  <div className="flex items-center gap-2 text-[13px] text-[#525252]">
+                    <span className="w-[7px] h-[7px] rounded-full bg-accent flex-shrink-0" />
+                    <span>{post.solution}</span>
                   </div>
                 )}
               </div>
-            </motion.article>
+
+              <div className="flex-shrink-0 flex items-center">
+                <ArrowUpRight className="w-4 h-4 text-[#a3a3a3]" />
+              </div>
+            </div>
           ))}
         </div>
 
@@ -149,12 +141,10 @@ export default function Blog() {
               size="sm"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="gap-2"
             >
-              <ChevronLeft className="w-4 h-4" />
               이전
             </Button>
-            
+
             <div className="text-sm font-medium">
               {currentPage} / {totalPages}
             </div>
@@ -164,10 +154,8 @@ export default function Blog() {
               size="sm"
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="gap-2"
             >
               다음
-              <ChevronRight className="w-4 h-4" />
             </Button>
           </div>
         )}
@@ -175,4 +163,3 @@ export default function Blog() {
     </div>
   );
 }
-

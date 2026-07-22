@@ -14,8 +14,8 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h1 className="font-serif text-5xl font-bold mb-6">Contact</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <h1 className="font-serif text-[44px] font-bold mb-3 tracking-[-0.02em]">Contact</h1>
+          <p className="text-[17px] text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             새로운 프로젝트 제안이나 협업 문의는 언제든 환영합니다.
           </p>
         </motion.div>
