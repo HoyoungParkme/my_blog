@@ -49,7 +49,6 @@ export default {
       },
       maxWidth: {
         page: "1184px", // 페이지 컨테이너
-        sheet: "920px", // 상세 본문 시트
         list: "760px", // 태그 페이지 글 목록
       },
     },
