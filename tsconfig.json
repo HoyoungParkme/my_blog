@@ -1,20 +1,20 @@
 {
   "include": ["src/**/*", "vite.config.ts", "tailwind.config.ts"],
-  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "incremental": true,
-    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
     "noEmit": true,
+    "target": "ES2022",
     "module": "ESNext",
-    "strict": true,
+    "moduleResolution": "bundler",
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "preserve",
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "types": ["node", "vite/client"],
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

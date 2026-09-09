@@ -27,7 +27,7 @@ jobs:
           cache: npm
 
       - name: Install Dependencies
-        run: rm -f package-lock.json && npm install
+        run: npm ci
 
       - name: Build
         run: npm run build

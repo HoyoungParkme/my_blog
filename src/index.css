@@ -1,92 +1,164 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+KR:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/**
+ * 전역 스타일과 디자인 토큰
+ *
+ * 파일 경로: src/index.css
+ * 목적: 디자인 핸드오프의 색상·타이포 토큰을 CSS 변수로 정의하고 전역 기본값을 잡는다.
+ * 주요 의존성: Tailwind CSS, Pretendard(index.html에서 CDN 로드)
+ */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Noto Serif KR', serif;
-  --font-mono: 'JetBrains Mono', monospace;
-
-  /* Minimalist monochrome palette with a deep accent */
-  --background: 0 0% 100%;
-  --foreground: 0 0% 10%;
-  
-  --primary: 0 0% 9%;
-  --primary-foreground: 0 0% 98%;
-  
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 10%;
-  
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 10%;
-  
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 9%;
-  
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 45%;
-  
-  --accent: 210 100% 50%; /* Modern deep blue accent */
-  --accent-foreground: 0 0% 98%;
-  
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-  
-  --border: 0 0% 90%;
-  --input: 0 0% 90%;
-  --ring: 0 0% 9%;
-  
-  --radius: 0.5rem;
-}
-
-.dark {
-  --background: 0 0% 3%;
-  --foreground: 0 0% 98%;
-  
-  --card: 0 0% 3%;
-  --card-foreground: 0 0% 98%;
-  
-  --popover: 0 0% 3%;
-  --popover-foreground: 0 0% 98%;
-  
-  --primary: 0 0% 98%;
-  --primary-foreground: 0 0% 9%;
-  
-  --secondary: 0 0% 10%;
-  --secondary-foreground: 0 0% 98%;
-  
-  --muted: 0 0% 10%;
-  --muted-foreground: 0 0% 60%;
-  
-  --accent: 210 100% 60%;
-  --accent-foreground: 0 0% 98%;
-  
-  --destructive: 0 62% 30%;
-  --destructive-foreground: 0 0% 98%;
-  
-  --border: 0 0% 12%;
-  --input: 0 0% 12%;
-  --ring: 0 0% 83%;
-}
-
 @layer base {
-  * {
-    @apply border-border;
+  :root {
+    /* 배경 */
+    --paper: #faf9f6; /* 페이지 배경 */
+    --sheet: #ffffff; /* 카드·본문 시트 배경 */
+    --badge: #f1efe9; /* 배지 배경 */
+    --placeholder: #e9e6df; /* 이미지 플레이스홀더 */
+
+    /* 텍스트 */
+    --ink: #151412; /* 본문 텍스트 */
+    --ink-body: #2a2823; /* 상세 본문 */
+    --ink-muted: #3d3a34; /* 설명 텍스트 */
+    --ink-faint: #6f6a60; /* 라벨·날짜 */
+
+    /* 강조와 선 */
+    --accent: #1a6a4a; /* 링크 hover, 오버라인 라벨 */
+    --rule: #dcd8cf; /* 구분선 */
+    --rule-tag: #c9c4b8; /* 태그 테두리 */
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased selection:bg-accent/20 selection:text-accent font-sans;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Pretendard, -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-tight;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--accent);
+  }
+
+  /* 헤더가 sticky라 앵커 이동 시 96px만큼 여유를 둔다 */
+  [id] {
+    scroll-margin-top: 96px;
   }
 }
 
-/* Custom Utilities for aesthetic */
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  /**
+   * 상세 페이지(프로젝트·글)의 3열 그리드.
+   * 좌측은 축소 가능한 여백 트랙, 중앙이 본문 시트(최소 560px 유지), 우측이 사이드바.
+   * Tailwind 임의값으로 쓰기엔 min()과 쉼표가 얽혀 있어 여기에 둔다.
+   */
+  .detail-grid {
+    display: block;
+  }
+
+  /**
+   * 마크다운 본문 스타일.
+   * h2는 목차 앵커 id가 필요해 컴포넌트에서 직접 렌더링하고, 나머지는 여기서 처리한다.
+   */
+  .post-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink-body);
+  }
+
+  .post-body p {
+    margin: 0 0 16px;
+    text-wrap: pretty;
+  }
+
+  .post-body ul,
+  .post-body ol {
+    margin: 0 0 16px;
+    padding-left: 20px;
+  }
+
+  .post-body ul {
+    list-style: disc;
+  }
+
+  .post-body ol {
+    list-style: decimal;
+  }
+
+  .post-body li {
+    margin-bottom: 6px;
+  }
+
+  .post-body strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .post-body a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  /* 인용구는 아직 채우지 않은 자리(TODO)를 표시하는 데 쓰인다 */
+  .post-body blockquote {
+    margin: 0 0 16px;
+    padding: 12px 16px;
+    border-left: 2px solid var(--rule-tag);
+    background: var(--paper);
+    color: var(--ink-faint);
+    font-size: 15px;
+  }
+
+  .post-body blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .post-body pre {
+    margin: 0 0 32px;
+    padding: 18px 20px;
+    background: var(--ink);
+    color: var(--placeholder);
+    border-radius: 6px;
+    overflow: auto;
+  }
+
+  .post-body code {
+    padding: 2px 6px;
+    background: var(--placeholder);
+    border-radius: 3px;
+    font: 14px ui-monospace, Menlo, monospace;
+  }
+
+  .post-body pre code {
+    padding: 0;
+    background: none;
+    font: 14px/1.6 ui-monospace, Menlo, monospace;
+  }
+
+  @media (min-width: 901px) {
+    .detail-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 240px)
+        minmax(min(100%, 560px), 920px)
+        minmax(240px, auto);
+      column-gap: 32px;
+      justify-content: center;
+      align-items: start;
+      justify-items: start;
+    }
   }
 }

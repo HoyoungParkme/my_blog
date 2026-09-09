@@ -1,8 +1,6 @@
 node_modules
 dist
 .DS_Store
-vite.config.ts.*
-*.tar.gz
 .playwright-mcp/
 
 # Claude Code 툴링 (로컬 전용, 저장소에는 포함하지 않음)
