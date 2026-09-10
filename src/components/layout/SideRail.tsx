@@ -34,9 +34,26 @@ const BLOG_LINKS = [
 
 export function SideRail() {
   const [location] = useLocation();
+  const projectsActive = location.startsWith("/projects");
+  const blogActive = location.startsWith("/blog") || location.startsWith("/tags");
+
+  /**
+   * 펼쳐진 아코디언은 항상 하나뿐이다.
+   * 1000px 이하에서 패널이 레일 아래에 겹쳐 뜨기 때문에 둘이 동시에 열리면 서로 가린다.
+   */
+  const [openKey, setOpenKey] = useState<string | null>(null);
+
+  // 해당 섹션으로 이동하면 그쪽을 펼쳐 현재 위치를 보여준다
+  useEffect(() => {
+    if (projectsActive) setOpenKey("Projects");
+    else if (blogActive) setOpenKey("Blog");
+  }, [projectsActive, blogActive]);
+
+  const toggle = (key: string) =>
+    setOpenKey((prev) => (prev === key ? null : key));
 
   return (
-    <aside className="block border-b border-rule bg-paper dt:fixed dt:left-0 dt:top-0 dt:z-10 dt:flex dt:h-screen dt:w-rail dt:flex-col dt:border-b-0 dt:border-r">
+    <aside className="relative block border-b border-rule bg-paper dt:fixed dt:left-0 dt:top-0 dt:z-10 dt:flex dt:h-screen dt:w-rail dt:flex-col dt:border-b-0 dt:border-r">
       <BrandBlock />
 
       <nav className="flex flex-row flex-wrap text-[15px] font-medium dt:mt-8 dt:flex-col dt:flex-nowrap">
@@ -46,13 +63,17 @@ export function SideRail() {
           label="Projects"
           href="/projects"
           links={PROJECT_LINKS}
-          active={location.startsWith("/projects")}
+          active={projectsActive}
+          open={openKey === "Projects"}
+          onToggle={() => toggle("Projects")}
         />
         <RailAccordion
           label="Blog"
           href="/blog"
           links={BLOG_LINKS}
-          active={location.startsWith("/blog") || location.startsWith("/tags")}
+          active={blogActive}
+          open={openKey === "Blog"}
+          onToggle={() => toggle("Blog")}
         />
       </nav>
 
@@ -98,28 +119,26 @@ function RailLink({
 
 /**
  * 상위 항목은 목록 페이지로 이동하고, 우측 화살표만 하위 목록을 여닫는다.
- * 1000px 이하에서는 펼친 목록이 절대 위치 드롭다운으로 뜬다.
+ * 1000px 이하에서는 펼친 목록이 레일 전체 아래에 드롭다운으로 뜬다.
+ * 항목 기준이 아니라 레일 기준으로 붙여야 레일 푸터(연락처)를 가리지 않는다.
  */
 function RailAccordion({
   label,
   href,
   links,
   active,
+  open,
+  onToggle,
 }: {
   label: string;
   href: string;
   links: { label: string; href: string }[];
   active: boolean;
+  open: boolean;
+  onToggle: () => void;
 }) {
-  const [open, setOpen] = useState(active);
-
-  // 해당 섹션으로 이동하면 하위 목록을 펼쳐 현재 위치를 보여준다
-  useEffect(() => {
-    if (active) setOpen(true);
-  }, [active]);
-
   return (
-    <div className="relative dt:static dt:border-b dt:border-rule-rail">
+    <div className="dt:border-b dt:border-rule-rail">
       <div
         className={`flex items-center justify-between gap-2 ${
           active ? "bg-badge font-semibold" : ""
@@ -130,7 +149,7 @@ function RailAccordion({
         </Link>
         <button
           type="button"
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={onToggle}
           aria-label={`${label} 하위 목록 ${open ? "접기" : "펼치기"}`}
           aria-expanded={open}
           className="py-3.5 pl-2 pr-5 text-[11px] text-ink-faint hover:text-accent dt:pr-6"
@@ -139,9 +158,8 @@ function RailAccordion({
         </button>
       </div>
 
-      {/* 모바일 드롭다운은 오른쪽 기준으로 붙여 화면 밖으로 넘치지 않게 한다 */}
       {open && (
-        <div className="absolute right-0 top-full z-20 min-w-[190px] rounded-b-md border border-rule bg-badge py-1.5 shadow-[0_6px_18px_rgba(21,20,18,.08)] dt:static dt:min-w-0 dt:rounded-none dt:border-0 dt:border-t dt:border-rule-rail dt:shadow-none">
+        <div className="absolute inset-x-0 top-full z-20 border-b border-rule bg-badge py-1.5 shadow-[0_6px_18px_rgba(21,20,18,.08)] dt:static dt:border-b-0 dt:border-t dt:border-rule-rail dt:shadow-none">
           {/* 세로선과 들여쓰기로 상위 항목보다 한 단계 아래임을 드러낸다 */}
           <div className="ml-5 border-l border-rule-tag dt:ml-6">
             {links.map((link) => (
