@@ -11,6 +11,7 @@ import { Route, Router as WouterRouter, Switch } from "wouter";
 
 import { PageShell } from "@/components/layout/PageShell";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import About from "@/pages/About";
 import Blog from "@/pages/Blog";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
@@ -23,6 +24,7 @@ function AppRoutes() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/projects" component={Projects} />
       <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/blog" component={Blog} />

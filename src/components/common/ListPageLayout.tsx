@@ -36,7 +36,7 @@ export function ListPageLayout({
   children,
 }: ListPageLayoutProps) {
   return (
-    <div className="mx-auto grid max-w-page grid-cols-1 items-start gap-10 px-5 pb-24 pt-16 dt:grid-cols-[200px_minmax(0,1fr)] dt:gap-14 dt:px-12">
+    <div className="mx-auto grid max-w-listing grid-cols-1 items-start gap-10 px-5 pb-24 pt-16 dt:grid-cols-[200px_minmax(0,1fr)] dt:gap-14 dt:px-12">
       <aside className="dt:sticky dt:top-24">
         <h1 className="text-[28px] font-bold tracking-tightest">{title}</h1>
 

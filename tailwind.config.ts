@@ -13,8 +13,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        // 디자인 핸드오프의 900px 분기. 900px 이하가 모바일이므로 데스크톱은 901px부터.
-        dt: "901px",
+        // 디자인 핸드오프의 1000px 분기. 1000px 이하가 모바일이므로 데스크톱은 1001px부터.
+        dt: "1001px",
       },
       colors: {
         paper: "var(--paper)",
@@ -31,7 +31,9 @@ export default {
         rule: {
           DEFAULT: "var(--rule)",
           tag: "var(--rule-tag)",
+          rail: "var(--rule-rail)",
         },
+        "brand-sub": "var(--brand-sub)",
       },
       fontFamily: {
         sans: ["Pretendard", "-apple-system", "'Apple SD Gothic Neo'", "sans-serif"],
@@ -48,8 +50,13 @@ export default {
         "overline-wide": ".12em",
       },
       maxWidth: {
-        page: "1184px", // 페이지 컨테이너
+        page: "1184px", // Tag 페이지 컨테이너
+        about: "1120px", // About 페이지 컨테이너
+        listing: "1000px", // Projects·Blog 목록 컨테이너
         list: "760px", // 태그 페이지 글 목록
+      },
+      spacing: {
+        rail: "240px", // 좌측 고정 레일 폭
       },
     },
   },
