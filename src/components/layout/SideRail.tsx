@@ -16,15 +16,16 @@ import { profile } from "@/content/profile";
 /** 복사 피드백을 유지하는 시간(ms) */
 const FEEDBACK_MS = 1600;
 
-/** 아코디언으로 펼쳐지는 하위 항목. href의 해시는 각 목록 페이지의 섹션 id와 맞아야 한다. */
+/**
+ * 아코디언으로 펼쳐지는 하위 항목. href의 해시는 각 목록 페이지의 섹션 id와 맞아야 한다.
+ * "전체"는 두지 않는다. 상위 항목(Projects·Blog)을 누르면 목록 전체로 이동한다.
+ */
 const PROJECT_LINKS = [
-  { label: "전체", href: "/projects" },
   { label: "회사 프로젝트", href: "/projects#company" },
   { label: "개인 프로젝트", href: "/projects#personal" },
 ];
 
 const BLOG_LINKS = [
-  { label: "전체", href: "/blog" },
   { label: "트러블슈팅", href: "/blog#type-0" },
   { label: "비교 분석", href: "/blog#type-1" },
   { label: "개념 정리", href: "/blog#type-2" },
@@ -43,11 +44,13 @@ export function SideRail() {
         <RailLink href="/about" label="About" active={location === "/about"} />
         <RailAccordion
           label="Projects"
+          href="/projects"
           links={PROJECT_LINKS}
           active={location.startsWith("/projects")}
         />
         <RailAccordion
           label="Blog"
+          href="/blog"
           links={BLOG_LINKS}
           active={location.startsWith("/blog") || location.startsWith("/tags")}
         />
@@ -94,40 +97,66 @@ function RailLink({
 }
 
 /**
- * details/summary 기반 아코디언.
+ * 상위 항목은 목록 페이지로 이동하고, 우측 화살표만 하위 목록을 여닫는다.
  * 1000px 이하에서는 펼친 목록이 절대 위치 드롭다운으로 뜬다.
  */
 function RailAccordion({
   label,
+  href,
   links,
   active,
 }: {
   label: string;
+  href: string;
   links: { label: string; href: string }[];
   active: boolean;
 }) {
+  const [open, setOpen] = useState(active);
+
+  // 해당 섹션으로 이동하면 하위 목록을 펼쳐 현재 위치를 보여준다
+  useEffect(() => {
+    if (active) setOpen(true);
+  }, [active]);
+
   return (
-    <details className="relative dt:static dt:border-b dt:border-rule-rail">
-      <summary
-        className={`flex cursor-pointer items-center justify-between gap-2 px-5 py-3.5 [&::-webkit-details-marker]:hidden dt:px-6 ${
+    <div className="relative dt:static dt:border-b dt:border-rule-rail">
+      <div
+        className={`flex items-center justify-between gap-2 ${
           active ? "bg-badge font-semibold" : ""
         }`}
       >
-        <span>{label}</span>
-        <span className="text-[11px] text-ink-faint">▾</span>
-      </summary>
-      <div className="absolute left-0 top-full z-20 min-w-[190px] rounded-b-md border border-rule bg-badge py-1.5 shadow-[0_6px_18px_rgba(21,20,18,.08)] dt:static dt:min-w-0 dt:rounded-none dt:border-0 dt:border-t dt:border-rule-rail dt:shadow-none">
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="block py-[7px] pl-8 pr-6 text-sm font-medium text-ink-muted"
-          >
-            {link.label}
-          </Link>
-        ))}
+        <Link href={href} className="flex-1 py-3.5 pl-5 dt:pl-6">
+          {label}
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((prev) => !prev)}
+          aria-label={`${label} 하위 목록 ${open ? "접기" : "펼치기"}`}
+          aria-expanded={open}
+          className="py-3.5 pl-2 pr-5 text-[11px] text-ink-faint hover:text-accent dt:pr-6"
+        >
+          <span className={`inline-block ${open ? "" : "-rotate-90"}`}>▾</span>
+        </button>
       </div>
-    </details>
+
+      {/* 모바일 드롭다운은 오른쪽 기준으로 붙여 화면 밖으로 넘치지 않게 한다 */}
+      {open && (
+        <div className="absolute right-0 top-full z-20 min-w-[190px] rounded-b-md border border-rule bg-badge py-1.5 shadow-[0_6px_18px_rgba(21,20,18,.08)] dt:static dt:min-w-0 dt:rounded-none dt:border-0 dt:border-t dt:border-rule-rail dt:shadow-none">
+          {/* 세로선과 들여쓰기로 상위 항목보다 한 단계 아래임을 드러낸다 */}
+          <div className="ml-5 border-l border-rule-tag dt:ml-6">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block py-[7px] pl-4 pr-5 text-sm font-medium text-ink-muted dt:pr-6"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
