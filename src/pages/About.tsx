@@ -10,7 +10,6 @@
 import { Link } from "wouter";
 
 import { ImagePlaceholder } from "@/components/common/ImagePlaceholder";
-import { TagPill } from "@/components/common/TagPill";
 import {
   academicHistory,
   certifications,
@@ -112,13 +111,6 @@ function FeaturedBlock({ subProjects }: { subProjects: typeof projects }) {
             <dt className="font-medium text-ink-faint">결과</dt>
             <dd>{featuredProject.brief.result}</dd>
           </dl>
-          <div className="flex flex-wrap gap-2 text-[13px]">
-            {featuredProject.tags.map((tag) => (
-              <TagPill key={tag} className="px-3 py-1">
-                {tag}
-              </TagPill>
-            ))}
-          </div>
           <div className="mt-auto self-start border-b border-ink text-[15px] font-semibold">
             케이스 스터디 읽기 →
           </div>

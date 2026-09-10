@@ -27,7 +27,7 @@
     /* 강조와 선 */
     --accent: #1a6a4a; /* 링크 hover, 오버라인 라벨, 파티클 */
     --rule: #dcd8cf; /* 구분선 */
-    --rule-tag: #c9c4b8; /* 태그 테두리 */
+    --rule-quote: #c9c4b8; /* 마크다운 인용구 왼쪽 테두리 */
     --rule-rail: #e6e2d9; /* 레일 내부 구분선 */
 
     /* 좌측 레일 브랜드 블록 */
@@ -154,7 +154,7 @@
   .post-body blockquote {
     margin: 0 0 16px;
     padding: 12px 16px;
-    border-left: 2px solid var(--rule-tag);
+    border-left: 2px solid var(--rule-quote);
     background: var(--paper);
     color: var(--ink-faint);
     font-size: 15px;

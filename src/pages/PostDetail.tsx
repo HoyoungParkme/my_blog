@@ -11,7 +11,6 @@ import { Link } from "wouter";
 
 import { DetailLayout, SidebarBlock } from "@/components/common/DetailLayout";
 import { Markdown } from "@/components/common/Markdown";
-import { TagLink } from "@/components/common/TagPill";
 import { extractHeadings, findPost, findPostNeighbors, type Post } from "@/content/posts";
 import NotFound from "@/pages/NotFound";
 
@@ -61,13 +60,6 @@ function Sidebar({ post, prev, next }: { post: Post; prev?: Post; next?: Post })
         </dl>
       </SidebarBlock>
 
-      <SidebarBlock label="태그">
-        <div className="flex flex-wrap gap-1.5 text-[13px]">
-          {post.tags.map((tag) => (
-            <TagLink key={tag} name={tag} className="px-2.5 py-[3px]" />
-          ))}
-        </div>
-      </SidebarBlock>
 
 
       {headings.length > 0 && (

@@ -4,7 +4,7 @@
  * 파일 경로: src/pages/Blog.tsx
  * 목적: 글을 유형별로 묶어 보여주는 목록 화면.
  * 주요 기능: 유형별 섹션 분류, 섹션 헤딩의 글 개수
- * 주요 의존성: src/content/posts.ts, src/content/taxonomy.ts
+ * 주요 의존성: src/content/posts.ts
  */
 
 import { Link } from "wouter";

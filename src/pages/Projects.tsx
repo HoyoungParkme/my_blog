@@ -4,14 +4,13 @@
  * 파일 경로: src/pages/Projects.tsx
  * 목적: 전체 프로젝트를 회사/개인으로 나눠 보여주는 목록 화면.
  * 주요 기능: 소속별 섹션 분류, 사이드바 섹션 점프, 기술 태그 목록
- * 주요 의존성: src/content/projects.ts, src/content/taxonomy.ts
+ * 주요 의존성: src/content/projects.ts
  */
 
 import { Link } from "wouter";
 
 import { ImagePlaceholder } from "@/components/common/ImagePlaceholder";
 import { ListPageLayout, ListSection } from "@/components/common/ListPageLayout";
-import { TagPill } from "@/components/common/TagPill";
 import { projects, type Project } from "@/content/projects";
 
 /** 회사 프로젝트로 분류할 소속명 */
@@ -64,13 +63,6 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
       <div className="mt-1.5 text-[15px] text-ink-muted [text-wrap:pretty]">
         {project.summary}
-      </div>
-      <div className="mt-3.5 flex flex-wrap gap-1.5 text-xs">
-        {project.tags.map((tag) => (
-          <TagPill key={tag} className="px-2.5 py-[3px]">
-            {tag}
-          </TagPill>
-        ))}
       </div>
     </Link>
   );

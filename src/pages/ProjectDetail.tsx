@@ -11,7 +11,6 @@ import { Link } from "wouter";
 
 import { DetailLayout, DetailSection, SidebarBlock } from "@/components/common/DetailLayout";
 import { ImagePlaceholder } from "@/components/common/ImagePlaceholder";
-import { TagLink } from "@/components/common/TagPill";
 import { findProject, findProjectNeighbors, type Project } from "@/content/projects";
 import NotFound from "@/pages/NotFound";
 
@@ -132,13 +131,6 @@ function Sidebar({
         </div>
       </SidebarBlock>
 
-      <SidebarBlock label="태그">
-        <div className="flex flex-wrap gap-1.5 text-[13px]">
-          {project.tags.map((tag) => (
-            <TagLink key={tag} name={tag} className="px-2.5 py-[3px]" />
-          ))}
-        </div>
-      </SidebarBlock>
 
       {(prev || next) && (
         <SidebarBlock>

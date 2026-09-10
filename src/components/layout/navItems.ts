@@ -25,10 +25,9 @@ export const NAV_ITEMS: NavItem[] = [
  *   href: 항목의 경로
  *   location: wouter가 준 현재 경로
  * Returns:
- *   활성 여부. Home은 완전 일치만 인정하고, Blog는 태그 페이지(/tags/*)도 자기 영역으로 본다.
+ *   활성 여부. Home만 완전 일치를 요구하고 나머지는 경로 접두사로 판정한다.
  */
 export function isNavActive(href: string, location: string): boolean {
   if (href === "/") return location === "/";
-  if (href === "/blog") return location.startsWith("/blog") || location.startsWith("/tags");
   return location.startsWith(href);
 }

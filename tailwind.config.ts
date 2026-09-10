@@ -30,7 +30,6 @@ export default {
         accent: "var(--accent)",
         rule: {
           DEFAULT: "var(--rule)",
-          tag: "var(--rule-tag)",
           rail: "var(--rule-rail)",
         },
         "brand-sub": "var(--brand-sub)",
@@ -53,7 +52,6 @@ export default {
         page: "1184px", // Tag 페이지 컨테이너
         about: "1120px", // About 페이지 컨테이너
         listing: "1000px", // Projects·Blog 목록 컨테이너
-        list: "760px", // 태그 페이지 글 목록
       },
       spacing: {
         rail: "240px", // 좌측 고정 레일 폭

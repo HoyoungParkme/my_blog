@@ -18,7 +18,6 @@ import NotFound from "@/pages/NotFound";
 import PostDetail from "@/pages/PostDetail";
 import ProjectDetail from "@/pages/ProjectDetail";
 import Projects from "@/pages/Projects";
-import TagPage from "@/pages/TagPage";
 
 function AppRoutes() {
   return (
@@ -29,7 +28,6 @@ function AppRoutes() {
       <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={PostDetail} />
-      <Route path="/tags/:tag" component={TagPage} />
       <Route component={NotFound} />
     </Switch>
   );
