@@ -3,7 +3,7 @@
  *
  * 파일 경로: src/components/common/DetailLayout.tsx
  * 목적: 프로젝트·글 상세가 공유하는 "본문 시트 + 우측 사이드바" 구조와 사이드바 블록을 제공한다.
- * 주요 기능: 3열 그리드(.detail-grid), 흰 배경 본문 시트, sticky 사이드바, 구분선이 붙는 사이드바 블록
+ * 주요 기능: 2열 그리드(.detail-grid), 흰 배경 본문 시트, sticky 사이드바, 구분선이 붙는 사이드바 블록
  */
 
 import type { ReactNode } from "react";
@@ -17,10 +17,10 @@ export function DetailLayout({
 }) {
   return (
     <article className="detail-grid px-5 pb-24 pt-14 dt:px-12">
-      <div className="col-start-1 w-full min-w-0 rounded-lg border border-rule bg-sheet px-5 py-7 dt:col-start-2 dt:px-14 dt:pb-14 dt:pt-12">
+      <div className="w-full min-w-0 rounded-lg border border-rule bg-sheet px-5 py-7 dt:px-14 dt:pb-14 dt:pt-12">
         {children}
       </div>
-      <aside className="mt-2 flex flex-col gap-6 text-[15px] dt:col-start-3 dt:mt-0 dt:w-60 dt:sticky dt:top-24 dt:self-start dt:pt-11">
+      <aside className="mt-2 flex flex-col gap-6 text-[15px] dt:col-start-2 dt:mt-0 dt:w-60 dt:sticky dt:top-24 dt:self-start dt:pt-11">
         {sidebar}
       </aside>
     </article>

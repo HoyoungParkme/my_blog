@@ -65,8 +65,10 @@
 
 @layer components {
   /**
-   * 상세 페이지(프로젝트·글)의 3열 그리드.
-   * 좌측은 축소 가능한 여백 트랙, 중앙이 본문 시트(최소 560px 유지), 우측이 사이드바.
+   * 상세 페이지(프로젝트·글)의 2열 그리드.
+   * 본문 시트(최소 560px 유지)와 240px 사이드바를 한 덩어리로 묶어 가운데 정렬한다.
+   * 예전에는 좌측에 빈 여백 트랙을 둬 시트만 정중앙에 놓았는데,
+   * 그러면 눈에 보이는 블록이 오른쪽으로 밀려 보였다.
    * Tailwind 임의값으로 쓰기엔 min()과 쉼표가 얽혀 있어 여기에 둔다.
    */
   .detail-grid {
@@ -155,10 +157,7 @@
   @media (min-width: 901px) {
     .detail-grid {
       display: grid;
-      grid-template-columns:
-        minmax(0, 240px)
-        minmax(min(100%, 560px), 920px)
-        minmax(240px, auto);
+      grid-template-columns: minmax(min(100%, 560px), 920px) 240px;
       column-gap: 32px;
       justify-content: center;
       align-items: start;
