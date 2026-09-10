@@ -3,7 +3,7 @@
  *
  * 파일 경로: src/pages/Blog.tsx
  * 목적: 글을 유형별로 묶어 보여주는 목록 화면.
- * 주요 기능: 유형별 섹션 분류, 사이드바 섹션 점프, 태그 목록, 관련 프로젝트 배지
+ * 주요 기능: 유형별 섹션 분류, 섹션 헤딩의 글 개수
  * 주요 의존성: src/content/posts.ts, src/content/taxonomy.ts
  */
 
@@ -55,11 +55,6 @@ function PostRow({ post }: { post: Post }) {
       </div>
       <div className="whitespace-nowrap pt-[3px] text-[13px] text-ink-faint dt:text-right">
         <div>{post.readMin}분</div>
-        {post.project && (
-          <div className="mt-1.5 inline-block rounded-full bg-badge px-2.5 py-[3px] font-medium text-ink">
-            프로젝트 연결
-          </div>
-        )}
       </div>
     </Link>
   );

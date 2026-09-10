@@ -15,7 +15,6 @@
  *   tags: [WebSocket, Debugging]
  *   summary: 목록과 상세 상단에 쓰이는 한 줄 요약
  *   takeaway: 핵심 한 줄
- *   project: erp-llm-chatbot   # 선택. 관련 프로젝트 slug
  *   ---
  */
 
@@ -36,8 +35,6 @@ export interface Post {
   summary: string;
   /** 목록과 상세 상단에 노출되는 핵심 한 줄 */
   takeaway: string;
-  /** 관련 프로젝트 slug. 없으면 undefined. */
-  project?: string;
   /** 프런트매터를 제외한 마크다운 본문 */
   body: string;
   /** 본문 길이로 계산한 읽는 시간(분) */
@@ -128,7 +125,6 @@ function toPost(path: string, raw: string): Post {
     tags: Array.isArray(data.tags) ? data.tags : [],
     summary: String(data.summary ?? ""),
     takeaway: String(data.takeaway ?? ""),
-    project: data.project ? String(data.project) : undefined,
     body,
     readMin: calcReadMin(body),
   };

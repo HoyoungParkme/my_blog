@@ -3,8 +3,8 @@
  *
  * 파일 경로: src/pages/PostDetail.tsx
  * 목적: 마크다운으로 작성된 글 한 편을 본문 시트와 사이드바 구조로 보여준다.
- * 주요 기능: 핵심 한 줄 카드, 마크다운 본문, 메타/태그/관련 프로젝트/목차/이전·다음 사이드바
- * 주요 의존성: src/content/posts.ts, src/content/projects.ts
+ * 주요 기능: 핵심 한 줄 카드, 마크다운 본문, 메타/태그/목차/이전·다음 사이드바
+ * 주요 의존성: src/content/posts.ts
  */
 
 import { Link } from "wouter";
@@ -13,7 +13,6 @@ import { DetailLayout, SidebarBlock } from "@/components/common/DetailLayout";
 import { Markdown } from "@/components/common/Markdown";
 import { TagLink } from "@/components/common/TagPill";
 import { extractHeadings, findPost, findPostNeighbors, type Post } from "@/content/posts";
-import { findProject } from "@/content/projects";
 import NotFound from "@/pages/NotFound";
 
 export default function PostDetail({ params }: { params: { slug: string } }) {
@@ -47,7 +46,6 @@ export default function PostDetail({ params }: { params: { slug: string } }) {
 }
 
 function Sidebar({ post, prev, next }: { post: Post; prev?: Post; next?: Post }) {
-  const relatedProject = post.project ? findProject(post.project) : undefined;
   const headings = extractHeadings(post.body);
 
   return (
@@ -71,13 +69,6 @@ function Sidebar({ post, prev, next }: { post: Post; prev?: Post; next?: Post })
         </div>
       </SidebarBlock>
 
-      {relatedProject && (
-        <SidebarBlock label="관련 프로젝트">
-          <Link href={`/projects/${relatedProject.slug}`} className="font-semibold">
-            {relatedProject.title} →
-          </Link>
-        </SidebarBlock>
-      )}
 
       {headings.length > 0 && (
         <SidebarBlock label="목차">
