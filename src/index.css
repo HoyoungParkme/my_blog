@@ -36,6 +36,35 @@
 
   html {
     scroll-behavior: smooth;
+    /*
+     * 앵커 이동과 포커스 이동이 sticky 탭 줄(모바일 49px) 밑에 깔리지 않게 한다.
+     * scroll-margin-top을 [id]에 주면 id 없는 요소(카드·태그 칩)의 포커스 이동이 가려진다.
+     */
+    scroll-padding-top: 64px;
+  }
+
+  @media (min-width: 1001px) {
+    html {
+      /* 데스크톱은 상세 사이드바의 dt:top-24(96px)와 짝을 맞춘다 */
+      scroll-padding-top: 96px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /*
+   * 상단 바(브랜드 줄 + 탭 줄)와 본문 래퍼가 #root의 형제로 놓인다.
+   * #root를 세로 flex로 두면 본문 래퍼가 flex-1로 남은 높이를 정확히 채워
+   * 바 높이를 빼는 계산(calc(100vh - 96px)) 없이도 Home이 한 화면에 들어간다.
+   */
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   body {
@@ -57,10 +86,13 @@
     color: var(--accent);
   }
 
-  /* 헤더가 sticky라 앵커 이동 시 96px만큼 여유를 둔다 */
-  [id] {
-    scroll-margin-top: 96px;
+  /* 키보드 이동 시에만 테두리를 보여준다 */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
   }
+
 }
 
 @layer components {

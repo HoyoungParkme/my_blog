@@ -11,7 +11,7 @@
  *   ---
  *   title: 글 제목
  *   date: 2026-03-01
- *   type: 트러블슈팅            # POST_TYPES 중 하나
+ *   type: 트러블슈팅            # 트러블슈팅 | 개인 포스팅
  *   tags: [WebSocket, Debugging]
  *   summary: 목록과 상세 상단에 쓰이는 한 줄 요약
  *   takeaway: 핵심 한 줄
@@ -20,7 +20,7 @@
  */
 
 /** 글 유형. Blog 목록의 섹션 구분과 순서를 겸한다. */
-export const POST_TYPES = ["트러블슈팅", "비교 분석", "개념 정리", "설계·문화"] as const;
+export const POST_TYPES = ["트러블슈팅", "개인 포스팅"] as const;
 
 export type PostType = (typeof POST_TYPES)[number];
 
@@ -124,7 +124,7 @@ function toPost(path: string, raw: string): Post {
     title: String(data.title ?? ""),
     date: rawDate.replace(/-/g, "."),
     rawDate,
-    type: (data.type as PostType) ?? "개념 정리",
+    type: (data.type as PostType) ?? "개인 포스팅",
     tags: Array.isArray(data.tags) ? data.tags : [],
     summary: String(data.summary ?? ""),
     takeaway: String(data.takeaway ?? ""),
