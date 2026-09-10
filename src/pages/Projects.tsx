@@ -10,14 +10,9 @@
 import { Link } from "wouter";
 
 import { ImagePlaceholder } from "@/components/common/ImagePlaceholder";
-import {
-  ListPageLayout,
-  ListSection,
-  type SectionLink,
-} from "@/components/common/ListPageLayout";
+import { ListPageLayout, ListSection } from "@/components/common/ListPageLayout";
 import { TagPill } from "@/components/common/TagPill";
 import { projects, type Project } from "@/content/projects";
-import { projectTags } from "@/content/taxonomy";
 
 /** 회사 프로젝트로 분류할 소속명 */
 const COMPANY = "디포커스";
@@ -34,16 +29,15 @@ export default function Projects() {
     projects: projects.filter(group.match),
   })).filter((group) => group.projects.length > 0);
 
-  const sections: SectionLink[] = groups.map((group) => ({
-    id: group.id,
-    label: group.label,
-    count: group.projects.length,
-  }));
-
   return (
-    <ListPageLayout title="Projects" sections={sections} tagLabel="기술" tags={projectTags}>
+    <ListPageLayout title="Projects">
       {groups.map((group) => (
-        <ListSection key={group.id} id={group.id} title={group.label}>
+        <ListSection
+          key={group.id}
+          id={group.id}
+          title={group.label}
+          count={group.projects.length}
+        >
           <div className="mt-6 grid grid-cols-1 gap-5 dt:grid-cols-2">
             {group.projects.map((project) => (
               <ProjectCard key={project.slug} project={project} />

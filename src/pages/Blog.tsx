@@ -9,13 +9,8 @@
 
 import { Link } from "wouter";
 
-import {
-  ListPageLayout,
-  ListSection,
-  type SectionLink,
-} from "@/components/common/ListPageLayout";
+import { ListPageLayout, ListSection } from "@/components/common/ListPageLayout";
 import { POST_TYPES, posts, type Post } from "@/content/posts";
-import { postTags } from "@/content/taxonomy";
 
 export default function Blog() {
   // 글이 없는 유형은 섹션과 사이드바 양쪽에서 모두 감춘다
@@ -25,16 +20,15 @@ export default function Blog() {
     posts: posts.filter((post) => post.type === type),
   })).filter((group) => group.posts.length > 0);
 
-  const sections: SectionLink[] = groups.map((group) => ({
-    id: group.id,
-    label: group.label,
-    count: group.posts.length,
-  }));
-
   return (
-    <ListPageLayout title="Blog" sections={sections} tagLabel="태그" tags={postTags}>
+    <ListPageLayout title="Blog">
       {groups.map((group) => (
-        <ListSection key={group.id} id={group.id} title={group.label}>
+        <ListSection
+          key={group.id}
+          id={group.id}
+          title={group.label}
+          count={group.posts.length}
+        >
           <div className="flex flex-col">
             {group.posts.map((post) => (
               <PostRow key={post.slug} post={post} />

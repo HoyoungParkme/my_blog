@@ -10,3 +10,6 @@ dist
 CLAUDE.md
 USAGE.md
 docs/
+
+# 디자인 캔버스 작업 파일 (로컬 전용)
+design/
