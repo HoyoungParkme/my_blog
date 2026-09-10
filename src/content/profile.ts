@@ -20,7 +20,7 @@ export interface HistoryEntry {
 export const profile = {
   name: "박호영",
   /** About 프로필 블록의 직군 오버라인 라벨 */
-  role: "AI 서비스 개발자 · LLM / AGENT / RAG",
+  role: "AI Agent 개발자 · LLM / RAG",
   /** 좌측 레일 브랜드 블록에 들어가는 짧은 직군 표기 */
   railRole: "AI Agent 개발자",
   bio: "옆집 할아버지 할머니도 협업이 가능한 직관적인 코드와 명확한 설계를 추구합니다. 응용통계를 전공하고 데이터 분석에서 출발해, 지금은 로컬 LLM 환경에서 도구를 쓰는 에이전트와 RAG 시스템을 설계하고 운영합니다.",
