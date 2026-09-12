@@ -16,7 +16,7 @@
     --paper: #faf9f6; /* 페이지 배경 */
     --sheet: #ffffff; /* 카드·본문 시트 배경 */
     --badge: #f1efe9; /* 배지 배경 */
-    --placeholder: #e9e6df; /* 이미지 플레이스홀더 */
+    --code-tint: #e9e6df; /* 코드 블록 글자색, 인라인 코드 배경 */
 
     /* 텍스트 */
     --ink: #151412; /* 본문 텍스트 */
@@ -168,14 +168,14 @@
     margin: 0 0 32px;
     padding: 18px 20px;
     background: var(--ink);
-    color: var(--placeholder);
+    color: var(--code-tint);
     border-radius: 6px;
     overflow: auto;
   }
 
   .post-body code {
     padding: 2px 6px;
-    background: var(--placeholder);
+    background: var(--code-tint);
     border-radius: 3px;
     font: 14px ui-monospace, Menlo, monospace;
   }

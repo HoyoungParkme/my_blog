@@ -3,14 +3,13 @@
  *
  * 파일 경로: src/pages/ProjectDetail.tsx
  * 목적: 하나의 프로젝트를 "배경과 문제 → 내가 한 일 → 결과와 배운 점" 순서로 보여준다.
- * 주요 기능: 지표 카드, 본문 시트, 메타/목차/태그/이전·다음 사이드바
+ * 주요 기능: 본문 시트, 지표 카드(수치가 있을 때만), 메타/목차/이전·다음 사이드바
  * 주요 의존성: src/content/projects.ts
  */
 
 import { Link } from "wouter";
 
 import { DetailLayout, DetailSection, SidebarBlock } from "@/components/common/DetailLayout";
-import { ImagePlaceholder } from "@/components/common/ImagePlaceholder";
 import { findProject, findProjectNeighbors, type Project } from "@/content/projects";
 import NotFound from "@/pages/NotFound";
 
@@ -34,21 +33,22 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
       </h1>
       <p className="mt-2.5 text-[17px] text-ink-muted">{project.summary}</p>
 
-      <ImagePlaceholder className="mb-9 mt-7 h-[380px] rounded-md" />
+      {/* 실측 수치가 채워진 프로젝트에만 지표 카드를 띄운다 */}
+      {project.metrics && project.metrics.length > 0 && (
+        <div className="mt-9 grid grid-cols-1 gap-3 dt:grid-cols-3">
+          {project.metrics.map((metric) => (
+            <div
+              key={metric.label}
+              className="rounded-md border border-rule bg-paper p-[18px]"
+            >
+              <div className="text-[26px] font-bold tracking-tighter">{metric.value}</div>
+              <div className="mt-0.5 text-sm text-ink-faint">{metric.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
 
-      <div className="mb-10 grid grid-cols-1 gap-3 dt:grid-cols-3">
-        {project.metrics.map((metric) => (
-          <div
-            key={metric.label}
-            className="rounded-md border border-rule bg-paper p-[18px]"
-          >
-            <div className="text-[26px] font-bold tracking-tighter">{metric.value}</div>
-            <div className="mt-0.5 text-sm text-ink-faint">{metric.label}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="text-base leading-[1.75] text-ink-body">
+      <div className="mt-9 text-base leading-[1.75] text-ink-body">
         <DetailSection id="sec-0" title="배경과 문제">
           <p className="mb-8 [text-wrap:pretty]">{project.problem}</p>
         </DetailSection>
@@ -57,7 +57,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
           <p className="mb-4 [text-wrap:pretty]">{project.role}</p>
         </DetailSection>
         {project.code && (
-          <pre className="mb-8 overflow-auto rounded-md bg-ink px-5 py-[18px] font-mono text-sm leading-[1.6] text-placeholder">
+          <pre className="mb-8 overflow-auto rounded-md bg-ink px-5 py-[18px] font-mono text-sm leading-[1.6] text-code-tint">
             {project.code}
           </pre>
         )}

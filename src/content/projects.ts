@@ -9,7 +9,7 @@
  * 보안서약서의 외부 공표 조항을 확인하기 전까지 실명은 복원하지 않는다.
  *
  * 채워야 할 항목:
- * - metrics의 value는 실측 수치로 교체해야 한다. 현재는 모두 자리표시자("—")다.
+ * - metrics는 실측 수치가 나온 프로젝트에만 넣는다. 없으면 지표 카드가 렌더되지 않는다.
  * - code는 공개 가능한 핵심 스니펫이 준비되면 채운다. 없으면 상세에서 코드 블록이 생략된다.
  * - links(github/demo)는 공개 가능한 저장소나 데모가 있을 때만 채운다.
  */
@@ -41,17 +41,12 @@ export interface Project {
   role: string;
   /** 케이스 스터디 "결과와 배운 점" */
   result: string;
-  metrics: ProjectMetric[];
+  /** 실측 수치. 없으면 상세에서 지표 카드를 띄우지 않는다. */
+  metrics?: ProjectMetric[];
   /** 핵심 코드 스니펫. 없으면 코드 블록을 렌더링하지 않는다. */
   code?: string;
   links?: { github?: string; demo?: string };
 }
-
-const PLACEHOLDER_METRICS: ProjectMetric[] = [
-  { value: "—", label: "지표 1" },
-  { value: "—", label: "지표 2" },
-  { value: "—", label: "지표 3" },
-];
 
 export const projects: Project[] = [
   {
@@ -69,7 +64,6 @@ export const projects: Project[] = [
       "AI 아키텍처 설계와 개발을 맡았습니다. Tableau 대시보드와 연동되는 LLM 기반 에이전트 시스템을 설계·구현했고, GraphQL과 REST를 함께 쓰는 하이브리드 방식으로 메타데이터와 데이터 소스를 연동했습니다. Qdrant 기반 벡터 저장소를 구성해 RAG 파이프라인을 설계하고, 자연어 질의에서 대시보드 인사이트를 뽑아내는 에이전트 오케스트레이션을 구현했습니다.",
     result:
       "메타데이터 조회는 GraphQL, 실데이터는 REST로 나눈 하이브리드 연동이 결정적이었습니다. 한쪽만 썼다면 스키마 탐색이나 실데이터 접근 중 하나가 막혔을 구조였습니다. (실측 수치 정리 예정)",
-    metrics: PLACEHOLDER_METRICS,
   },
   {
     slug: "casino-anomaly-detection",
@@ -86,7 +80,6 @@ export const projects: Project[] = [
       "테이블 영역별 행동 이상 탐지를 위해 YOLOv8 모델을 파인튜닝하고, ROI 기반 공간 분석 로직과 탐지 파이프라인을 설계했습니다. 학습 데이터를 만들기 위한 ROI 레이블링 웹 플랫폼도 직접 개발했습니다.",
     result:
       "탐지 결과를 좌표가 아니라 영역 단위 사건으로 해석하게 되면서 모델 출력이 곧바로 운영 규칙에 연결됐습니다. 도메인에 맞는 레이블링 도구를 먼저 만든 것이 데이터 품질을 좌우했습니다. (실측 수치 정리 예정)",
-    metrics: PLACEHOLDER_METRICS,
   },
   {
     slug: "logistics-risk-tableau",
@@ -103,7 +96,6 @@ export const projects: Project[] = [
       "망분리 환경을 전제로 내부 데이터와 클라우드를 잇는 데이터 연계 아키텍처를 설계했습니다. 화면 개발에 앞서 현업 담당자와 직접 미팅하며 단순 수치 조회가 아니라 리스크 판단에 실제로 필요한 인사이트가 무엇인지 도출했고, 그 결과를 기준으로 대시보드를 구성해 Tableau로 직접 개발했습니다.",
     result:
       "요구사항을 그대로 화면으로 옮기는 대신 현업과 판단 기준을 먼저 맞춘 것이 결과를 갈랐습니다. 무엇을 보여줄지가 아니라 무엇을 결정해야 하는지에서 시작하면 화면 구성이 따라옵니다. (실측 수치 정리 예정)",
-    metrics: PLACEHOLDER_METRICS,
   },
 ];
 

@@ -20,7 +20,7 @@ export default {
         paper: "var(--paper)",
         sheet: "var(--sheet)",
         badge: "var(--badge)",
-        placeholder: "var(--placeholder)",
+        "code-tint": "var(--code-tint)",
         ink: {
           DEFAULT: "var(--ink)",
           body: "var(--ink-body)",
