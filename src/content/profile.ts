@@ -51,12 +51,16 @@ export const academicHistory: HistoryEntry[] = [
   },
 ];
 
-/** 자격증은 취득 연월 데이터가 없어 term을 비운다. 열 정렬은 그대로 유지된다. */
+/** 자격증. 다른 이력 블록과 같이 최신순으로 둔다. 약칭이 널리 쓰이는 건 괄호로 함께 적는다. */
 export const certifications: HistoryEntry[] = [
-  { term: "", name: "빅데이터 분석기사" },
-  { term: "", name: "SQLD" },
-  { term: "", name: "ADSP" },
-  { term: "", name: "Salesforce Data Cloud Certification" },
+  {
+    term: "2025.12",
+    name: "Salesforce Certified Data Cloud Consultant",
+    detail: "Salesforce",
+  },
+  { term: "2024.12", name: "빅데이터분석기사", detail: "한국데이터산업진흥원" },
+  { term: "2024.03", name: "데이터분석 준전문가 (ADSP)", detail: "한국데이터산업진흥원" },
+  { term: "2023.10", name: "SQL 개발자 (SQLD)", detail: "한국데이터산업진흥원" },
 ];
 
 export const education: HistoryEntry[] = [
