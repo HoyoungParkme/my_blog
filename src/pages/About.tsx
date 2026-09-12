@@ -2,14 +2,13 @@
  * About 화면
  *
  * 파일 경로: src/pages/About.tsx
- * 목적: 이력서 본체. 프로필, 대표 프로젝트, 이력을 담는다.
- * 주요 기능: 프로필 블록, Featured 프로젝트 카드와 하위 카드 3개, 경력/학력/자격증/교육 이력
+ * 목적: 이력서 본체. 프로필, 프로젝트 목록, 이력을 담는다.
+ * 주요 기능: 프로필 블록, 프로젝트 목록(Projects와 같은 행 구조), 경력/학력/자격증/교육 이력
  * 주요 의존성: src/content/profile.ts, src/content/projects.ts
  */
 
 import { Link } from "wouter";
 
-import { ImagePlaceholder } from "@/components/common/ImagePlaceholder";
 import {
   academicHistory,
   certifications,
@@ -18,20 +17,18 @@ import {
   profile,
   type HistoryEntry,
 } from "@/content/profile";
-import { featuredProject, projects } from "@/content/projects";
+import { projects, type Project } from "@/content/projects";
 
-/** Featured 아래에 놓이는 하위 카드 개수 */
-const SUB_CARD_COUNT = 3;
+/** About에 노출할 프로젝트 개수. 넘치면 "전체 보기"로 넘긴다. */
+const SHOWN_COUNT = 3;
 
 export default function About() {
-  const subProjects = projects
-    .filter((project) => project.slug !== featuredProject.slug)
-    .slice(0, SUB_CARD_COUNT);
+  const shown = projects.slice(0, SHOWN_COUNT);
 
   return (
     <section className="mx-auto max-w-about px-5 pb-24 pt-12 dt:px-16 dt:pt-[88px]">
       <ProfileBlock />
-      <FeaturedBlock subProjects={subProjects} />
+      <ProjectsBlock shown={shown} />
       <HistoryBlock />
     </section>
   );
@@ -81,59 +78,45 @@ function ProfileBlock() {
   );
 }
 
-function FeaturedBlock({ subProjects }: { subProjects: typeof projects }) {
+function ProjectsBlock({ shown }: { shown: Project[] }) {
   return (
     <div className="border-b border-rule py-14">
       <div className="mb-7 flex items-baseline justify-between">
-        <h2 className="text-[28px] font-bold tracking-tightest">대표 프로젝트</h2>
+        <h2 className="text-[28px] font-bold tracking-tightest">프로젝트</h2>
         <Link href="/projects" className="border-b border-ink text-[15px] font-semibold">
           전체 {projects.length}개 보기
         </Link>
       </div>
 
-      <Link
-        href={`/projects/${featuredProject.slug}`}
-        className="grid grid-cols-1 gap-6 rounded-md border border-rule bg-sheet p-5 hover:border-ink hover:text-ink dt:grid-cols-[1.15fr_1fr] dt:gap-10 dt:p-8"
-      >
-        <ImagePlaceholder className="min-h-[320px] rounded" />
-        <div className="flex flex-col gap-[18px]">
-          <div className="text-[13px] font-semibold tracking-overline-wide text-accent">
-            FEATURED · {featuredProject.year} · {featuredProject.org}
-          </div>
-          <div className="text-[26px] font-bold leading-[1.25] tracking-tightest">
-            {featuredProject.title}
-          </div>
-          <dl className="grid grid-cols-[56px_1fr] gap-x-4 gap-y-3 text-base text-ink-body">
-            <dt className="font-medium text-ink-faint">문제</dt>
-            <dd>{featuredProject.brief.problem}</dd>
-            <dt className="font-medium text-ink-faint">역할</dt>
-            <dd>{featuredProject.brief.role}</dd>
-            <dt className="font-medium text-ink-faint">결과</dt>
-            <dd>{featuredProject.brief.result}</dd>
-          </dl>
-          <div className="mt-auto self-start border-b border-ink text-[15px] font-semibold">
-            케이스 스터디 읽기 →
-          </div>
-        </div>
-      </Link>
-
-      <div className="mt-5 grid grid-cols-1 gap-5 dt:grid-cols-3">
-        {subProjects.map((project) => (
-          <Link
-            key={project.slug}
-            href={`/projects/${project.slug}`}
-            className="block rounded-md border border-rule bg-sheet p-6 hover:border-ink hover:text-ink"
-          >
-            <ImagePlaceholder className="mb-4 h-[120px] rounded" />
-            <div className="text-lg font-bold tracking-tight">{project.title}</div>
-            <div className="mt-1.5 text-[15px] text-ink-muted">{project.summary}</div>
-            <div className="mt-3.5 text-[13px] font-medium text-ink-faint">
-              {project.year} · {project.tags.join(" · ")}
-            </div>
-          </Link>
+      <div className="flex flex-col border-t border-ink">
+        {shown.map((project) => (
+          <ProjectRow key={project.slug} project={project} />
         ))}
       </div>
     </div>
+  );
+}
+
+/** Projects·Troubleshooting 목록과 같은 행 구조를 쓴다. */
+function ProjectRow({ project }: { project: Project }) {
+  return (
+    <Link
+      href={`/projects/${project.slug}`}
+      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[132px_minmax(0,1fr)_auto] dt:gap-6"
+    >
+      <span className="whitespace-nowrap pt-[3px] text-sm text-ink-faint">
+        {project.period}
+      </span>
+      <div>
+        <div className="text-lg font-bold leading-[1.4] tracking-tight">{project.title}</div>
+        <div className="mt-1.5 text-[15px] text-ink-muted [text-wrap:pretty]">
+          {project.summary}
+        </div>
+      </div>
+      <div className="whitespace-nowrap pt-[3px] text-[13px] text-ink-faint dt:text-right">
+        {project.roleShort}
+      </div>
+    </Link>
   );
 }
 

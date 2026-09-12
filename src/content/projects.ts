@@ -35,11 +35,6 @@ export interface Project {
   tags: string[];
   /** 목록 카드의 한 줄 요약 */
   summary: string;
-  /**
-   * Home의 Featured 카드에 들어가는 문제/역할/결과 한 줄 요약.
-   * 상세의 problem/role/result는 서술형이라 카드에 그대로 넣으면 비율이 무너진다.
-   */
-  brief: { problem: string; role: string; result: string };
   /** 케이스 스터디 "배경과 문제" */
   problem: string;
   /** 케이스 스터디 "내가 한 일" */
@@ -49,8 +44,6 @@ export interface Project {
   metrics: ProjectMetric[];
   /** 핵심 코드 스니펫. 없으면 코드 블록을 렌더링하지 않는다. */
   code?: string;
-  /** Home 대표 프로젝트로 노출할지 여부. 첫 번째 featured 하나만 사용된다. */
-  featured?: boolean;
   links?: { github?: string; demo?: string };
 }
 
@@ -70,14 +63,6 @@ export const projects: Project[] = [
     roleShort: "AI 아키텍처 설계 · 개발",
     tags: ["AI Agent", "Qdrant", "RAG", "GraphQL", "Tableau"],
     summary: "자연어 질의를 대시보드 인사이트로 바꾸는 Tableau 연동 에이전트",
-    brief: {
-      problem:
-        "대시보드는 있는데 필요한 숫자를 찾으려면 어느 시트를 봐야 하는지부터 알아야 했습니다.",
-      role:
-        "GraphQL·REST 하이브리드로 Tableau를 연동하고, Qdrant 기반 RAG와 에이전트 오케스트레이션을 구현했습니다.",
-      result:
-        "자연어 질의만으로 대시보드 인사이트를 얻을 수 있게 됐습니다.",
-    },
     problem:
       "대시보드는 이미 있는데 정작 필요한 숫자를 찾으려면 어느 시트를 봐야 하는지부터 알아야 했습니다. Tableau의 메타데이터와 데이터 소스를 에이전트가 이해할 수 있는 형태로 끌어오는 것이 먼저 풀어야 할 문제였습니다.",
     role:
@@ -85,7 +70,6 @@ export const projects: Project[] = [
     result:
       "메타데이터 조회는 GraphQL, 실데이터는 REST로 나눈 하이브리드 연동이 결정적이었습니다. 한쪽만 썼다면 스키마 탐색이나 실데이터 접근 중 하나가 막혔을 구조였습니다. (실측 수치 정리 예정)",
     metrics: PLACEHOLDER_METRICS,
-    featured: true,
   },
   {
     slug: "casino-anomaly-detection",
@@ -96,14 +80,6 @@ export const projects: Project[] = [
     roleShort: "모델 설계 · 학습 · 플랫폼 개발",
     tags: ["YOLOv8", "Computer Vision", "ROI 분석", "레이블링 플랫폼"],
     summary: "YOLOv8 파인튜닝과 ROI 공간 분석, 학습 데이터를 위한 레이블링 플랫폼까지 직접 개발",
-    brief: {
-      problem:
-        "같은 동작도 어느 영역에서 일어났는지에 따라 정상과 이상이 갈리는데, 일반 객체 탐지로는 구분되지 않았습니다.",
-      role:
-        "YOLOv8을 파인튜닝하고 ROI 기반 공간 분석 로직과 탐지 파이프라인을 설계했으며, 레이블링 플랫폼도 직접 만들었습니다.",
-      result:
-        "탐지 결과를 영역 단위 사건으로 해석하게 되면서 모델 출력이 곧바로 운영 규칙에 연결됐습니다.",
-    },
     problem:
       "테이블 위 행동은 어디에서 일어났는지가 곧 의미입니다. 같은 동작이라도 베팅 영역인지 딜러 영역인지에 따라 정상과 이상이 갈리는데, 일반 객체 탐지만으로는 이 구분이 되지 않았습니다. 게다가 이 도메인의 학습 데이터는 기성 레이블링 도구로 만들 수 있는 형태가 아니었습니다.",
     role:
@@ -121,14 +97,6 @@ export const projects: Project[] = [
     roleShort: "데이터 연계 설계 · Tableau 개발",
     tags: ["Tableau", "망분리 아키텍처", "데이터 연계"],
     summary: "망분리 환경의 데이터 연계 아키텍처 설계와 리스크 판단용 대시보드 개발",
-    brief: {
-      problem:
-        "망분리 환경이라 일반적인 연계 방식을 쓸 수 없었고, 현업이 원한 것은 조회 화면이 아니라 판단 화면이었습니다.",
-      role:
-        "망분리 전제의 데이터 연계 아키텍처를 설계하고, 현업과 판단 기준을 맞춘 뒤 Tableau로 직접 개발했습니다.",
-      result:
-        "요구사항을 화면으로 옮기는 대신 판단 기준에서 시작한 것이 결과를 갈랐습니다.",
-    },
     problem:
       "내부 데이터를 클라우드와 연계해야 하는데 망분리 환경이라 일반적인 연결 방식을 쓸 수 없었습니다. 그리고 현업이 원한 것은 수치 조회 화면이 아니라 리스크를 판단할 수 있는 화면이었는데, 요구사항 문서만으로는 그 차이가 드러나지 않았습니다.",
     role:
@@ -157,5 +125,3 @@ export function findProjectNeighbors(slug: string): {
   return { prev: projects[index - 1], next: projects[index + 1] };
 }
 
-/** Home 대표 프로젝트. featured가 없으면 첫 번째 프로젝트를 쓴다. */
-export const featuredProject = projects.find((p) => p.featured) ?? projects[0];
