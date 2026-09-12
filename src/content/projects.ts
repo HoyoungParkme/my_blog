@@ -5,6 +5,9 @@
  * 목적: 프로젝트 목록과 케이스 스터디 상세에 쓰이는 데이터를 정의한다.
  * 주요 기능: 프로젝트 배열 제공, slug 조회, 이전/다음 탐색
  *
+ * 고객사 이름은 쓰지 않는다. 업종과 규모로만 표기한다.
+ * 보안서약서의 외부 공표 조항을 확인하기 전까지 실명은 복원하지 않는다.
+ *
  * 채워야 할 항목:
  * - metrics의 value는 실측 수치로 교체해야 한다. 현재는 모두 자리표시자("—")다.
  * - code는 공개 가능한 핵심 스니펫이 준비되면 채운다. 없으면 상세에서 코드 블록이 생략된다.
@@ -60,7 +63,7 @@ const PLACEHOLDER_METRICS: ProjectMetric[] = [
 export const projects: Project[] = [
   {
     slug: "tableau-ai-agent",
-    title: "현대글로비스 Tableau AI",
+    title: "국내 대형 물류 기업 Tableau AI",
     year: "2026",
     org: "디포커스",
     period: "2026.01 — 2026.04",
@@ -86,7 +89,7 @@ export const projects: Project[] = [
   },
   {
     slug: "casino-anomaly-detection",
-    title: "파라다이스 카지노",
+    title: "국내 대형 카지노 테이블 게임 이상탐지",
     year: "2025",
     org: "디포커스",
     period: "2025.11 — 2026.04",
@@ -111,7 +114,7 @@ export const projects: Project[] = [
   },
   {
     slug: "logistics-risk-tableau",
-    title: "현대글로비스 리스크 관리 프로젝트",
+    title: "국내 대형 물류 기업 리스크 관리 시스템",
     year: "2024",
     org: "디포커스",
     period: "2024.09 — 2025.05",

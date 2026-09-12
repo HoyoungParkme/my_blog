@@ -22,10 +22,7 @@ export default function PostDetail({ params }: { params: { slug: string } }) {
 
   return (
     <DetailLayout sidebar={<Sidebar post={post} prev={prev} next={next} />}>
-      <div className="text-[13px] font-semibold tracking-overline text-accent">
-        {post.type}
-      </div>
-      <h1 className="mt-2.5 text-[32px] font-bold leading-[1.25] tracking-tighter [text-wrap:balance]">
+      <h1 className="text-[32px] font-bold leading-[1.25] tracking-tighter [text-wrap:balance]">
         {post.title}
       </h1>
       <p className="mt-2.5 text-[17px] text-ink-muted [text-wrap:pretty]">{post.summary}</p>
@@ -55,8 +52,6 @@ function Sidebar({ post, prev, next }: { post: Post; prev?: Post; next?: Post })
           <dd>{post.date}</dd>
           <dt className="text-ink-faint">분량</dt>
           <dd>{post.readMin}분</dd>
-          <dt className="text-ink-faint">유형</dt>
-          <dd>{post.type}</dd>
         </dl>
       </SidebarBlock>
 

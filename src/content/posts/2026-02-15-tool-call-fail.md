@@ -1,7 +1,6 @@
 ---
 title: LLM 에이전트의 Tool Call이 조용히 실패하던 문제
 date: 2026-02-15
-type: 트러블슈팅
 tags: [LLM, AI Agent, Tool Calling, Debugging]
 summary: LLM Agent의 Tool Calling 과정에서 발생하는 실패 패턴을 분석하고 재시도 전략으로 안정성을 확보한 과정을 공유합니다.
 takeaway: 도구 호출 실패는 예외로 터지지 않고 "도구를 안 쓴 답변"으로 조용히 지나간다. 실패를 먼저 관측 가능한 형태로 만든 다음에야 재시도 전략을 세울 수 있었다.

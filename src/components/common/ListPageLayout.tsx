@@ -26,7 +26,7 @@ export function ListPageLayout({
   );
 }
 
-/** 본문의 한 섹션. 레일 아코디언이 이 id로 점프한다. */
+/** 본문의 한 섹션. Projects가 회사/개인 프로젝트를 나눌 때 쓴다. */
 export function ListSection({
   id,
   title,

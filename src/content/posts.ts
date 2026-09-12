@@ -3,6 +3,7 @@
  *
  * 파일 경로: src/content/posts.ts
  * 목적: src/content/posts/*.md 를 빌드 타임에 읽어 프런트매터를 파싱하고, 글 목록·상세에 쓰이는 형태로 제공한다.
+ *       이 블로그는 트러블슈팅 글만 다루므로 글 유형 분류를 두지 않는다.
  * 주요 기능: 마크다운 로드, 프런트매터 파싱, 읽는 시간 계산, slug 조회, 이전/다음 탐색
  * 주요 의존성: Vite의 import.meta.glob
  *
@@ -11,17 +12,11 @@
  *   ---
  *   title: 글 제목
  *   date: 2026-03-01
- *   type: 트러블슈팅            # 트러블슈팅 | 개인 포스팅
  *   tags: [WebSocket, Debugging]
  *   summary: 목록과 상세 상단에 쓰이는 한 줄 요약
  *   takeaway: 핵심 한 줄
  *   ---
  */
-
-/** 글 유형. Blog 목록의 섹션 구분과 순서를 겸한다. */
-export const POST_TYPES = ["트러블슈팅", "개인 포스팅"] as const;
-
-export type PostType = (typeof POST_TYPES)[number];
 
 export interface Post {
   slug: string;
@@ -30,7 +25,6 @@ export interface Post {
   date: string;
   /** 정렬용 원본 날짜. `YYYY-MM-DD` */
   rawDate: string;
-  type: PostType;
   tags: string[];
   summary: string;
   /** 목록과 상세 상단에 노출되는 핵심 한 줄 */
@@ -121,7 +115,6 @@ function toPost(path: string, raw: string): Post {
     title: String(data.title ?? ""),
     date: rawDate.replace(/-/g, "."),
     rawDate,
-    type: (data.type as PostType) ?? "개인 포스팅",
     tags: Array.isArray(data.tags) ? data.tags : [],
     summary: String(data.summary ?? ""),
     takeaway: String(data.takeaway ?? ""),

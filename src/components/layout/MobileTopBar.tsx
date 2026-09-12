@@ -41,6 +41,7 @@ export function MobileTopBar() {
         flex + justify-between이면 넓은 화면에서 항목 사이에 죽은 구간이 생기고,
         글자를 키웠을 때 페이지 전체가 가로로 밀린다.
         minmax(78px, 1fr)는 78px에서 멈추고 이 줄만 가로 스크롤된다.
+        whitespace-nowrap이 없으면 320px에서 "트러블슈팅"이 두 줄로 접혀 바 높이가 튄다.
       */}
       <nav
         aria-label="주요 메뉴"
@@ -53,7 +54,7 @@ export function MobileTopBar() {
               key={item.href}
               href={item.href}
               aria-current={active ? "page" : undefined}
-              className={`flex min-h-[44px] items-center justify-center px-2 py-3 ${
+              className={`flex min-h-[44px] items-center justify-center whitespace-nowrap px-2 py-3 ${
                 active ? "bg-badge font-semibold" : ""
               }`}
             >

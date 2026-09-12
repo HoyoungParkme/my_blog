@@ -1,7 +1,6 @@
 ---
 title: WebSocket 연결이 반복해서 끊기던 문제
 date: 2026-03-01
-type: 트러블슈팅
 tags: [WebSocket, Streaming, Debugging]
 summary: AI 서비스 실시간 스트리밍 구현 중 발생한 WebSocket 연결 불안정 문제를 분석하고 해결한 과정을 기록합니다.
 takeaway: 끊김은 클라이언트에서 보이지만 원인은 커넥션이 정리되지 않고 쌓이는 서버 쪽에 있었다. 재연결 로직은 증상을 가릴 뿐이라 커넥션 관리 구조를 함께 고쳐야 했다.
