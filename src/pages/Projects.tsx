@@ -2,48 +2,27 @@
  * Projects 화면
  *
  * 파일 경로: src/pages/Projects.tsx
- * 목적: 전체 프로젝트를 회사/개인으로 나눠 보여주는 목록 화면.
- * 주요 기능: 소속별 섹션 분류, 사이드바 섹션 점프, 기술 태그 목록
+ * 목적: 전체 프로젝트를 최신순으로 보여주는 목록 화면.
  * 주요 의존성: src/content/projects.ts
+ *
+ * 소속별 그룹을 두지 않는다. 지금은 전부 회사 프로젝트라 섹션 제목이
+ * 페이지 제목과 같은 말을 반복하기 때문이다. 개인 프로젝트가 생기면 그때 나눈다.
  */
 
 import { Link } from "wouter";
 
 import { ImagePlaceholder } from "@/components/common/ImagePlaceholder";
-import { ListPageLayout, ListSection } from "@/components/common/ListPageLayout";
+import { ListPageLayout } from "@/components/common/ListPageLayout";
 import { projects, type Project } from "@/content/projects";
 
-/** 회사 프로젝트로 분류할 소속명 */
-const COMPANY = "디포커스";
-
-const GROUPS = [
-  { id: "company", label: "회사 프로젝트", match: (p: Project) => p.org === COMPANY },
-  { id: "personal", label: "개인 프로젝트", match: (p: Project) => p.org !== COMPANY },
-];
-
 export default function Projects() {
-  // 프로젝트가 없는 그룹은 섹션과 사이드바 양쪽에서 모두 감춘다
-  const groups = GROUPS.map((group) => ({
-    ...group,
-    projects: projects.filter(group.match),
-  })).filter((group) => group.projects.length > 0);
-
   return (
     <ListPageLayout title="Projects">
-      {groups.map((group) => (
-        <ListSection
-          key={group.id}
-          id={group.id}
-          title={group.label}
-          count={group.projects.length}
-        >
-          <div className="mt-6 grid grid-cols-1 gap-5 dt:grid-cols-2">
-            {group.projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-        </ListSection>
-      ))}
+      <div className="grid grid-cols-1 gap-5 border-t border-ink pt-6 dt:grid-cols-2">
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
+      </div>
     </ListPageLayout>
   );
 }

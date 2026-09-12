@@ -15,7 +15,7 @@ import { posts, type Post } from "@/content/posts";
 
 export default function Blog() {
   return (
-    <ListPageLayout title="트러블슈팅">
+    <ListPageLayout title="Troubleshooting">
       <div className="flex flex-col border-t border-ink">
         {posts.map((post) => (
           <PostRow key={post.slug} post={post} />

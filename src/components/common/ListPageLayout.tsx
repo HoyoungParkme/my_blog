@@ -25,26 +25,3 @@ export function ListPageLayout({
     </div>
   );
 }
-
-/** 본문의 한 섹션. Projects가 회사/개인 프로젝트를 나눌 때 쓴다. */
-export function ListSection({
-  id,
-  title,
-  count,
-  children,
-}: {
-  id: string;
-  title: string;
-  count: number;
-  children: ReactNode;
-}) {
-  return (
-    <section id={id} className="mb-14">
-      <div className="flex items-baseline gap-3 border-b border-ink pb-3.5">
-        <h2 className="text-[22px] font-bold tracking-tighter">{title}</h2>
-        <span className="text-[15px] text-ink-faint">{count}</span>
-      </div>
-      {children}
-    </section>
-  );
-}

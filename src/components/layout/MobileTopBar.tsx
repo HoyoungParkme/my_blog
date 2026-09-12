@@ -40,12 +40,13 @@ export function MobileTopBar() {
         탭 줄: 4등분 그리드.
         flex + justify-between이면 넓은 화면에서 항목 사이에 죽은 구간이 생기고,
         글자를 키웠을 때 페이지 전체가 가로로 밀린다.
-        minmax(78px, 1fr)는 78px에서 멈추고 이 줄만 가로 스크롤된다.
-        whitespace-nowrap이 없으면 320px에서 "트러블슈팅"이 두 줄로 접혀 바 높이가 튄다.
+        minmax(min-content, 1fr)는 각 칸이 최소한 글자 폭만큼은 확보하게 하고,
+        남는 폭만 균등 분배한다. 라벨 길이가 달라도 잘리지 않고 빈 구간도 안 생긴다.
+        whitespace-nowrap이 없으면 좁은 화면에서 긴 라벨이 두 줄로 접혀 바 높이가 튄다.
       */}
       <nav
         aria-label="주요 메뉴"
-        className="sticky top-0 z-10 grid grid-cols-[repeat(4,minmax(78px,1fr))] overflow-x-auto border-b border-rule bg-paper text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dt:hidden"
+        className="sticky top-0 z-10 grid grid-cols-[repeat(4,minmax(min-content,1fr))] overflow-x-auto border-b border-rule bg-paper text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dt:hidden"
       >
         {NAV_ITEMS.map((item) => {
           const active = isNavActive(item.href, location);

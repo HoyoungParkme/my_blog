@@ -26,7 +26,7 @@ export interface Project {
   title: string;
   /** 카드 오버라인에 표시되는 대표 연도 */
   year: string;
-  /** 소속. "디포커스"면 회사 프로젝트, 그 외는 개인 프로젝트로 분류된다. */
+  /** 소속. 상세 사이드바의 "소속" 행에 표시된다. */
   org: string;
   /** `YYYY.MM — YYYY.MM` 형식. 진행 중이면 `YYYY.MM — 현재`. */
   period: string;
