@@ -7,13 +7,12 @@
  * 주요 의존성: wouter
  */
 
-import { Route, Router as WouterRouter, Switch } from "wouter";
+import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
 
 import { PageShell } from "@/components/layout/PageShell";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import About from "@/pages/About";
 import Blog from "@/pages/Blog";
-import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
 import PostDetail from "@/pages/PostDetail";
 import ProjectDetail from "@/pages/ProjectDetail";
@@ -22,8 +21,11 @@ import Projects from "@/pages/Projects";
 function AppRoutes() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
+      <Route path="/" component={About} />
+      {/* 예전 주소로 들어와도 첫 화면으로 보낸다 */}
+      <Route path="/about">
+        <Redirect to="/" replace />
+      </Route>
       <Route path="/projects" component={Projects} />
       <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/blog" component={Blog} />

@@ -2,7 +2,7 @@
  * About 화면
  *
  * 파일 경로: src/pages/About.tsx
- * 목적: 이력서 본체. 프로필, 프로젝트 목록, 이력을 담는다.
+ * 목적: 첫 화면(/)이자 이력서 본체. 프로필, 프로젝트 목록, 이력을 담는다.
  * 주요 기능: 프로필 블록, 프로젝트 목록(Projects와 같은 행 구조), 경력/학력/자격증/교육 이력
  * 주요 의존성: src/content/profile.ts, src/content/projects.ts
  */

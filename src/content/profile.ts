@@ -2,7 +2,7 @@
  * 프로필·이력 콘텐츠
  *
  * 파일 경로: src/content/profile.ts
- * 목적: Home 화면의 프로필 블록과 이력(경력/학력/자격증/교육) 블록에 쓰이는 데이터를 한곳에 모은다.
+ * 목적: About(첫 화면)의 프로필 블록과 이력(경력/학력/자격증/교육) 블록에 쓰이는 데이터를 한곳에 모은다.
  * 주요 기능: 프로필 정보, 경력, 학력, 자격증, 교육 이력 제공
  * 주요 의존성: src/assets/images/my-photo.jpg
  */
@@ -28,7 +28,7 @@ export const profile = {
   github: "https://github.com/HoyoungParkme",
   photo: myPhoto,
   /**
-   * 이력서 PDF 경로. public/ 아래에 파일을 넣고 경로를 채우면 Home에 버튼이 나타난다.
+   * 이력서 PDF 경로. public/ 아래에 파일을 넣고 경로를 채우면 About에 버튼이 나타난다.
    * TODO: 이력서 PDF 준비 후 "resume.pdf" 등으로 교체.
    */
   resumeUrl: "",

@@ -12,8 +12,7 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+  { href: "/", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Troubleshooting" },
 ];
@@ -25,7 +24,7 @@ export const NAV_ITEMS: NavItem[] = [
  *   href: 항목의 경로
  *   location: wouter가 준 현재 경로
  * Returns:
- *   활성 여부. Home만 완전 일치를 요구하고 나머지는 경로 접두사로 판정한다.
+ *   활성 여부. 첫 화면(/)만 완전 일치를 요구하고 나머지는 경로 접두사로 판정한다.
  */
 export function isNavActive(href: string, location: string): boolean {
   if (href === "/") return location === "/";

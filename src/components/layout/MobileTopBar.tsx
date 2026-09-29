@@ -2,7 +2,7 @@
  * 모바일 상단 바 (1000px 이하 전용)
  *
  * 파일 경로: src/components/layout/MobileTopBar.tsx
- * 목적: 브랜드 줄과 4등분 탭 줄로 이루어진 2줄 상단 내비.
+ * 목적: 브랜드 줄과 3등분 탭 줄로 이루어진 2줄 상단 내비.
  *       브랜드 줄은 스크롤과 함께 올라가고 탭 줄만 화면 상단에 붙는다.
  * 주요 기능: 브랜드 줄, sticky 탭 줄, 현재 페이지 표시
  * 주요 의존성: wouter, src/content/profile.ts, ./navItems
@@ -37,7 +37,7 @@ export function MobileTopBar() {
       </Link>
 
       {/*
-        탭 줄: 4등분 그리드.
+        탭 줄: 3등분 그리드.
         flex + justify-between이면 넓은 화면에서 항목 사이에 죽은 구간이 생기고,
         글자를 키웠을 때 페이지 전체가 가로로 밀린다.
         minmax(min-content, 1fr)는 각 칸이 최소한 글자 폭만큼은 확보하게 하고,
@@ -46,7 +46,7 @@ export function MobileTopBar() {
       */}
       <nav
         aria-label="주요 메뉴"
-        className="sticky top-0 z-10 grid grid-cols-[repeat(4,minmax(min-content,1fr))] overflow-x-auto border-b border-rule bg-paper text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dt:hidden"
+        className="sticky top-0 z-10 grid grid-cols-[repeat(3,minmax(min-content,1fr))] overflow-x-auto border-b border-rule bg-paper text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dt:hidden"
       >
         {NAV_ITEMS.map((item) => {
           const active = isNavActive(item.href, location);
