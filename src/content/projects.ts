@@ -50,6 +50,22 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "graphrag-bi-agent",
+    title: "GraphRAG 기반 사내 BI 에이전트",
+    year: "2026",
+    org: "디포커스",
+    period: "2026.05 – 현재",
+    roleShort: "PL · 설계 · 개발",
+    tags: ["GraphRAG", "FastAPI", "React", "Tableau"],
+    summary: "데이터 명세서로 스키마 관계를 그래프로 엮고, 질문에 맞는 데이터를 찾아 차트로 보여주는 BI 에이전트",
+    problem:
+      "사내 DB에서 필요한 데이터를 질문 하나로 찾고 바로 차트로 보고 싶었습니다. 검색 방식은 키워드를 맞추는 렉시컬 검색에서 RAG로 넘어왔지만, RAG로도 테이블과 스키마 사이의 관계는 풀리지 않았습니다. 값이 어느 테이블에 있고 무엇과 이어지는지 알아야 정확한 데이터를 꺼낼 수 있었습니다.",
+    role:
+      "PL로서 전체 구조를 설계하고 개발했습니다. 사용자가 데이터 사전(DD)이나 데이터 명세서를 올리면 데이터 카탈로그를 자동으로 만들고, 이를 GraphRAG 그래프로 구성합니다. 이어서 컬럼 설명을 읽어 테이블 간 관계를 추천하고, 그 관계를 그래프에 더해 GraphRAG가 스스로 보강되게 했습니다. 백엔드는 FastAPI로 DB 모델링부터 자연어 질의 API까지 만들었고, 답변을 차트로 보여주는 대시보드는 React로 구현했습니다.",
+    result:
+      "기본 기능은 구현을 마쳤고, 지금은 외부 시스템을 플러그인으로 붙이는 단계입니다. Tableau는 연결을 마쳤고 다음은 SAP입니다. 테이블 간 관계를 사람이 하나하나 정의하지 않고 명세서에서 뽑아 그래프를 채우게 한 것이 이 구조의 중심입니다.",
+  },
+  {
     slug: "tableau-ai-agent",
     title: "국내 대형 물류 기업 Tableau AI",
     year: "2026",
