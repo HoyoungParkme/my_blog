@@ -30,18 +30,18 @@ function ProjectRow({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[132px_minmax(0,1fr)_auto] dt:gap-6"
+      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[132px_minmax(0,1fr)_auto] dt:items-baseline dt:gap-6"
     >
-      <span className="whitespace-nowrap pt-[3px] text-sm text-ink-faint">
+      <span className="whitespace-nowrap text-sm tabular-nums text-ink-faint">
         {project.period}
       </span>
       <div>
-        <div className="text-lg font-bold leading-[1.4] tracking-tight">{project.title}</div>
-        <div className="mt-1.5 text-[15px] text-ink-muted [text-wrap:pretty]">
+        <div className="text-base font-semibold">{project.title}</div>
+        <div className="mt-1.5 text-base text-ink-muted [text-wrap:pretty]">
           {project.summary}
         </div>
       </div>
-      <div className="whitespace-nowrap pt-[3px] text-[13px] text-ink-faint dt:text-right">
+      <div className="whitespace-nowrap text-[13px] text-ink-faint dt:text-right">
         {project.roleShort}
       </div>
     </Link>

@@ -29,16 +29,16 @@ function PostRow({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[104px_minmax(0,1fr)_auto] dt:gap-6"
+      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[104px_minmax(0,1fr)_auto] dt:items-baseline dt:gap-6"
     >
-      <span className="pt-[3px] text-sm text-ink-faint">{post.date}</span>
+      <span className="text-sm tabular-nums text-ink-faint">{post.date}</span>
       <div>
-        <div className="text-lg font-bold leading-[1.4] tracking-tight">{post.title}</div>
-        <div className="mt-1.5 text-[15px] text-ink-muted [text-wrap:pretty]">
+        <div className="text-base font-semibold">{post.title}</div>
+        <div className="mt-1.5 text-base text-ink-muted [text-wrap:pretty]">
           {post.takeaway}
         </div>
       </div>
-      <div className="whitespace-nowrap pt-[3px] text-[13px] text-ink-faint dt:text-right">
+      <div className="whitespace-nowrap text-[13px] text-ink-faint dt:text-right">
         <div>{post.readMin}분</div>
       </div>
     </Link>

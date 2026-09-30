@@ -5,6 +5,9 @@
  * 목적: 첫 화면(/)이자 이력서 본체. 프로필, 프로젝트 목록, 이력을 담는다.
  * 주요 기능: 프로필 블록, 프로젝트 목록(Projects와 같은 행 구조), 경력/학력/자격증/교육 이력
  * 주요 의존성: src/content/profile.ts, src/content/projects.ts
+ *
+ * 글자 크기는 다섯 단계만 쓴다.
+ *   이름 38 / 섹션 제목 22 / 항목 제목·설명 16 / 날짜 14 / 보조 텍스트(라벨·버튼·역할) 13
  */
 
 import { Link } from "wouter";
@@ -43,16 +46,16 @@ function ProfileBlock() {
         className="h-[275px] w-[220px] rounded-md object-cover"
       />
       <div>
-        <div className="text-sm font-semibold tracking-overline-wide text-accent">
+        <div className="text-[13px] font-semibold tracking-overline-wide text-accent">
           {profile.role}
         </div>
-        <h1 className="mt-2.5 text-[38px] font-bold tracking-tightest dt:text-[38px]">
+        <h1 className="mt-2.5 text-[38px] font-bold tracking-tightest">
           {profile.name}
         </h1>
-        <p className="mt-[18px] max-w-[640px] text-[17px] text-ink-muted [text-wrap:pretty]">
+        <p className="mt-[18px] max-w-[640px] text-base text-ink-muted [text-wrap:pretty]">
           {profile.bio}
         </p>
-        <div className="mt-5 flex flex-wrap gap-2 text-sm font-semibold">
+        <div className="mt-5 flex flex-wrap gap-2 text-[13px] font-semibold">
           {profile.resumeUrl && (
             <a
               href={profile.resumeUrl}
@@ -81,14 +84,15 @@ function ProfileBlock() {
 function ProjectsBlock({ shown }: { shown: Project[] }) {
   return (
     <div className="border-b border-rule py-14">
-      <div className="mb-7 flex items-baseline justify-between">
-        <h2 className="text-[28px] font-bold tracking-tightest">프로젝트</h2>
-        <Link href="/projects" className="border-b border-ink text-[15px] font-semibold">
+      {/* 섹션 제목은 이력 블록(HistoryList) 제목과 같은 크기·밑줄 간격을 쓴다 */}
+      <div className="flex items-baseline justify-between border-b border-ink pb-3">
+        <h2 className="text-[22px] font-bold tracking-tighter">프로젝트</h2>
+        <Link href="/projects" className="border-b border-ink text-[13px] font-semibold">
           전체 {projects.length}개 보기
         </Link>
       </div>
 
-      <div className="flex flex-col border-t border-ink">
+      <div className="flex flex-col">
         {shown.map((project) => (
           <ProjectRow key={project.slug} project={project} />
         ))}
@@ -102,18 +106,18 @@ function ProjectRow({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[132px_minmax(0,1fr)_auto] dt:gap-6"
+      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[132px_minmax(0,1fr)_auto] dt:items-baseline dt:gap-6"
     >
-      <span className="whitespace-nowrap pt-[3px] text-sm text-ink-faint">
+      <span className="whitespace-nowrap text-sm tabular-nums text-ink-faint">
         {project.period}
       </span>
       <div>
-        <div className="text-lg font-bold leading-[1.4] tracking-tight">{project.title}</div>
-        <div className="mt-1.5 text-[15px] text-ink-muted [text-wrap:pretty]">
+        <div className="text-base font-semibold">{project.title}</div>
+        <div className="mt-1.5 text-base text-ink-muted [text-wrap:pretty]">
           {project.summary}
         </div>
       </div>
-      <div className="whitespace-nowrap pt-[3px] text-[13px] text-ink-faint dt:text-right">
+      <div className="whitespace-nowrap text-[13px] text-ink-faint dt:text-right">
         {project.roleShort}
       </div>
     </Link>
@@ -139,10 +143,10 @@ function HistoryList({ title, entries }: { title: string; entries: HistoryEntry[
       <h2 className="mb-5 border-b border-ink pb-3 text-[22px] font-bold tracking-tighter">
         {title}
       </h2>
-      <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-base dt:grid-cols-[150px_minmax(0,1fr)] dt:gap-y-[18px]">
+      <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-base dt:grid-cols-[150px_minmax(0,1fr)] dt:items-baseline dt:gap-y-[18px]">
         {entries.map((entry) => (
           <div key={entry.name} className="contents">
-            <dt className="whitespace-nowrap text-ink-faint [font-variant-numeric:tabular-nums]">
+            <dt className="whitespace-nowrap text-sm tabular-nums text-ink-faint">
               {entry.term}
             </dt>
             <dd className="mb-4 dt:mb-0">
