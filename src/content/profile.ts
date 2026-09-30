@@ -37,9 +37,8 @@ export const profile = {
 export const experiences: HistoryEntry[] = [
   {
     term: "2024.07 – 현재",
-    name: "디포커스 · 선임",
-    detail:
-      "백엔드·AI 에이전트 개발. 로컬 LLM 서빙과 스트리밍 서버, 데이터 연계 구조를 설계하고, 그 위에서 도구 호출 에이전트와 RAG 파이프라인을 구축·운영합니다.",
+    name: "디포커스",
+    detail: "Data Biz 본부 AI팀 선임",
   },
 ];
 
