@@ -39,29 +39,24 @@ export default function About() {
 
 function ProfileBlock() {
   return (
-    <div className="grid grid-cols-1 items-start gap-6 border-b border-rule pb-14 dt:grid-cols-[220px_minmax(0,1fr)] dt:items-stretch dt:gap-12">
-      {/* 사진 배경이 흰색이라 페이지 배경과 섞이지 않게 테두리로 경계를 준다 */}
+    <div className="grid grid-cols-1 items-start gap-6 border-b border-rule pb-14 dt:grid-cols-[220px_minmax(0,1fr)] dt:gap-12">
+      {/* 사진 배경이 흰색이라 페이지 배경과 섞이지 않게 버튼과 같은 선으로 경계를 준다 */}
       <img
         src={profile.photo}
         alt={`${profile.name} 프로필 사진`}
-        className="h-[275px] w-[220px] rounded-md border-2 border-accent object-cover"
+        className="h-[275px] w-[220px] rounded-md border border-ink object-cover"
       />
-      {/*
-        데스크톱에서는 글 영역을 사진 높이로 늘려 직군·이름·소개는 사진 윗선에,
-        버튼은 사진 아랫선에 맞춘다. 직군 표기의 행간을 없애야 글자 윗선이 사진 윗선과 겹친다.
-      */}
-      <div className="dt:flex dt:flex-col dt:justify-between">
-        <div>
-          <div className="text-[13px] font-semibold tracking-overline-wide text-accent dt:leading-none">
-            {profile.role}
-          </div>
-          <h1 className="mt-2.5 text-[38px] font-bold tracking-tightest">
-            {profile.name}
-          </h1>
-          <p className="mt-[18px] max-w-[640px] text-base text-ink-muted [text-wrap:pretty]">
-            {profile.bio}
-          </p>
+      <div>
+        {/* 행간을 없애 직군 글자 윗선을 사진 윗선에 맞춘다 */}
+        <div className="text-[13px] font-semibold tracking-overline-wide text-accent dt:leading-none">
+          {profile.role}
         </div>
+        <h1 className="mt-2.5 text-[38px] font-bold tracking-tightest">
+          {profile.name}
+        </h1>
+        <p className="mt-[18px] max-w-[640px] text-base text-ink-muted [text-wrap:pretty]">
+          {profile.bio}
+        </p>
         <div className="mt-5 flex flex-wrap gap-2 text-[13px] font-semibold">
           {profile.resumeUrl && (
             <a
