@@ -28,7 +28,7 @@ export interface Project {
   year: string;
   /** 소속. 상세 사이드바의 "소속" 행에 표시된다. */
   org: string;
-  /** `YYYY.MM — YYYY.MM` 형식. 진행 중이면 `YYYY.MM — 현재`. */
+  /** `YYYY.MM – YYYY.MM` 형식. 진행 중이면 `YYYY.MM – 현재`. */
   period: string;
   /** 카드와 사이드바에 쓰이는 짧은 역할 표기 */
   roleShort: string;
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     title: "국내 대형 물류 기업 Tableau AI",
     year: "2026",
     org: "디포커스",
-    period: "2026.01 — 2026.04",
+    period: "2026.01 – 2026.04",
     roleShort: "AI 아키텍처 설계 · 개발",
     tags: ["AI Agent", "Qdrant", "RAG", "GraphQL", "Tableau"],
     summary: "자연어 질의를 대시보드 인사이트로 바꾸는 Tableau 연동 에이전트",
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     title: "국내 대형 카지노 테이블 게임 이상탐지",
     year: "2025",
     org: "디포커스",
-    period: "2025.11 — 2026.04",
+    period: "2025.11 – 2026.04",
     roleShort: "모델 설계 · 학습 · 플랫폼 개발",
     tags: ["YOLOv8", "Computer Vision", "ROI 분석", "레이블링 플랫폼"],
     summary: "YOLOv8 파인튜닝과 ROI 공간 분석, 학습 데이터를 위한 레이블링 플랫폼까지 직접 개발",
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     title: "국내 대형 물류 기업 리스크 관리 시스템",
     year: "2024",
     org: "디포커스",
-    period: "2024.09 — 2025.05",
+    period: "2024.09 – 2025.05",
     roleShort: "데이터 연계 설계 · Tableau 개발",
     tags: ["Tableau", "망분리 아키텍처", "데이터 연계"],
     summary: "망분리 환경의 데이터 연계 아키텍처 설계와 리스크 판단용 대시보드 개발",

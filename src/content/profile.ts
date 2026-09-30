@@ -11,7 +11,7 @@ import myPhoto from "@/assets/images/my-photo.jpg";
 
 /** 이력 블록의 한 행. 날짜(term)와 제목(name), 선택적 설명(detail)으로 구성된다. */
 export interface HistoryEntry {
-  /** `YYYY.MM — YYYY.MM` 형식. 진행 중이면 `YYYY.MM — 현재`, 단월이면 `YYYY.MM`. 미상이면 빈 문자열. */
+  /** `YYYY.MM – YYYY.MM` 형식. 진행 중이면 `YYYY.MM – 현재`, 단월이면 `YYYY.MM`. 미상이면 빈 문자열. */
   term: string;
   name: string;
   detail?: string;
@@ -36,7 +36,7 @@ export const profile = {
 
 export const experiences: HistoryEntry[] = [
   {
-    term: "2024.07 — 현재",
+    term: "2024.07 – 현재",
     name: "디포커스 · 선임",
     detail:
       "AI 서비스 개발. 로컬 LLM 서빙과 멀티턴 도구 호출 에이전트, 문서 RAG 파이프라인을 설계·구축·운영합니다.",
@@ -45,7 +45,7 @@ export const experiences: HistoryEntry[] = [
 
 export const academicHistory: HistoryEntry[] = [
   {
-    term: "2016.03 — 2023.08",
+    term: "2016.03 – 2023.08",
     name: "고려대학교 세종캠퍼스",
     detail: "응용통계학과",
   },
@@ -64,13 +64,13 @@ export const certifications: HistoryEntry[] = [
 ];
 
 export const education: HistoryEntry[] = [
-  { term: "2025.10 — 2025.11", name: "온디바이스 AI", detail: "정보통신산업진흥원" },
-  { term: "2025.05 — 2025.07", name: "데이터 엔지니어링", detail: "정보통신산업진흥원" },
-  { term: "2024.11 — 2024.12", name: "블록체인", detail: "정보통신산업진흥원" },
+  { term: "2025.10 – 2025.11", name: "온디바이스 AI", detail: "정보통신산업진흥원" },
+  { term: "2025.05 – 2025.07", name: "데이터 엔지니어링", detail: "정보통신산업진흥원" },
+  { term: "2024.11 – 2024.12", name: "블록체인", detail: "정보통신산업진흥원" },
   { term: "2024.11", name: "인공지능 (DQN)", detail: "정보통신산업진흥원" },
   { term: "2024.06", name: "인공지능 (언어)", detail: "정보통신산업진흥원" },
   {
-    term: "2024.03 — 2024.05",
+    term: "2024.03 – 2024.05",
     name: "빅데이터 기반 비즈니스 분석가 양성과정",
     detail: "한국직업개발원",
   },
