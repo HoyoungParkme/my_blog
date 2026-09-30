@@ -52,7 +52,7 @@ function ProfileBlock() {
         <h1 className="mt-2.5 text-[38px] font-bold tracking-tightest">
           {profile.name}
         </h1>
-        <p className="mt-[18px] max-w-[640px] whitespace-pre-line text-base text-ink-muted [text-wrap:pretty]">
+        <p className="mt-[18px] max-w-[640px] text-base text-ink-muted [text-wrap:pretty]">
           {profile.bio}
         </p>
         <div className="mt-5 flex flex-wrap gap-2 text-[13px] font-semibold">
