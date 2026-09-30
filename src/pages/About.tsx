@@ -57,10 +57,6 @@ function ProfileBlock() {
         <p className="mt-[18px] max-w-[640px] text-base text-ink-muted [text-wrap:pretty]">
           {profile.bio}
         </p>
-        {/* 가운뎃점 앞은 줄바꿈 없는 공백이라 줄이 바뀌어도 점이 줄 머리에 오지 않는다 */}
-        <p className="mt-2 max-w-[640px] text-[13px] text-ink-faint">
-          {profile.skills.join("\u00a0· ")}
-        </p>
         <div className="mt-5 flex flex-wrap gap-2 text-[13px] font-semibold">
           {profile.resumeUrl && (
             <a
