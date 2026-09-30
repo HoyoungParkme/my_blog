@@ -126,26 +126,30 @@ function ProjectRow({ project }: { project: Project }) {
   );
 }
 
+/**
+ * 경력·학력 / 자격증·교육을 2×2로 놓아 섹션 제목끼리 가로줄을 맞추고 이력서 순서대로 읽히게 한다.
+ * 두 단은 1280px부터 쓴다. 그보다 좁으면 이력 글자 칸이 110px대로 줄어 단어가 잘린다.
+ * (dt 분기는 설정상 xl보다 뒤에 생성돼 같은 요소에 섞으면 넓은 화면에서 dt가 이긴다. 여기엔 xl만 쓴다.)
+ */
 function HistoryBlock() {
   return (
-    <div className="grid grid-cols-1 items-start gap-10 pt-14 dt:grid-cols-2 dt:gap-16">
-      <div className="flex flex-col gap-12">
-        <HistoryList title="경력" entries={experiences} />
-        <HistoryList title="학력" entries={academicHistory} />
-        <HistoryList title="자격증" entries={certifications} />
-      </div>
+    <div className="grid grid-cols-1 items-start gap-12 pt-14 xl:grid-cols-2 xl:gap-x-16">
+      <HistoryList title="경력" entries={experiences} />
+      <HistoryList title="학력" entries={academicHistory} />
+      <HistoryList title="자격증" entries={certifications} />
       <HistoryList title="교육" entries={education} />
     </div>
   );
 }
 
+/** 날짜 칸(132px)은 위 프로젝트 목록과 같게 둬 이력 이름과 프로젝트 제목이 한 세로선에 선다. */
 function HistoryList({ title, entries }: { title: string; entries: HistoryEntry[] }) {
   return (
     <div>
       <h2 className="mb-5 border-b border-ink pb-3 text-[22px] font-bold tracking-tighter">
         {title}
       </h2>
-      <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-base dt:grid-cols-[150px_minmax(0,1fr)] dt:items-baseline dt:gap-y-[18px]">
+      <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-base dt:grid-cols-[132px_minmax(0,1fr)] dt:items-baseline dt:gap-y-[18px]">
         {entries.map((entry) => (
           <div key={entry.name} className="contents">
             <dt className="whitespace-nowrap text-sm tabular-nums text-ink-faint">
