@@ -25,6 +25,8 @@ export const profile = {
   railRole: "AI Agent 개발자",
   /** "AI Agent"는 좁은 화면에서 두 줄로 갈라지지 않게 줄바꿈 없는 공백(\u00a0)으로 잇는다. */
   bio: "동화책처럼 읽히는 명세서를 쓰고, 백엔드부터 AI\u00a0Agent까지 구현하는 개발자",
+  /** 회사 컨설턴트 프로파일의 보유기술. About 소개문 아래에 한 줄로 보인다. */
+  skills: ["FastAPI", "Django", "React", "PostgreSQL", "Redis", "Docker", "LangChain", "GraphRAG", "Tableau"],
   email: "hoyoungpark.ds@gmail.com",
   github: "https://github.com/HoyoungParkme",
   photo: myPhoto,
