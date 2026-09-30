@@ -23,7 +23,8 @@ export const profile = {
   role: "AI Agent 개발자 · LLM / RAG",
   /** 좌측 레일 브랜드 블록에 들어가는 짧은 직군 표기 */
   railRole: "AI Agent 개발자",
-  bio: "동화책처럼 읽히는 명세서를 쓰고, 코딩 에이전트와 함께 백엔드부터 AI 에이전트까지 만듭니다.",
+  /** "AI Agent"는 좁은 화면에서 두 줄로 갈라지지 않게 줄바꿈 없는 공백(\u00a0)으로 잇는다. */
+  bio: "동화책처럼 읽히는 명세서를 쓰고, 백엔드부터 AI\u00a0Agent까지 구현하는 개발자입니다.",
   email: "hoyoungpark.ds@gmail.com",
   github: "https://github.com/HoyoungParkme",
   photo: myPhoto,
