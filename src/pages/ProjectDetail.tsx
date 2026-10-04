@@ -60,6 +60,17 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
 
         <DetailSection id="sec-1" title="내가 한 일">
           <p className="mb-4 [text-wrap:pretty]">{project.role}</p>
+          {/* 대표 프로젝트만 쓰는 핵심 결정 목록. 없으면 렌더하지 않는다 */}
+          {project.highlights && project.highlights.length > 0 && (
+            <ul className="mb-8 flex flex-col gap-5">
+              {project.highlights.map((item) => (
+                <li key={item.title} className="border-l-2 border-rule pl-4">
+                  <div className="font-semibold text-ink">{item.title}</div>
+                  <p className="mt-1 [text-wrap:pretty]">{item.body}</p>
+                </li>
+              ))}
+            </ul>
+          )}
         </DetailSection>
         {project.code && (
           <pre className="mb-8 overflow-auto rounded-md bg-ink px-5 py-[18px] font-mono text-sm leading-[1.6] text-code-tint">
