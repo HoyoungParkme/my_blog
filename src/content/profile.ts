@@ -2,8 +2,8 @@
  * 프로필·이력 콘텐츠
  *
  * 파일 경로: src/content/profile.ts
- * 목적: About(첫 화면)의 프로필 블록과 이력(경력/학력/자격증/교육) 블록에 쓰이는 데이터를 한곳에 모은다.
- * 주요 기능: 프로필 정보, 경력, 학력, 자격증, 교육 이력 제공
+ * 목적: About(첫 화면)의 프로필 블록과 이력(경력/학력/자격증/대회/교육) 블록에 쓰이는 데이터를 한곳에 모은다.
+ * 주요 기능: 프로필 정보, 경력, 학력, 자격증, 대회, 교육 이력 제공
  * 주요 의존성: src/assets/images/my-photo.jpg
  */
 
@@ -61,6 +61,15 @@ export const certifications: HistoryEntry[] = [
   { term: "2024.12", name: "빅데이터분석기사", detail: "한국데이터산업진흥원" },
   { term: "2024.03", name: "데이터분석 준전문가 (ADSP)", detail: "한국데이터산업진흥원" },
   { term: "2023.10", name: "SQL 개발자 (SQLD)", detail: "한국데이터산업진흥원" },
+];
+
+/**
+ * 대회. term은 진출 결과가 발표된 달이다.
+ * AI 챔피언: 본선 심사 통과 40팀 = 결선 진출(2026.08 발표). 부산 Big Data 활용 대회: 서류평가 통과 14팀 = 본선 진출(2026.09 발표).
+ */
+export const competitions: HistoryEntry[] = [
+  { term: "2026.09", name: "2026년 Big Data 활용 대회 본선 진출", detail: "부산 빅데이터혁신센터" },
+  { term: "2026.08", name: "2026 AI 챔피언 대회 결선 진출", detail: "과학기술정보통신부" },
 ];
 
 export const education: HistoryEntry[] = [

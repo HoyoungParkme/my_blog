@@ -3,7 +3,7 @@
  *
  * 파일 경로: src/pages/About.tsx
  * 목적: 첫 화면(/)이자 이력서 본체. 프로필, 프로젝트 목록, 이력을 담는다.
- * 주요 기능: 프로필 블록, 프로젝트 목록(Projects와 같은 행 구조), 경력/학력/자격증/교육 이력
+ * 주요 기능: 프로필 블록, 프로젝트 목록(Projects와 같은 행 구조), 경력/학력/자격증/대회/교육 이력
  * 주요 의존성: src/content/profile.ts, src/content/projects.ts
  *
  * 글자 크기는 다섯 단계만 쓴다.
@@ -15,6 +15,7 @@ import { Link } from "wouter";
 import {
   academicHistory,
   certifications,
+  competitions,
   education,
   experiences,
   profile,
@@ -127,7 +128,8 @@ function ProjectRow({ project }: { project: Project }) {
 }
 
 /**
- * 경력·학력 / 자격증·교육을 2×2로 놓아 섹션 제목끼리 가로줄을 맞추고 이력서 순서대로 읽히게 한다.
+ * 경력·학력 / 자격증·대회 / 교육 순서의 2단 격자로 섹션 제목끼리 가로줄을 맞추고 이력서 순서대로 읽히게 한다.
+ * 대회(본선 진출)는 채용담당자가 바로 보는 성과라 교육보다 앞에 둔다.
  * 두 단은 1280px부터 쓴다. 그보다 좁으면 이력 글자 칸이 110px대로 줄어 단어가 잘린다.
  * (dt 분기는 설정상 xl보다 뒤에 생성돼 같은 요소에 섞으면 넓은 화면에서 dt가 이긴다. 여기엔 xl만 쓴다.)
  */
@@ -137,6 +139,7 @@ function HistoryBlock() {
       <HistoryList title="경력" entries={experiences} />
       <HistoryList title="학력" entries={academicHistory} />
       <HistoryList title="자격증" entries={certifications} />
+      <HistoryList title="대회" entries={competitions} />
       <HistoryList title="교육" entries={education} />
     </div>
   );

@@ -97,7 +97,8 @@ function Sidebar({
           <dt className="text-ink-faint">역할</dt>
           <dd>{project.roleShort}</dd>
           <dt className="text-ink-faint">스택</dt>
-          <dd>{project.tags.join(" · ")}</dd>
+          {/* 가운뎃점 앞은 줄바꿈 없는 공백이라 줄이 바뀌어도 점이 줄 머리에 오지 않는다 */}
+          <dd>{project.tags.join("\u00a0· ")}</dd>
         </dl>
       </SidebarBlock>
 

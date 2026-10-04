@@ -52,6 +52,23 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "insurance-claim-assistant",
+    title: "보험청구심사 어시스턴트",
+    year: "2026",
+    org: "2026 AI 챔피언 대회",
+    period: "2026.06 – 현재",
+    roleShort: "풀스택 개발",
+    tags: ["FastAPI", "Upstage Solar", "RAG", "Neo4j", "LangGraph", "React"],
+    summary: "2026 AI 챔피언 대회 결선 진출작. 약관 원문을 근거로 보험 청구 가능성을 안내하는 RAG 서비스",
+    problem:
+      "보험금을 받을 수 있는지는 약관을 읽어야 알 수 있지만, 가입자가 약관에서 해당 조항을 찾아 해석하기는 어렵습니다. 그렇다고 AI가 된다·안 된다를 단정하면, 틀렸을 때 사용자가 확인할 방법이 없는 답이 됩니다.",
+    role:
+      "약관 PDF를 조·항·표 단위로 나눠 적재하고, 벡터·그래프(Neo4j)·하이브리드 세 가지 경로로 근거 조항을 찾는 RAG를 만들었습니다. 멀티턴 대화로 부족한 정보를 모은 뒤 청구 가능성을 높음·중간·낮음으로 판단하고, 근거가 된 약관 원문을 그대로 인용하게 했습니다. 진단서·영수증 같은 서류는 OCR로 읽어 필요한 항목에 자동으로 채우고, 법령·진단코드·과실비율 조회는 ReAct·LangGraph 기반 에이전트가 도구로 호출합니다. 추론·임베딩·OCR은 모두 국내 모델(Upstage)로 구성했습니다.",
+    result:
+      "2026 AI 챔피언 대회(과학기술정보통신부 주최)에서 본선 심사를 통과해 결선(40개 팀)에 진출했습니다. 단정 금지, 약관 원문 인용 강제, 개인정보 마스킹 세 원칙을 두고 설계해, 틀릴 수 있는 판단을 사용자가 근거로 확인할 수 있게 했습니다.",
+    links: { github: "https://github.com/HoyoungParkme/Insurance-Helper" },
+  },
+  {
     slug: "graphrag-bi-agent",
     title: "GraphRAG 기반 사내 BI 에이전트",
     year: "2026",
