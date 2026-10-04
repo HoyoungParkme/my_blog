@@ -13,12 +13,15 @@ import { DetailLayout, DetailSection, SidebarBlock } from "@/components/common/D
 import { findProject, findProjectNeighbors, type Project } from "@/content/projects";
 import NotFound from "@/pages/NotFound";
 
-/** 사이드바 목차. 본문 섹션의 id·제목과 일치해야 한다. */
+/**
+ * 사이드바 목차. 본문 섹션의 id·제목과 일치해야 한다.
+ * field가 비어 있는 프로젝트(같이 쓰기 전인 초안)는 본문과 목차에서 그 섹션을 함께 뺀다.
+ */
 const SECTIONS = [
-  { id: "sec-0", title: "배경과 문제" },
-  { id: "sec-1", title: "내가 한 일" },
-  { id: "sec-2", title: "결과와 배운 점" },
-];
+  { id: "sec-0", title: "배경과 문제", field: "problem" },
+  { id: "sec-1", title: "내가 한 일", field: "role" },
+  { id: "sec-2", title: "결과와 배운 점", field: "result" },
+] as const;
 
 export default function ProjectDetail({ params }: { params: { slug: string } }) {
   const project = findProject(params.slug);
@@ -49,9 +52,11 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
       )}
 
       <div className="mt-9 text-base leading-[1.75] text-ink-body">
-        <DetailSection id="sec-0" title="배경과 문제">
-          <p className="mb-8 [text-wrap:pretty]">{project.problem}</p>
-        </DetailSection>
+        {project.problem && (
+          <DetailSection id="sec-0" title="배경과 문제">
+            <p className="mb-8 [text-wrap:pretty]">{project.problem}</p>
+          </DetailSection>
+        )}
 
         <DetailSection id="sec-1" title="내가 한 일">
           <p className="mb-4 [text-wrap:pretty]">{project.role}</p>
@@ -62,9 +67,11 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
           </pre>
         )}
 
-        <DetailSection id="sec-2" title="결과와 배운 점">
-          <p className="[text-wrap:pretty]">{project.result}</p>
-        </DetailSection>
+        {project.result && (
+          <DetailSection id="sec-2" title="결과와 배운 점">
+            <p className="[text-wrap:pretty]">{project.result}</p>
+          </DetailSection>
+        )}
       </div>
     </DetailLayout>
   );
@@ -123,7 +130,7 @@ function Sidebar({
 
       <SidebarBlock label="목차">
         <div className="flex flex-col gap-1.5 text-ink-muted">
-          {SECTIONS.map((section) => (
+          {SECTIONS.filter((section) => project[section.field]).map((section) => (
             <a key={section.id} href={`#${section.id}`}>
               {section.title}
             </a>

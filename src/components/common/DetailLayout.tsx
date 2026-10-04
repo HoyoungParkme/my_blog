@@ -20,7 +20,11 @@ export function DetailLayout({
       <div className="w-full min-w-0 rounded-lg border border-rule bg-sheet px-5 py-7 dt:px-14 dt:pb-14 dt:pt-12">
         {children}
       </div>
-      <aside className="mt-2 flex flex-col gap-6 text-[15px] dt:col-start-2 dt:mt-0 dt:w-60 dt:sticky dt:top-24 dt:self-start dt:pt-11">
+      {/*
+        원래 자리(dt:mt-10 → 본문 시작 56px + 40px = 96px)를 붙는 위치(dt:top-24 = 96px)와 같게 둔다.
+        둘이 다르면 긴 글은 처음부터 96px로 밀려 내려가고, 짧은 글은 밀릴 공간이 없어 40px 위에 남는다.
+      */}
+      <aside className="mt-2 flex flex-col gap-6 text-[15px] dt:col-start-2 dt:mt-10 dt:w-60 dt:sticky dt:top-24 dt:self-start dt:pt-11">
         {sidebar}
       </aside>
     </article>

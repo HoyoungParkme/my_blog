@@ -9,6 +9,8 @@
  * 보안서약서의 외부 공표 조항을 확인하기 전까지 실명은 복원하지 않는다.
  *
  * 채워야 할 항목:
+ * - problem·result는 본인과 같이 쓰기 전인 초안이면 비워 둔다. 비어 있으면 상세에서 그 섹션과 목차 항목이 빠진다.
+ *   지어낸 배경이나 "정리 예정" 같은 자리 표시 문구는 넣지 않는다.
  * - metrics는 실측 수치가 나온 프로젝트에만 넣는다. 없으면 지표 카드가 렌더되지 않는다.
  * - code는 공개 가능한 핵심 스니펫이 준비되면 채운다. 없으면 상세에서 코드 블록이 생략된다.
  * - links(github/demo)는 공개 가능한 저장소나 데모가 있을 때만 채운다.
@@ -35,12 +37,12 @@ export interface Project {
   tags: string[];
   /** 목록 카드의 한 줄 요약 */
   summary: string;
-  /** 케이스 스터디 "배경과 문제" */
-  problem: string;
+  /** 케이스 스터디 "배경과 문제". 같이 쓰기 전이면 비워 둔다. */
+  problem?: string;
   /** 케이스 스터디 "내가 한 일" */
   role: string;
-  /** 케이스 스터디 "결과와 배운 점" */
-  result: string;
+  /** 케이스 스터디 "결과와 배운 점". 같이 쓰기 전이면 비워 둔다. */
+  result?: string;
   /** 실측 수치. 없으면 상세에서 지표 카드를 띄우지 않는다. */
   metrics?: ProjectMetric[];
   /** 핵심 코드 스니펫. 없으면 코드 블록을 렌더링하지 않는다. */
@@ -64,6 +66,18 @@ export const projects: Project[] = [
       "PL로서 전체 구조를 설계하고 개발했습니다. 사용자가 데이터 사전(DD)이나 데이터 명세서를 올리면 데이터 카탈로그를 자동으로 만들고, 이를 GraphRAG 그래프로 구성합니다. 이어서 컬럼 설명을 읽어 테이블 간 관계를 추천하고, 그 관계를 그래프에 더해 GraphRAG가 스스로 보강되게 했습니다. 백엔드는 FastAPI로 DB 모델링부터 자연어 질의 API까지 만들었고, 답변을 차트로 보여주는 대시보드는 React로 구현했습니다.",
     result:
       "기본 기능은 구현을 마쳤고, 지금은 외부 시스템을 플러그인으로 붙이는 단계입니다. Tableau는 연결을 마쳤고 다음은 SAP입니다. 테이블 간 관계를 사람이 하나하나 정의하지 않고 명세서에서 뽑아 그래프를 채우게 한 것이 이 구조의 중심입니다.",
+  },
+  {
+    slug: "commerce-mall-poc",
+    title: "국내 대형 IT 서비스 기업 쇼핑몰 PoC",
+    year: "2026",
+    org: "디포커스",
+    period: "2026.04 – 2026.05",
+    roleShort: "풀스택 개발",
+    tags: ["React", "유사도 분석"],
+    summary: "상품·구매 API와 React 쇼핑몰 화면, 유사도 분석 서비스를 구현한 PoC",
+    role:
+      "풀스택 개발을 맡아 상품·구매 API를 개발하고 React로 쇼핑몰 화면을 구현했습니다. 유사도 분석 서비스도 함께 구현했습니다.",
   },
   {
     slug: "tableau-ai-agent",
@@ -98,6 +112,18 @@ export const projects: Project[] = [
       "탐지 결과를 좌표가 아니라 영역 단위 사건으로 해석하게 되면서 모델 출력이 곧바로 운영 규칙에 연결됐습니다. 도메인에 맞는 레이블링 도구를 먼저 만든 것이 데이터 품질을 좌우했습니다.",
   },
   {
+    slug: "llm-sentiment-analysis",
+    title: "국내 ERP 솔루션 기업 LLM 서비스 감정분석 고도화",
+    year: "2025",
+    org: "디포커스",
+    period: "2025.10 – 2025.12",
+    roleShort: "풀스택 개발",
+    tags: ["LLM", "감정분석", "비동기 처리"],
+    summary: "LLM 서비스에 감정분석 API와 대시보드를 더하고, LLM 호출을 비동기로 처리한 고도화",
+    role:
+      "풀스택 개발을 맡아 감정분석 API를 개발하고 감정분석 대시보드 화면을 구현했습니다. LLM 호출은 비동기로 처리하도록 구현했습니다.",
+  },
+  {
     slug: "cobol-java-migration",
     title: "국내 대형 자동차 부품사 COBOL → Java 전환",
     year: "2025",
@@ -112,6 +138,42 @@ export const projects: Project[] = [
       "백엔드를 맡아 두 개의 파이프라인을 개발했습니다. COBOL 소스를 파싱하는 파이프라인으로 COBOL 버전 화면 명세서의 바탕을 만들고, 이 명세서를 Java 버전 문서로 옮기는 변환 자동화 파이프라인을 만들었습니다.",
     result:
       "명세서가 없는 레거시를 코드에서 바로 번역하는 대신, 현재 동작을 문서로 먼저 되살리고 그 문서를 전환의 기준으로 삼았습니다.",
+  },
+  {
+    slug: "tableau-ai-poc",
+    title: "국내 대기업 Tableau AI PoC",
+    year: "2025",
+    org: "디포커스",
+    period: "2025.08 – 2025.09",
+    roleShort: "풀스택 개발",
+    tags: ["LLM", "Tableau VDS API"],
+    summary: "그룹사 사내 LLM과 Tableau VDS API를 연동해 질의 결과를 표와 차트로 보여준 PoC",
+    role:
+      "풀스택 개발을 맡아 그룹사 사내 LLM과 Tableau VDS API를 연동하고, 질의 결과를 표와 차트로 보여주는 화면을 구현했습니다.",
+  },
+  {
+    slug: "logistics-scm-dashboard",
+    title: "국내 대형 물류 기업 SCM 대시보드 추가개발",
+    year: "2025",
+    org: "디포커스",
+    period: "2025.02 – 2025.06",
+    roleShort: "BI 개발",
+    tags: ["BI 대시보드", "SQL"],
+    summary: "SCM 사업부 대시보드를 추가로 개발하고 데이터 추출 쿼리를 작성",
+    role:
+      "BI 개발을 맡아 SCM 사업부 대시보드를 개발하고, 데이터를 추출하는 DB 사용자 지정 쿼리를 작성했습니다.",
+  },
+  {
+    slug: "logistics-external-data",
+    title: "국내 대형 물류 기업 외부데이터 자산화",
+    year: "2024",
+    org: "디포커스",
+    period: "2024.11 – 2024.12",
+    roleShort: "BI 개발",
+    tags: ["시계열 대시보드", "SQL"],
+    summary: "외부데이터를 자산화하는 시계열 차트 대시보드와 데이터 추출 쿼리를 개발",
+    role:
+      "BI 개발을 맡아 시계열 차트 대시보드를 개발하고, 데이터를 추출하는 DB 사용자 지정 쿼리를 작성했습니다.",
   },
   {
     slug: "logistics-risk-tableau",
