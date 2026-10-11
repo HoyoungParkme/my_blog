@@ -13,6 +13,7 @@
 import { Link } from "wouter";
 
 import { ProjectList } from "@/components/common/ProjectList";
+import { useTimelineFill } from "@/components/common/useTimelineFill";
 import { usePageTitle } from "@/components/layout/usePageTitle";
 import {
   academicHistory,
@@ -121,26 +122,39 @@ function HistoryBlock() {
   );
 }
 
-/** 날짜 칸(132px)은 위 프로젝트 목록과 같게 둬 이력 이름과 프로젝트 제목이 한 세로선에 선다. */
+/** 이력 한 섹션. 왼쪽 타임라인 선 + 날짜(132px) / 이름·설명 2단. */
 function HistoryList({ title, entries }: { title: string; entries: HistoryEntry[] }) {
+  const trackRef = useTimelineFill<HTMLDivElement>();
+
   return (
     <div>
       <h2 className="mb-5 border-b border-ink pb-3 text-[22px] font-bold tracking-tighter">
         {title}
       </h2>
-      <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-base dt:grid-cols-[132px_minmax(0,1fr)] dt:items-baseline dt:gap-y-[18px]">
-        {entries.map((entry) => (
-          <div key={entry.name} className="contents">
-            <dt className="whitespace-nowrap text-sm tabular-nums text-ink-faint">
-              {entry.term}
-            </dt>
-            <dd className="mb-4 dt:mb-0">
-              <div className="font-semibold">{entry.name}</div>
-              {entry.detail && <div className="mt-1 text-ink-muted">{entry.detail}</div>}
-            </dd>
-          </div>
-        ))}
-      </dl>
+      {/* 왼쪽 선은 스크롤한 만큼 위에서부터 채워지고, 선이 지나간 항목의 점이 켜진다 */}
+      <div ref={trackRef} className="relative pl-7">
+        <div aria-hidden className="absolute bottom-0 left-[6px] top-0 w-0.5 rounded-full bg-rule">
+          <div data-fill className="h-0 w-full rounded-full bg-ink" />
+        </div>
+        <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-base dt:grid-cols-[132px_minmax(0,1fr)] dt:items-baseline dt:gap-y-[18px]">
+          {entries.map((entry) => (
+            <div key={entry.name} className="contents">
+              <dt className="relative whitespace-nowrap text-sm tabular-nums text-ink-faint">
+                <span
+                  aria-hidden
+                  data-dot
+                  className="absolute -left-7 top-[3px] h-3.5 w-3.5 rounded-full border-2 border-rule bg-rule transition-colors duration-300 data-[on]:border-ink data-[on]:bg-paper motion-reduce:transition-none"
+                />
+                {entry.term}
+              </dt>
+              <dd className="mb-4 dt:mb-0">
+                <div className="font-semibold">{entry.name}</div>
+                {entry.detail && <div className="mt-1 text-ink-muted">{entry.detail}</div>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </div>
   );
 }
