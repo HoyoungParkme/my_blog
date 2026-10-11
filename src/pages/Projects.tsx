@@ -9,41 +9,14 @@
  * 커버 이미지가 준비되지 않아 회색 블록만 자리를 차지하던 카드 그리드를 걷어냈다.
  */
 
-import { Link } from "wouter";
-
 import { ListPageLayout } from "@/components/common/ListPageLayout";
-import { projects, type Project } from "@/content/projects";
+import { ProjectList } from "@/components/common/ProjectList";
+import { projects } from "@/content/projects";
 
 export default function Projects() {
   return (
     <ListPageLayout title="Projects">
-      <div className="flex flex-col border-t border-ink">
-        {projects.map((project) => (
-          <ProjectRow key={project.slug} project={project} />
-        ))}
-      </div>
+      <ProjectList projects={projects} className="flex flex-col border-t border-ink" />
     </ListPageLayout>
-  );
-}
-
-function ProjectRow({ project }: { project: Project }) {
-  return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[132px_minmax(0,1fr)_auto] dt:items-baseline dt:gap-6"
-    >
-      <span className="whitespace-nowrap text-sm tabular-nums text-ink-faint">
-        {project.period}
-      </span>
-      <div>
-        <div className="text-base font-semibold">{project.title}</div>
-        <div className="mt-1.5 text-base text-ink-muted [text-wrap:pretty]">
-          {project.summary}
-        </div>
-      </div>
-      <div className="whitespace-nowrap text-[13px] text-ink-faint dt:text-right">
-        {project.roleShort}
-      </div>
-    </Link>
   );
 }
