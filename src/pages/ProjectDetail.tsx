@@ -10,7 +10,9 @@
 import { Link } from "wouter";
 
 import { DetailLayout, DetailSection, SidebarBlock } from "@/components/common/DetailLayout";
+import { usePageTitle } from "@/components/layout/usePageTitle";
 import { findProject, findProjectNeighbors, type Project } from "@/content/projects";
+import { NOT_FOUND_NAME } from "@/content/siteMeta";
 import NotFound from "@/pages/NotFound";
 
 /**
@@ -25,6 +27,8 @@ const SECTIONS = [
 
 export default function ProjectDetail({ params }: { params: { slug: string } }) {
   const project = findProject(params.slug);
+  // 없는 slug면 NotFound와 같은 제목을 써서 훅 실행 순서와 상관없이 탭 제목이 맞게 한다
+  usePageTitle(project?.title ?? NOT_FOUND_NAME);
   if (!project) return <NotFound />;
 
   const { prev, next } = findProjectNeighbors(project.slug);

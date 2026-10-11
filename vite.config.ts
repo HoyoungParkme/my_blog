@@ -3,18 +3,21 @@
  *
  * 파일 경로: vite.config.ts
  * 목적: React 빌드 설정과 GitHub Pages 배포용 base path를 정의한다.
- * 주요 기능: @ 경로 별칭, 저장소 이름 기반 base path 자동 설정
+ * 주요 기능: @ 경로 별칭, 저장소 이름 기반 base path 자동 설정,
+ *           라우트별 HTML 생성(딥링크 200 응답 + 페이지별 meta, scripts/routeHtmlPlugin.ts)
  */
 
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
 
+import { routeHtmlPlugin } from "./scripts/routeHtmlPlugin";
+
 export default defineConfig({
   // 커스텀 도메인(hoyoungpark.com)을 쓰므로 사이트가 루트에 배포된다.
   // 저장소 하위 경로(github.io/my_blog/)로 되돌릴 경우에만 base를 바꾸면 된다.
   base: "/",
-  plugins: [react()],
+  plugins: [react(), routeHtmlPlugin()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),

@@ -11,11 +11,15 @@ import { Link } from "wouter";
 
 import { DetailLayout, SidebarBlock } from "@/components/common/DetailLayout";
 import { Markdown } from "@/components/common/Markdown";
+import { usePageTitle } from "@/components/layout/usePageTitle";
 import { extractHeadings, findPost, findPostNeighbors, type Post } from "@/content/posts";
+import { NOT_FOUND_NAME } from "@/content/siteMeta";
 import NotFound from "@/pages/NotFound";
 
 export default function PostDetail({ params }: { params: { slug: string } }) {
   const post = findPost(params.slug);
+  // 없는 slug면 NotFound와 같은 제목을 써서 훅 실행 순서와 상관없이 탭 제목이 맞게 한다
+  usePageTitle(post?.title ?? NOT_FOUND_NAME);
   if (!post) return <NotFound />;
 
   const { prev, next } = findPostNeighbors(post.slug);

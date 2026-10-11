@@ -12,6 +12,7 @@
 
 import { Link } from "wouter";
 
+import { usePageTitle } from "@/components/layout/usePageTitle";
 import {
   academicHistory,
   certifications,
@@ -27,6 +28,7 @@ import { projects, type Project } from "@/content/projects";
 const SHOWN_COUNT = 3;
 
 export default function About() {
+  usePageTitle();
   const shown = projects.slice(0, SHOWN_COUNT);
 
   return (

@@ -7,7 +7,12 @@
 
 import { Link } from "wouter";
 
+import { usePageTitle } from "@/components/layout/usePageTitle";
+import { NOT_FOUND_NAME } from "@/content/siteMeta";
+
 export default function NotFound() {
+  usePageTitle(NOT_FOUND_NAME);
+
   return (
     <section className="mx-auto max-w-page px-5 pb-24 pt-[72px] dt:px-12">
       <div className="text-sm font-semibold tracking-overline-wide text-accent">404</div>

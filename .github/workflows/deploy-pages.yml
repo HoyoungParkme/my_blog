@@ -31,9 +31,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: SPA Fallback
-        run: cp dist/index.html dist/404.html
-
+      # 라우트별 HTML과 404.html은 빌드(scripts/routeHtmlPlugin.ts)가 만든다
       - name: Deploy To gh-pages Branch
         uses: peaceiris/actions-gh-pages@v4
         with:
