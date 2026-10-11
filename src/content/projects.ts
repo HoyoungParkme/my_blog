@@ -9,12 +9,15 @@
  * 보안서약서의 외부 공표 조항을 확인하기 전까지 실명은 복원하지 않는다.
  *
  * 채워야 할 항목:
+ * - flow는 에이전트 프로젝트의 "실행 흐름" 섹션 데이터(src/content/agentFlows.ts). 없으면 섹션이 빠진다.
  * - problem·result는 본인과 같이 쓰기 전인 초안이면 비워 둔다. 비어 있으면 상세에서 그 섹션과 목차 항목이 빠진다.
  *   지어낸 배경이나 "정리 예정" 같은 자리 표시 문구는 넣지 않는다.
  * - metrics는 실측 수치가 나온 프로젝트에만 넣는다. 없으면 지표 카드가 렌더되지 않는다.
  * - code는 공개 가능한 핵심 스니펫이 준비되면 채운다. 없으면 상세에서 코드 블록이 생략된다.
  * - links(github/demo)는 공개 가능한 저장소나 데모가 있을 때만 채운다.
  */
+
+import { graphragBiFlow, insuranceClaimFlow, type AgentFlow } from "./agentFlows";
 
 /** 케이스 스터디 상단에 노출되는 지표 카드 한 칸. */
 export interface ProjectMetric {
@@ -45,6 +48,8 @@ export interface Project {
   highlights?: { title: string; body: string }[];
   /** 케이스 스터디 "결과와 배운 점". 같이 쓰기 전이면 비워 둔다. */
   result?: string;
+  /** 에이전트가 질문 1건을 처리하는 단계. 상세의 "실행 흐름" 섹션에 쓰인다. */
+  flow?: AgentFlow;
   /** 실측 수치. 없으면 상세에서 지표 카드를 띄우지 않는다. */
   metrics?: ProjectMetric[];
   /** 핵심 코드 스니펫. 없으면 코드 블록을 렌더링하지 않는다. */
@@ -86,6 +91,7 @@ export const projects: Project[] = [
     ],
     result:
       "2026 AI 챔피언 대회에 국내 AI 트랙으로 출전해, 본선 심사를 통과한 40개 팀에 들어 결선에 진출했습니다. 가장 크게 배운 것은 개발의 기준을 사용자에게 두는 일입니다. 정보를 자세히 많이 받아 매핑할수록 답은 정확해지지만, 사용자에게는 그 질문들이 과합니다. 그래서 질문이 길어지면 그때까지 받은 정보로 부분 판단을 내리게 하는 식으로, 정확도와 사용자 부담 사이의 중간을 찾았습니다.",
+    flow: insuranceClaimFlow,
     links: { github: "https://github.com/yonghyun-dev/Insurance-Helper" },
   },
   {
@@ -103,6 +109,7 @@ export const projects: Project[] = [
       "PL로서 전체 구조를 설계하고 개발했습니다. 사용자가 데이터 사전(DD)이나 데이터 명세서를 올리면 데이터 카탈로그를 자동으로 만들고, 이를 GraphRAG 그래프로 구성합니다. 이어서 컬럼 설명을 읽어 테이블 간 관계를 추천하고, 그 관계를 그래프에 더해 GraphRAG가 스스로 보강되게 했습니다. 백엔드는 FastAPI로 DB 모델링부터 자연어 질의 API까지 만들었고, 답변을 차트로 보여주는 대시보드는 React로 구현했습니다.",
     result:
       "기본 기능은 구현을 마쳤고, 지금은 외부 시스템을 플러그인으로 붙이는 단계입니다. Tableau는 연결을 마쳤고 다음은 SAP입니다. 테이블 간 관계를 사람이 하나하나 정의하지 않고 명세서에서 뽑아 그래프를 채우게 한 것이 이 구조의 중심입니다.",
+    flow: graphragBiFlow,
   },
   {
     slug: "commerce-mall-poc",

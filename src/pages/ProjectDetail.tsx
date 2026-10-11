@@ -9,6 +9,7 @@
 
 import { Link } from "wouter";
 
+import { AgentFlow } from "@/components/common/AgentFlow";
 import { DetailLayout, DetailSection, SidebarBlock } from "@/components/common/DetailLayout";
 import { usePageTitle } from "@/components/layout/usePageTitle";
 import { findProject, findProjectNeighbors, type Project } from "@/content/projects";
@@ -22,6 +23,7 @@ import NotFound from "@/pages/NotFound";
 const SECTIONS = [
   { id: "sec-0", title: "배경과 문제", field: "problem" },
   { id: "sec-1", title: "내가 한 일", field: "role" },
+  { id: "sec-flow", title: "실행 흐름", field: "flow" },
   { id: "sec-2", title: "결과와 배운 점", field: "result" },
 ] as const;
 
@@ -80,6 +82,12 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
           <pre className="mb-8 overflow-auto rounded-md bg-ink px-5 py-[18px] font-mono text-sm leading-[1.6] text-code-tint">
             {project.code}
           </pre>
+        )}
+
+        {project.flow && (
+          <DetailSection id="sec-flow" title="실행 흐름">
+            <AgentFlow flow={project.flow} />
+          </DetailSection>
         )}
 
         {project.result && (
