@@ -18,6 +18,7 @@ export const DEFAULT_DESCRIPTION =
 
 export const PROJECTS_DESCRIPTION =
   "박호영이 참여한 AI Agent·RAG·백엔드·BI 프로젝트를 최신순으로 정리했습니다.";
+export const CONTESTS_DESCRIPTION = "박호영이 출전한 AI·데이터 대회의 출품작을 정리했습니다.";
 export const BLOG_DESCRIPTION =
   "박호영이 개발하며 겪은 문제와 해결 과정을 정리한 트러블슈팅 기록입니다.";
 

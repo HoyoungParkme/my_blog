@@ -27,6 +27,7 @@ export interface ProjectMetric {
 }
 
 export interface Project {
+  /** 상세 주소(/projects/:slug)에 쓰인다. "contests"는 대회 목록 주소라 쓰지 않는다. */
   slug: string;
   title: string;
   /** 카드 오버라인에 표시되는 대표 연도 */
@@ -277,15 +278,15 @@ export const contestProjects = projects.filter((project) => project.kind === "co
 
 /**
  * 상세 페이지의 이전/다음 프로젝트를 찾는다.
- * Projects 화면에 보이는 순서(업무 프로젝트 → 대회)를 따르며, 양 끝에서는 해당 방향이 undefined다.
+ * 같은 묶음(업무 프로젝트 또는 대회) 안에서 목록 순서를 따르며, 양 끝에서는 해당 방향이 undefined다.
  */
 export function findProjectNeighbors(slug: string): {
   prev?: Project;
   next?: Project;
 } {
-  const listed = [...workProjects, ...contestProjects];
-  const index = listed.findIndex((project) => project.slug === slug);
+  const group = findProject(slug)?.kind === "contest" ? contestProjects : workProjects;
+  const index = group.findIndex((project) => project.slug === slug);
   if (index === -1) return {};
-  return { prev: listed[index - 1], next: listed[index + 1] };
+  return { prev: group[index - 1], next: group[index + 1] };
 }
 

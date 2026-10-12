@@ -26,7 +26,13 @@ function AppRoutes() {
       <Route path="/about">
         <Redirect to="/" replace />
       </Route>
-      <Route path="/projects" component={Projects} />
+      <Route path="/projects">
+        <Projects group="work" />
+      </Route>
+      {/* 상세(:slug)보다 먼저 둬야 "contests"가 프로젝트 주소로 잡히지 않는다 */}
+      <Route path="/projects/contests">
+        <Projects group="contest" />
+      </Route>
       <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={PostDetail} />

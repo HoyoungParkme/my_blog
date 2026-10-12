@@ -24,7 +24,7 @@ import {
   profile,
   type HistoryEntry,
 } from "@/content/profile";
-import { projects, workProjects, type Project } from "@/content/projects";
+import { workProjects, type Project } from "@/content/projects";
 
 /** About에 노출할 업무 프로젝트 개수. 넘치면 "전체 보기"로 넘긴다. 대회 출품작은 대회 섹션에서 링크로 연결한다. */
 const SHOWN_COUNT = 3;
@@ -95,7 +95,7 @@ function ProjectsBlock({ shown }: { shown: Project[] }) {
       <div className="flex items-baseline justify-between border-b border-ink pb-3">
         <h2 className="text-[22px] font-bold tracking-tighter">프로젝트</h2>
         <Link href="/projects" className="border-b border-ink text-[13px] font-semibold">
-          전체 {projects.length}개 보기
+          전체 {workProjects.length}개 보기
         </Link>
       </div>
 

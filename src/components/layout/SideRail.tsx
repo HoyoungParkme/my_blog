@@ -4,7 +4,7 @@
  * 파일 경로: src/components/layout/SideRail.tsx
  * 목적: 데스크톱에서 좌측에 고정되는 내비게이션.
  *       1000px 이하는 MobileTopBar가 담당하므로 이 컴포넌트는 화면에서 감춘다.
- * 주요 기능: 브랜드 블록, 평평한 내비 4개, 연락처 푸터
+ * 주요 기능: 브랜드 블록, 내비(Projects는 활성일 때 하위 항목을 펼친다), 연락처 푸터
  * 주요 의존성: wouter, src/content/profile.ts, ./navItems
  */
 
@@ -13,7 +13,7 @@ import { Link, useLocation } from "wouter";
 
 import { profile } from "@/content/profile";
 
-import { NAV_ITEMS, isNavActive } from "./navItems";
+import { NAV_ITEMS, activeProjectSubHref, isNavActive, type NavItem } from "./navItems";
 
 /** 복사 피드백을 유지하는 시간(ms) */
 const FEEDBACK_MS = 1600;
@@ -31,17 +31,22 @@ export function SideRail() {
       <nav aria-label="주요 메뉴" className="mt-8 flex flex-col text-[15px] font-medium">
         {NAV_ITEMS.map((item) => {
           const active = isNavActive(item.href, location);
+          // 하위 항목이 있으면 배경 강조는 하위 항목이 받고, 상위 항목은 굵기만 바꾼다
+          const highlight = active ? (item.children ? "font-semibold" : "bg-badge font-semibold") : "";
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={active ? "page" : undefined}
-              className={`border-b border-rule-rail px-6 py-3.5 ${
-                active ? "bg-badge font-semibold" : ""
-              }`}
-            >
-              {item.label}
-            </Link>
+            <div key={item.href}>
+              <Link
+                href={item.href}
+                aria-current={active && !item.children ? "page" : undefined}
+                className={`flex items-center justify-between border-b border-rule-rail px-6 py-3.5 ${highlight}`}
+              >
+                {item.label}
+                {item.children && <Chevron open={active} />}
+              </Link>
+              {active && item.children && (
+                <SubNav items={item.children} activeHref={activeProjectSubHref(location)} />
+              )}
+            </div>
           );
         })}
       </nav>
@@ -50,6 +55,44 @@ export function SideRail() {
         <RailFooter />
       </div>
     </aside>
+  );
+}
+
+/** 펼쳐진 하위 항목 목록. 상위 항목보다 들여 쓰고 글자를 한 단계 줄인다. */
+function SubNav({ items, activeHref }: { items: NavItem[]; activeHref?: string }) {
+  return (
+    <div className="flex flex-col">
+      {items.map((child) => {
+        const active = child.href === activeHref;
+        return (
+          <Link
+            key={child.href}
+            href={child.href}
+            aria-current={active ? "page" : undefined}
+            className={`border-b border-rule-rail py-2.5 pl-10 pr-6 text-sm ${
+              active ? "bg-badge font-semibold text-ink" : "text-ink-muted"
+            }`}
+          >
+            {child.label}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+/** 하위 항목이 있다는 표시. 펼쳐지면 아래를 향한다. */
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 10 10"
+      className={`h-2.5 w-2.5 text-ink-faint transition-transform duration-200 motion-reduce:transition-none ${
+        open ? "rotate-90" : ""
+      }`}
+    >
+      <path d="M3 1.5 6.5 5 3 8.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
   );
 }
 

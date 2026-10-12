@@ -24,6 +24,7 @@ import {
   DEFAULT_DESCRIPTION,
   NOT_FOUND_NAME,
   PROJECTS_DESCRIPTION,
+  CONTESTS_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   pageTitle,
@@ -74,6 +75,12 @@ function collectRoutes(root: string): RouteMeta[] {
       path: "/projects",
       title: pageTitle("Projects"),
       description: PROJECTS_DESCRIPTION,
+      type: "website",
+    },
+    {
+      path: "/projects/contests",
+      title: pageTitle("대회"),
+      description: CONTESTS_DESCRIPTION,
       type: "website",
     },
     ...projects.map((project) => ({

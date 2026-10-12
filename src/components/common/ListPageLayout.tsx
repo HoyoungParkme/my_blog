@@ -15,12 +15,15 @@ import { usePageTitle } from "@/components/layout/usePageTitle";
 
 export function ListPageLayout({
   title,
+  tabTitle = title,
   children,
 }: {
   title: string;
+  /** 브라우저 탭 제목. 화면 제목과 다를 때만 넘긴다. */
+  tabTitle?: string;
   children: ReactNode;
 }) {
-  usePageTitle(title);
+  usePageTitle(tabTitle);
 
   return (
     <div className="mx-auto max-w-listing px-5 pb-24 pt-16 dt:px-12">
