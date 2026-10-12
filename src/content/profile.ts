@@ -32,7 +32,7 @@ export const profile = {
   photo: myPhoto,
   /**
    * 경력기술서 PDF 경로. 값이 있으면 About에 버튼이 나타난다.
-   * 파일은 `npm run pdf`가 경력기술서 화면(/resume, 개발 서버 전용)을 인쇄해 public/pdf/에 만든다.
+   * 파일은 배포할 때 `npm run pdf`가 경력기술서 화면(/resume, 개발 서버 전용)을 인쇄해 만든다.
    */
   resumeUrl: "/pdf/resume.pdf",
   /** 경력기술서 맨 위 핵심역량. 근거가 되는 프로젝트가 있는 강점만 쓴다. */

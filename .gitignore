@@ -1,5 +1,7 @@
 node_modules
 dist
+# 배포 때 npm run pdf가 만드는 PDF (경력기술서·프로젝트 상세)
+public/pdf/
 .DS_Store
 .playwright-mcp/
 

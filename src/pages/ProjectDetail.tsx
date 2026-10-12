@@ -196,7 +196,7 @@ function Sidebar({
 
       <SidebarBlock>
         <div className="flex flex-col gap-2 font-semibold">
-          {/* 파일은 `npm run pdf`가 이 화면을 인쇄해 public/pdf/projects/에 만든다 */}
+          {/* 파일은 배포할 때 `npm run pdf`가 이 화면을 인쇄해 만든다 */}
           <a
             href={`/pdf/projects/${project.slug}.pdf`}
             download

@@ -9,7 +9,8 @@
  *   - 끝나면 서버를 내린다. 지운 프로젝트의 PDF가 남지 않게 projects 폴더는 매번 비우고 다시 만든다
  * 주요 의존성: 시스템 Chrome (CHROME_PATH 환경변수, 없으면 /usr/bin/google-chrome)
  *
- * 사용법: 콘텐츠(src/content/*)를 고친 뒤 `npm run pdf` → 바뀐 public/pdf/를 함께 커밋한다.
+ * 배포(.github/workflows/deploy-pages.yml)가 빌드 전에 자동으로 실행한다. 그래서 PDF 파일은 저장소에 넣지 않는다(.gitignore).
+ * 로컬에서 미리 보려면 `npm run pdf` → public/pdf/ 확인.
  */
 
 import { execFileSync, spawn } from "node:child_process";
@@ -52,6 +53,8 @@ function printPdf(url, outFile) {
     [
       "--headless=new",
       "--disable-gpu",
+      // GitHub Actions 러너에서는 샌드박스 없이 띄운다. 로컬에서는 기본(샌드박스 사용) 그대로
+      ...(process.env.CI ? ["--no-sandbox"] : []),
       "--no-pdf-header-footer",
       "--virtual-time-budget=15000",
       `--print-to-pdf=${outFile}`,

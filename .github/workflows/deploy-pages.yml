@@ -28,6 +28,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      # 경력기술서·프로젝트 상세 PDF를 지금 콘텐츠로 다시 만든다 (scripts/makePdfs.mjs, 러너에 있는 Chrome 사용).
+      # public/pdf/에 생기고 빌드가 dist/로 복사한다. 실패하면 배포를 멈춘다 — PDF 버튼이 깨진 채 올라가지 않게
+      - name: Make PDFs
+        run: npm run pdf
+
       - name: Build
         run: npm run build
 
