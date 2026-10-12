@@ -7,7 +7,7 @@
  * 주요 의존성: wouter
  */
 
-import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
+import { Redirect, Route, Router as WouterRouter, Switch, useLocation } from "wouter";
 
 import { PageShell } from "@/components/layout/PageShell";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
@@ -20,6 +20,12 @@ import Projects from "@/pages/Projects";
 import Resume from "@/pages/Resume";
 
 function AppRoutes() {
+  const [location] = useLocation();
+  // GitHub Pages는 끝에 "/"가 붙은 주소(/projects/)를 404.html로 띄운다. 붙지 않은 주소로 바꿔 같은 화면을 보여준다
+  if (location.length > 1 && location.endsWith("/")) {
+    return <Redirect to={location.replace(/\/+$/, "")} replace />;
+  }
+
   return (
     <Switch>
       <Route path="/" component={About} />

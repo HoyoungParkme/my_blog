@@ -11,6 +11,14 @@
 export const SITE_URL = "https://hoyoungpark.com";
 export const SITE_NAME = "박호영";
 
+/** 링크 미리보기 이미지(1200×630). 원본은 scripts/og-image.html, 만드는 방법은 그 파일 머리 주석에 있다. */
+export const OG_IMAGE = {
+  url: `${SITE_URL}/og-image.png`,
+  width: 1200,
+  height: 630,
+  alt: "박호영 — AI Agent 개발자",
+};
+
 /** 첫 화면(About) 제목. 다른 페이지는 `페이지 이름 | 박호영` 형식이다. */
 export const DEFAULT_TITLE = "박호영 | AI Agent 개발자";
 export const DEFAULT_DESCRIPTION =

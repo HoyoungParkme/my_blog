@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+  링크 미리보기 이미지(og:image) 원본
+
+  파일 경로: scripts/og-image.html
+  목적: 카카오톡·슬랙 등에 사이트 주소를 붙였을 때 보이는 1200×630 이미지를 만든다.
+  결과물: public/og-image.png (모든 페이지가 같은 이미지를 쓴다. 태그는 scripts/routeHtmlPlugin.ts가 넣는다)
+
+  다시 만들기 (저장소 루트에서):
+    google-chrome --headless=new --hide-scrollbars --force-device-scale-factor=1 \
+      --window-size=1200,630 --virtual-time-budget=5000 \
+      --screenshot=public/og-image.png "file://$PWD/scripts/og-image.html"
+
+  색·글꼴은 사이트 토큰(src/index.css)과 같다. 문구는 src/content/profile.ts와 맞춘다.
+-->
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #faf9f6;
+        color: #151412;
+        font-family: Pretendard, sans-serif;
+        word-break: keep-all;
+      }
+      .card {
+        box-sizing: border-box;
+        height: 630px;
+        padding: 88px 96px 72px;
+        display: flex;
+        flex-direction: column;
+        border-left: 24px solid #151412;
+      }
+      .overline {
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        color: #1a6a4a;
+      }
+      .name {
+        margin-top: 20px;
+        font-size: 104px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      .bio {
+        margin-top: 36px;
+        max-width: 900px;
+        font-size: 36px;
+        line-height: 1.45;
+        color: #3d3a34;
+      }
+      .footer {
+        margin-top: auto;
+        padding-top: 24px;
+        border-top: 2px solid #dcd8cf;
+        display: flex;
+        justify-content: space-between;
+        font-size: 26px;
+        color: #6f6a60;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="overline">AI AGENT 개발자 · LLM / RAG</div>
+      <div class="name">박호영</div>
+      <div class="bio">동화책처럼 읽히는 명세서를 쓰고, 백엔드부터 AI&nbsp;Agent까지 구현하는 개발자</div>
+      <div class="footer">
+        <span>hoyoungpark.com</span>
+        <span>Projects · Troubleshooting · 경력기술서 PDF</span>
+      </div>
+    </div>
+  </body>
+</html>

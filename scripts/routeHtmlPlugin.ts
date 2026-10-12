@@ -9,6 +9,7 @@
  *   - index.html의 route-meta 표시 사이에 첫 화면 메타를 채운다 (개발 서버·빌드 공통)
  *   - 빌드 후 주소마다 `<경로>.html`을 만든다. GitHub Pages는 `/projects` 요청에 `projects.html`을 200으로 준다.
  *   - 없는 주소용 404.html(검색 제외)을 만든다. SPA가 이 파일로 떠서 NotFound 화면을 보여준다.
+ *   - 검색엔진용 sitemap.xml(검색 제외·중복 주소 빼고)과 robots.txt를 만든다.
  * 주요 의존성: vite, src/content/projects.ts, src/content/postParser.ts, src/content/siteMeta.ts
  */
 
@@ -23,6 +24,7 @@ import {
   BLOG_DESCRIPTION,
   DEFAULT_DESCRIPTION,
   NOT_FOUND_NAME,
+  OG_IMAGE,
   PROJECTS_DESCRIPTION,
   CONTESTS_DESCRIPTION,
   SITE_NAME,
@@ -131,7 +133,11 @@ function renderMetaBlock(meta: RouteMeta): string {
       `<meta property="og:title" content="${title}" />`,
       `<meta property="og:description" content="${description}" />`,
       `<meta property="og:url" content="${url}" />`,
-      `<meta name="twitter:card" content="summary" />`,
+      `<meta property="og:image" content="${OG_IMAGE.url}" />`,
+      `<meta property="og:image:width" content="${OG_IMAGE.width}" />`,
+      `<meta property="og:image:height" content="${OG_IMAGE.height}" />`,
+      `<meta property="og:image:alt" content="${escapeHtml(OG_IMAGE.alt)}" />`,
+      `<meta name="twitter:card" content="summary_large_image" />`,
     );
   }
   return ["<!-- route-meta:start -->", ...tags, "<!-- route-meta:end -->"].join("\n    ");
@@ -143,6 +149,20 @@ function withMeta(html: string, meta: RouteMeta): string {
     throw new Error("index.html에 route-meta 표시가 없습니다");
   }
   return html.replace(META_BLOCK, renderMetaBlock(meta));
+}
+
+/** 검색엔진에 알릴 주소 목록. 다른 주소로 합쳐진 것(/about)과 검색 제외 페이지는 뺀다. */
+function renderSitemap(routes: RouteMeta[]): string {
+  const urls = routes
+    .filter((route) => !route.noindex && !route.canonicalPath)
+    .map((route) => `  <url><loc>${SITE_URL}${route.path}</loc></url>`);
+  return [
+    `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+    ...urls,
+    `</urlset>`,
+    "",
+  ].join("\n");
 }
 
 function writeHtml(file: string, html: string): void {
@@ -177,7 +197,8 @@ export function routeHtmlPlugin(): Plugin {
       if (!isBuild) return;
 
       const template = fs.readFileSync(path.join(outDir, "index.html"), "utf-8");
-      for (const route of collectRoutes(root)) {
+      const routes = collectRoutes(root);
+      for (const route of routes) {
         if (route.path === "/") continue;
         writeHtml(path.join(outDir, `${route.path}.html`), withMeta(template, route));
       }
@@ -191,6 +212,12 @@ export function routeHtmlPlugin(): Plugin {
           type: "website",
           noindex: true,
         }),
+      );
+
+      fs.writeFileSync(path.join(outDir, "sitemap.xml"), renderSitemap(routes));
+      fs.writeFileSync(
+        path.join(outDir, "robots.txt"),
+        `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`,
       );
     },
   };
