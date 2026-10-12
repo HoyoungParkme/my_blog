@@ -24,14 +24,14 @@ import {
   profile,
   type HistoryEntry,
 } from "@/content/profile";
-import { projects, type Project } from "@/content/projects";
+import { projects, workProjects, type Project } from "@/content/projects";
 
-/** About에 노출할 프로젝트 개수. 넘치면 "전체 보기"로 넘긴다. */
+/** About에 노출할 업무 프로젝트 개수. 넘치면 "전체 보기"로 넘긴다. 대회 출품작은 대회 섹션에서 링크로 연결한다. */
 const SHOWN_COUNT = 3;
 
 export default function About() {
   usePageTitle();
-  const shown = projects.slice(0, SHOWN_COUNT);
+  const shown = workProjects.slice(0, SHOWN_COUNT);
 
   return (
     <section className="mx-auto max-w-about px-5 pb-24 pt-12 dt:px-16 dt:pt-[88px]">
@@ -148,7 +148,16 @@ function HistoryList({ title, entries }: { title: string; entries: HistoryEntry[
                 {entry.term}
               </dt>
               <dd className="mb-4 dt:mb-0">
-                <div className="font-semibold">{entry.name}</div>
+                {entry.href ? (
+                  <Link
+                    href={entry.href}
+                    className="font-semibold underline decoration-rule underline-offset-4 hover:text-accent hover:decoration-accent"
+                  >
+                    {entry.name}
+                  </Link>
+                ) : (
+                  <div className="font-semibold">{entry.name}</div>
+                )}
                 {entry.detail && <div className="mt-1 text-ink-muted">{entry.detail}</div>}
               </dd>
             </div>

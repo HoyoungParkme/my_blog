@@ -15,6 +15,8 @@ export interface HistoryEntry {
   term: string;
   name: string;
   detail?: string;
+  /** 사이트 안 상세 페이지 주소. 있으면 이름이 링크가 된다. (예: 대회 출품작 상세) */
+  href?: string;
 }
 
 export const profile = {
@@ -65,11 +67,16 @@ export const certifications: HistoryEntry[] = [
 
 /**
  * 대회. term은 진출 결과가 발표된 달이다.
- * AI 챔피언: 본선 심사 통과 40팀 = 결선 진출(2026.08 발표). 부산 Big Data 활용 대회: 서류평가 통과 14팀 = 본선 진출(2026.09 발표).
+ * AI 챔피언: 본선 심사 통과 = 1차 결선 진출 40팀(일반 20 / 국내 AI 20, 2026.08.21 공식 공지). 국내 AI 트랙 지원 122팀. 부산 Big Data 활용 대회: 서류평가 통과 14팀 = 본선 진출(2026.09 발표).
  */
 export const competitions: HistoryEntry[] = [
   { term: "2026.09", name: "2026년 Big Data 활용 대회 본선 진출", detail: "부산 빅데이터혁신센터" },
-  { term: "2026.08", name: "2026 AI 챔피언 대회 결선 진출", detail: "과학기술정보통신부" },
+  {
+    term: "2026.08",
+    name: "2026 AI 챔피언 대회 1차 결선 진출",
+    detail: "과학기술정보통신부",
+    href: "/projects/insurance-claim-assistant",
+  },
 ];
 
 export const education: HistoryEntry[] = [

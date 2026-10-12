@@ -33,6 +33,8 @@ export interface Project {
   year: string;
   /** 소속. 상세 사이드바의 "소속" 행에 표시된다. */
   org: string;
+  /** 대회 출품작이면 "contest". 없으면 업무 프로젝트다. Projects 화면에서 묶음을 나누고, About 첫 화면 목록에서는 뺀다. */
+  kind?: "contest";
   /** `YYYY.MM – YYYY.MM` 형식. 진행 중이면 `YYYY.MM – 현재`, 투입 전이면 `YYYY.MM 투입 예정`. */
   period: string;
   /** 카드와 사이드바에 쓰이는 짧은 역할 표기 */
@@ -87,14 +89,15 @@ export const projects: Project[] = [
     title: "보험청구심사 어시스턴트",
     year: "2026",
     org: "디포커스 AI 팀",
+    kind: "contest",
     period: "2026.05 – 현재",
     roleShort: "RAG 파이프라인 설계 · 개발",
     tags: ["Upstage Document Parse", "Solar", "GraphRAG", "Neo4j", "FastAPI"],
-    summary: "2026 AI 챔피언 대회 결선 진출작. 약관 원문을 근거로 보험 청구 가능성을 안내하는 RAG 에이전트",
+    summary: "2026 AI 챔피언 대회 1차 결선 진출작. 약관 원문을 근거로 보험 청구 가능성을 안내하는 RAG 에이전트",
     problem:
       "보험 약관은 길고 어려워 내 사고가 보장되는지 스스로 판단하기 어렵습니다. 보험사 상담에는 보험사 입장이 섞일 수 있고, 일반 AI 챗봇은 근거 없이 된다·안 된다를 단정할 위험이 있습니다.",
     role:
-      "팀에서 약관 문서를 추출해 GraphRAG로 구성하고 챗봇에 연동하는 파이프라인을 설계하고 개발했습니다(프론트엔드와 시나리오는 팀원 담당). 국내 AI 트랙 규정에 맞춰 문서 추출과 추론은 Upstage(Document Parse·Solar)로 구성했습니다.",
+      "3명 팀에서 개발을 맡아, 약관 문서를 추출해 GraphRAG로 구성하고 챗봇에 연동하는 파이프라인을 설계하고 개발했습니다. 화면, LangGraph 대화 흐름, 사용자 서류 추출(Upstage IE), Azure 배포까지 직접 구현했고, 기획과 시나리오는 팀원이 맡았습니다. 국내 AI 트랙 규정에 맞춰 문서 추출과 추론은 Upstage(Document Parse·Solar)로 구성했습니다.",
     highlights: [
       {
         title: "약관을 구조째 추출한다",
@@ -114,7 +117,7 @@ export const projects: Project[] = [
       },
     ],
     result:
-      "2026 AI 챔피언 대회에 국내 AI 트랙으로 출전해, 본선 심사를 통과한 40개 팀에 들어 결선에 진출했습니다. 가장 크게 배운 것은 개발의 기준을 사용자에게 두는 일입니다. 정보를 자세히 많이 받아 매핑할수록 답은 정확해지지만, 사용자에게는 그 질문들이 과합니다. 그래서 질문이 길어지면 그때까지 받은 정보로 부분 판단을 내리게 하는 식으로, 정확도와 사용자 부담 사이의 중간을 찾았습니다.",
+      "2026 AI 챔피언 대회 국내 AI 트랙에 출전해, 지원한 122개 팀 중 1차 결선에 오른 20개 팀에 들었습니다. 가장 크게 배운 것은 개발의 기준을 사용자에게 두는 일입니다. 정보를 자세히 많이 받아 매핑할수록 답은 정확해지지만, 사용자에게는 그 질문들이 과합니다. 그래서 질문이 길어지면 그때까지 받은 정보로 부분 판단을 내리게 하는 식으로, 정확도와 사용자 부담 사이의 중간을 찾았습니다.",
     flow: insuranceClaimFlow,
     links: { github: "https://github.com/yonghyun-dev/Insurance-Helper" },
   },
@@ -266,16 +269,23 @@ export function findProject(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
 }
 
+/** 업무 프로젝트(대회 출품작 제외). 배열 순서(최신순)를 따른다. */
+export const workProjects = projects.filter((project) => project.kind !== "contest");
+
+/** 대회 출품작. 배열 순서(최신순)를 따른다. */
+export const contestProjects = projects.filter((project) => project.kind === "contest");
+
 /**
  * 상세 페이지의 이전/다음 프로젝트를 찾는다.
- * 배열 순서(최신순)를 그대로 따르며, 양 끝에서는 해당 방향이 undefined다.
+ * Projects 화면에 보이는 순서(업무 프로젝트 → 대회)를 따르며, 양 끝에서는 해당 방향이 undefined다.
  */
 export function findProjectNeighbors(slug: string): {
   prev?: Project;
   next?: Project;
 } {
-  const index = projects.findIndex((project) => project.slug === slug);
+  const listed = [...workProjects, ...contestProjects];
+  const index = listed.findIndex((project) => project.slug === slug);
   if (index === -1) return {};
-  return { prev: projects[index - 1], next: projects[index + 1] };
+  return { prev: listed[index - 1], next: listed[index + 1] };
 }
 
