@@ -33,7 +33,7 @@ export interface Project {
   year: string;
   /** 소속. 상세 사이드바의 "소속" 행에 표시된다. */
   org: string;
-  /** `YYYY.MM – YYYY.MM` 형식. 진행 중이면 `YYYY.MM – 현재`. */
+  /** `YYYY.MM – YYYY.MM` 형식. 진행 중이면 `YYYY.MM – 현재`, 투입 전이면 `YYYY.MM 투입 예정`. */
   period: string;
   /** 카드와 사이드바에 쓰이는 짧은 역할 표기 */
   roleShort: string;
@@ -58,6 +58,30 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    slug: "financial-ad-review-agent",
+    title: "국내 대형 지방 금융그룹 AI Agent 개발",
+    year: "2026",
+    org: "디포커스",
+    period: "2026.12 투입 예정",
+    roleShort: "광고 심의 Agent 개발",
+    tags: ["AI Agent"],
+    summary: "업무 케이스별로 여러 Agent를 만드는 프로젝트. 그중 광고 심의 어시스턴트 Agent를 맡을 예정",
+    role:
+      "업무 케이스별로 여러 Agent를 만드는 프로젝트에서 광고 심의 어시스턴트 Agent를 맡을 예정입니다. 2026년 12월에 투입합니다.",
+  },
+  {
+    slug: "refinery-master-data-cleansing",
+    title: "국내 대형 정유사 기준정보 정비",
+    year: "2026",
+    org: "디포커스",
+    period: "2026.10 – 현재",
+    roleShort: "PL · 설계 · 개발",
+    tags: ["SAP", "Python", "React", "데이터 클렌징"],
+    summary: "SAP 버전 업그레이드에 맞춰 기준정보 6종을 사내 규칙대로 정제하는 데이터 클렌징 플랫폼",
+    role:
+      "PL을 맡아 설계와 개발을 함께 하고 있습니다. SAP로 관리하는 기준정보(마스터 데이터) 6종을 SAP 버전 업그레이드에 맞춰 정비하기 위해, 회사 내부 규칙에 따라 데이터를 정제하는 클렌징 플랫폼을 Python과 React로 개발하고 있습니다.",
+  },
   {
     slug: "insurance-claim-assistant",
     title: "보험청구심사 어시스턴트",
