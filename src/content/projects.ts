@@ -193,7 +193,7 @@ export const projects: Project[] = [
     outcomes: [
       "카탈로그 → GraphRAG → 자연어 분석 → 차트·보고서까지 1단계 핵심 기능 구현",
       "Tableau 연동 완료, SAP 연동 진행 중",
-      "같은 GraphRAG 기능 위에서 국내 대형 물류 기업 Tableau AI 프로젝트를 만듦",
+      "국내 대형 물류 기업 Tableau AI 경험을 바탕으로 만들어, 그 Tableau AI에 GraphRAG 기능으로 붙임",
       "고객사 데모·제안에 사용",
     ],
     highlights: [
@@ -216,11 +216,27 @@ export const projects: Project[] = [
     year: "2026",
     org: "디포커스",
     period: "2026.04 – 2026.05",
-    roleShort: "풀스택 개발",
-    tags: ["React", "유사도 분석"],
-    summary: "상품·구매 API와 React 쇼핑몰 화면, 유사도 분석 서비스를 구현한 PoC",
+    roleShort: "풀스택 · AI 기능 개발",
+    tags: ["FastAPI", "PostgreSQL", "pgvector", "React", "OpenAI", "CLIP"],
+    summary:
+      "사내 쇼핑몰처럼 상품을 고르면 구매요청서부터 견적·발주까지 이어지는 B2B 구매 포털 PoC. AI 기능 개발 담당",
+    problem:
+      "회사에서 사무 비품·소모품을 살 때 쇼핑몰처럼 고르고, 구매요청서 작성부터 결재·견적·발주·입고까지 한 포털에서 처리하는 간접재 구매 포털의 프로토타입을 만드는 프로젝트였습니다.",
     role:
-      "풀스택 개발을 맡아 상품·구매 API를 개발하고 React로 쇼핑몰 화면을 구현했습니다. 유사도 분석 서비스도 함께 구현했습니다.",
+      "3명 팀에서 백엔드와 프론트엔드를 개발했고, 그중 AI 기능을 맡았습니다.",
+    contribution: "3명 팀에서 백엔드·프론트 개발, AI 기능 전담",
+    tasks: [
+      "상품 검색부터 구매요청서 결재, 구매 주문, 견적 요청까지 이어지는 API와 화면 개발 (FastAPI·React)",
+      "자연어로 상품을 찾는 멀티턴 AI 챗봇 개발",
+      "신규 상품 등록 요청 때 텍스트(pgvector)·이미지(CLIP) 유사도로 기존 상품과 중복을 검토",
+      "승인된 구매요청으로 견적 요청서 초안을 쓰고, 제출된 단가를 과거 낙찰가와 비교해 적정성을 판단하는 견적 AI 개발",
+      "구매요청서의 요청 목적·정책 안내 문구를 LLM이 자동으로 채우는 기능 개발",
+    ],
+    outcomes: [
+      "PoC가 본사업으로 이어짐",
+    ],
+    result:
+      "AI 기능 자체는 이미 충분히 만들 수 있었습니다. 중요한 것은 사용자가 실제로 필요로 하는 지점에 맞춰 AI 기술을 고르고 넣는 일이었습니다.",
   },
   {
     slug: "tableau-ai-agent",
@@ -229,14 +245,31 @@ export const projects: Project[] = [
     org: "디포커스",
     period: "2026.01 – 2026.04",
     roleShort: "AI 아키텍처 설계 · 개발",
-    tags: ["AI Agent", "Qdrant", "RAG", "GraphQL", "Tableau"],
-    summary: "자연어 질의를 대시보드 인사이트로 바꾸는 Tableau 연동 에이전트",
+    tags: ["FastAPI", "LangGraph", "pgvector", "GraphQL", "Tableau", "React"],
+    summary:
+      "자연어 질의를 대시보드 인사이트로 바꾸는 Tableau 연동 에이전트",
     problem:
       "대시보드는 이미 있는데 정작 필요한 숫자를 찾으려면 어느 시트를 봐야 하는지부터 알아야 했습니다. Tableau의 메타데이터와 데이터 소스를 에이전트가 이해할 수 있는 형태로 끌어오는 것이 먼저 풀어야 할 문제였습니다.",
     role:
-      "AI 아키텍처 설계와 개발을 맡았습니다. Tableau 대시보드와 연동되는 LLM 기반 에이전트 시스템을 설계·구현했고, GraphQL과 REST를 함께 쓰는 하이브리드 방식으로 메타데이터와 데이터 소스를 연동했습니다. Qdrant 기반 벡터 저장소를 구성해 RAG 파이프라인을 설계하고, 자연어 질의에서 대시보드 인사이트를 뽑아내는 에이전트 오케스트레이션을 구현했습니다.",
+      "Tableau 대시보드와 연동되는 LLM 에이전트를 혼자 설계하고 개발했습니다.",
+    contribution: "1인 개발 (설계부터 개발까지 전담)",
+    tasks: [
+      "Tableau 메타데이터는 GraphQL, 실데이터는 REST로 가져오는 하이브리드 연동 구현",
+      "pgvector 벡터 검색과 GraphRAG로 질문에 맞는 대시보드·데이터 소스를 찾는 검색 파이프라인 구성",
+      "자연어 질문에서 대시보드 인사이트를 뽑는 LangGraph 에이전트를 FastAPI 서버로 구현",
+      "질의와 결과를 보여주는 React 화면 개발",
+    ],
+    outcomes: [
+      "후속 사업으로 이어짐 (2026.12 착수 예정)",
+    ],
+    highlights: [
+      {
+        title: "메타데이터는 GraphQL, 실데이터는 REST",
+        body: "Tableau의 대시보드·시트·데이터 소스 구조는 GraphQL로, 실제 값은 REST로 가져오도록 나눴습니다. 한쪽만 썼다면 스키마 탐색이나 실데이터 접근 중 하나가 막혔을 구조였습니다.",
+      },
+    ],
     result:
-      "메타데이터 조회는 GraphQL, 실데이터는 REST로 나눈 하이브리드 연동이 결정적이었습니다. 한쪽만 썼다면 스키마 탐색이나 실데이터 접근 중 하나가 막혔을 구조였습니다.",
+      "이 프로젝트에서 정리한 GraphRAG 접근을 한 고객사에 묶어 두지 않고, 범용 BI 에이전트 플랫폼으로 따로 개발해 다시 이 Tableau AI에 붙였습니다. 한 프로젝트를 위해 만든 기능도 구조를 떼어 두면 다른 곳에 다시 쓰는 제품이 될 수 있다는 것을 배웠습니다.",
   },
   {
     slug: "casino-anomaly-detection",
