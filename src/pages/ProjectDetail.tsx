@@ -2,11 +2,13 @@
  * 프로젝트 상세 화면 (케이스 스터디)
  *
  * 파일 경로: src/pages/ProjectDetail.tsx
- * 목적: 하나의 프로젝트를 "배경과 문제 → 내가 한 일 → 결과와 배운 점" 순서로 보여준다.
- * 주요 기능: 본문 시트, 지표 카드(수치가 있을 때만), 메타/목차/이전·다음 사이드바
+ * 목적: 하나의 프로젝트를 "한눈에 보기 → 배경과 문제 → 내가 한 일 → 결과와 배운 점" 순서로 보여준다.
+ * 주요 기능: 본문 시트, 한눈에 보기 카드(기여·주요 업무·결과가 있을 때만), 지표 카드(수치가 있을 때만),
+ *           메타/링크/목차/이전·다음 사이드바
  * 주요 의존성: src/content/projects.ts
  */
 
+import type { ReactNode } from "react";
 import { Link } from "wouter";
 
 import { AgentFlow } from "@/components/common/AgentFlow";
@@ -27,6 +29,11 @@ const SECTIONS = [
   { id: "sec-2", title: "결과와 배운 점", field: "result" },
 ] as const;
 
+/** 섹션 제목. 결과를 한눈에 보기 카드로 옮긴 프로젝트는 마지막 섹션을 "배운 점"으로 부른다. */
+function sectionTitle(section: (typeof SECTIONS)[number], project: Project): string {
+  return section.id === "sec-2" && project.outcomes ? "배운 점" : section.title;
+}
+
 export default function ProjectDetail({ params }: { params: { slug: string } }) {
   const project = findProject(params.slug);
   // 없는 slug면 NotFound와 같은 제목을 써서 훅 실행 순서와 상관없이 탭 제목이 맞게 한다
@@ -41,6 +48,8 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
         {project.title}
       </h1>
       <p className="mt-2.5 text-[17px] text-ink-muted">{project.summary}</p>
+
+      <GlanceCard project={project} />
 
       {/* 실측 수치가 채워진 프로젝트에만 지표 카드를 띄운다 */}
       {project.metrics && project.metrics.length > 0 && (
@@ -91,12 +100,66 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
         )}
 
         {project.result && (
-          <DetailSection id="sec-2" title="결과와 배운 점">
+          <DetailSection id="sec-2" title={sectionTitle(SECTIONS[3], project)}>
             <p className="[text-wrap:pretty]">{project.result}</p>
           </DetailSection>
         )}
       </div>
     </DetailLayout>
+  );
+}
+
+/**
+ * 제목 아래 "한눈에 보기" 카드. 기여·주요 업무·결과를 모아 10초 안에 훑게 한다.
+ * 셋 다 없으면(같이 쓰기 전인 프로젝트) 렌더하지 않는다.
+ */
+function GlanceCard({ project }: { project: Project }) {
+  const { contribution, tasks, outcomes } = project;
+  if (!contribution && !tasks?.length && !outcomes?.length) return null;
+
+  return (
+    <section
+      aria-label="한눈에 보기"
+      className="mt-8 flex flex-col gap-4 rounded-md border border-rule bg-paper p-4 dt:px-[22px] dt:py-5"
+    >
+      <div className="text-[13px] font-semibold tracking-overline text-ink-faint">한눈에 보기</div>
+      {contribution && <GlanceRow label="기여">{contribution}</GlanceRow>}
+      {tasks && tasks.length > 0 && (
+        <GlanceRow label="주요 업무">
+          <BulletList items={tasks} />
+        </GlanceRow>
+      )}
+      {outcomes && outcomes.length > 0 && (
+        <GlanceRow label="결과">
+          <BulletList items={outcomes} />
+        </GlanceRow>
+      )}
+    </section>
+  );
+}
+
+/** 카드 한 줄. 데스크톱은 라벨(72px) / 내용 2단, 좁은 화면은 라벨 위·내용 아래. */
+function GlanceRow({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-1 gap-1 dt:grid-cols-[72px_minmax(0,1fr)] dt:gap-3">
+      <div className="text-sm text-ink-faint dt:pt-px">{label}</div>
+      <div className="min-w-0 text-[15px] leading-[1.6] text-ink-body">{children}</div>
+    </div>
+  );
+}
+
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="flex flex-col gap-1.5">
+      {items.map((item) => (
+        <li
+          key={item}
+          className="relative pl-3.5 [text-wrap:pretty] before:absolute before:left-0.5 before:top-[0.72em] before:h-1 before:w-1 before:rounded-full before:bg-ink-faint before:content-['']"
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -125,7 +188,7 @@ function Sidebar({
         </dl>
       </SidebarBlock>
 
-      {(project.links?.github || project.links?.demo) && (
+      {(project.links?.github || project.links?.demo || project.links?.video) && (
         <SidebarBlock>
           <div className="flex flex-col gap-2 font-semibold">
             {project.links.github && (
@@ -148,6 +211,16 @@ function Sidebar({
                 데모 / 발표자료 ↗
               </a>
             )}
+            {project.links.video && (
+              <a
+                href={project.links.video}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded border border-ink px-3.5 py-2.5 text-center"
+              >
+                시연 영상 ↗
+              </a>
+            )}
           </div>
         </SidebarBlock>
       )}
@@ -156,7 +229,7 @@ function Sidebar({
         <div className="flex flex-col gap-1.5 text-ink-muted">
           {SECTIONS.filter((section) => project[section.field]).map((section) => (
             <a key={section.id} href={`#${section.id}`}>
-              {section.title}
+              {sectionTitle(section, project)}
             </a>
           ))}
         </div>

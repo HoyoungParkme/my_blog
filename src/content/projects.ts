@@ -12,6 +12,8 @@
  * - flow는 에이전트 프로젝트의 "실행 흐름" 섹션 데이터(src/content/agentFlows.ts). 없으면 섹션이 빠진다.
  * - problem·result는 본인과 같이 쓰기 전인 초안이면 비워 둔다. 비어 있으면 상세에서 그 섹션과 목차 항목이 빠진다.
  *   지어낸 배경이나 "정리 예정" 같은 자리 표시 문구는 넣지 않는다.
+ * - contribution·tasks·outcomes는 상세 상단 "한눈에 보기" 카드에 쓰인다. 셋 다 없으면 카드가 빠진다.
+ *   outcomes에는 사실·규모·변화만 쓰고, 숫자는 실제로 잰 값만 넣는다.
  * - metrics는 실측 수치가 나온 프로젝트에만 넣는다. 없으면 지표 카드가 렌더되지 않는다.
  * - code는 공개 가능한 핵심 스니펫이 준비되면 채운다. 없으면 상세에서 코드 블록이 생략된다.
  * - links(github/demo)는 공개 가능한 저장소나 데모가 있을 때만 채운다.
@@ -49,7 +51,16 @@ export interface Project {
   role: string;
   /** "내가 한 일" 아래 핵심 결정 목록(제목 + 이유). 대표 프로젝트만 쓴다. */
   highlights?: { title: string; body: string }[];
-  /** 케이스 스터디 "결과와 배운 점". 같이 쓰기 전이면 비워 둔다. */
+  /** 기여 범위. 팀 규모와 맡은 부분 (예: "3명 팀에서 개발 전담") */
+  contribution?: string;
+  /** 주요 업무. 무엇을 어떻게 했는지 한 줄씩 */
+  tasks?: string[];
+  /** 결과. 사실·규모·변화를 한 줄씩. 숫자는 실측값만 */
+  outcomes?: string[];
+  /**
+   * 케이스 스터디 마지막 섹션 문단. 같이 쓰기 전이면 비워 둔다.
+   * outcomes가 있으면 결과는 카드로 옮기고 여기에는 배운 점만 쓴다(섹션 제목도 "배운 점"이 된다).
+   */
   result?: string;
   /** 에이전트가 질문 1건을 처리하는 단계. 상세의 "실행 흐름" 섹션에 쓰인다. */
   flow?: AgentFlow;
@@ -57,7 +68,7 @@ export interface Project {
   metrics?: ProjectMetric[];
   /** 핵심 코드 스니펫. 없으면 코드 블록을 렌더링하지 않는다. */
   code?: string;
-  links?: { github?: string; demo?: string };
+  links?: { github?: string; demo?: string; video?: string };
 }
 
 export const projects: Project[] = [
@@ -92,13 +103,27 @@ export const projects: Project[] = [
     org: "디포커스 AI 팀",
     kind: "contest",
     period: "2026.05 – 현재",
-    roleShort: "RAG 파이프라인 설계 · 개발",
+    roleShort: "설계 · 개발 전반",
     tags: ["Upstage Document Parse", "Solar", "GraphRAG", "Neo4j", "FastAPI"],
     summary: "2026 AI 챔피언 대회 1차 결선 진출작. 약관 원문을 근거로 보험 청구 가능성을 안내하는 RAG 에이전트",
     problem:
       "보험 약관은 길고 어려워 내 사고가 보장되는지 스스로 판단하기 어렵습니다. 보험사 상담에는 보험사 입장이 섞일 수 있고, 일반 AI 챗봇은 근거 없이 된다·안 된다를 단정할 위험이 있습니다.",
     role:
-      "3명 팀에서 개발을 맡아, 약관 문서를 추출해 GraphRAG로 구성하고 챗봇에 연동하는 파이프라인을 설계하고 개발했습니다. 화면, LangGraph 대화 흐름, 사용자 서류 추출(Upstage IE), Azure 배포까지 직접 구현했고, 기획과 시나리오는 팀원이 맡았습니다. 국내 AI 트랙 규정에 맞춰 문서 추출과 추론은 Upstage(Document Parse·Solar)로 구성했습니다.",
+      "약관 문서를 추출해 GraphRAG로 구성하고 챗봇에 연동하는 파이프라인을 중심으로, 화면부터 배포까지 개발을 맡았습니다. 국내 AI 트랙 규정에 맞춰 문서 추출과 추론은 Upstage(Document Parse·Solar)로 구성했습니다.",
+    contribution: "3명 팀에서 개발 전담 (기획·시나리오는 팀원)",
+    tasks: [
+      "Upstage Document Parse로 약관을 제N조·항 단위로 추출·청킹하는 파이프라인 구축",
+      "보험사→상품→조→항 계층을 Neo4j 그래프로 적재하고, 벡터·그래프 하이브리드 검색 구현",
+      "직접 만든 에이전트 실행기를 LangGraph 워크플로우로 옮겨, 정보 추출 → 되묻기 → 검색 → 판정 단계를 노드로 분리",
+      "진단서·영수증 같은 사고 서류에서 Upstage IE로 핵심 정보를 뽑아 대화 입력을 자동으로 채움",
+      "채팅 화면 개발과 Azure 배포",
+    ],
+    // AI Festa 부스 일정 출처: AI CHAMPION 공지 "[AI Festa] 전시 부스 안내" (운영 2026.10.6 ~ 10.8)
+    outcomes: [
+      "2026 AI 챔피언 대회 국내 AI 트랙 1차 결선 진출 (지원 122팀 중 20팀)",
+      "5개 보험사 실손 약관을 추출해 검색 데이터로 적재",
+      "AI Festa 전국민 AI 경진대회 특별관 부스에서 시연 (2026.10.6 – 10.8)",
+    ],
     highlights: [
       {
         title: "약관을 구조째 추출한다",
@@ -118,9 +143,12 @@ export const projects: Project[] = [
       },
     ],
     result:
-      "2026 AI 챔피언 대회 국내 AI 트랙에 출전해, 지원한 122개 팀 중 1차 결선에 오른 20개 팀에 들었습니다. 가장 크게 배운 것은 개발의 기준을 사용자에게 두는 일입니다. 정보를 자세히 많이 받아 매핑할수록 답은 정확해지지만, 사용자에게는 그 질문들이 과합니다. 그래서 질문이 길어지면 그때까지 받은 정보로 부분 판단을 내리게 하는 식으로, 정확도와 사용자 부담 사이의 중간을 찾았습니다.",
+      "가장 크게 배운 것은 개발의 기준을 사용자에게 두는 일입니다. 정보를 자세히 많이 받아 매핑할수록 답은 정확해지지만, 사용자에게는 그 질문들이 과합니다. 그래서 질문이 길어지면 그때까지 받은 정보로 부분 판단을 내리게 하는 식으로, 정확도와 사용자 부담 사이의 중간을 찾았습니다.",
     flow: insuranceClaimFlow,
-    links: { github: "https://github.com/yonghyun-dev/Insurance-Helper" },
+    links: {
+      github: "https://github.com/yonghyun-dev/Insurance-Helper",
+      video: "https://www.youtube.com/watch?v=nDu77yEyso8",
+    },
   },
   {
     slug: "graphrag-bi-agent",
