@@ -30,7 +30,7 @@ export function MobileTopBar() {
       */}
       <Link
         href="/"
-        className="flex items-baseline gap-2 bg-ink px-5 py-3 text-paper hover:text-paper dt:hidden"
+        className="flex items-baseline gap-2 bg-ink px-5 py-3 text-paper hover:text-paper dt:hidden print:hidden"
       >
         <span className="text-[17px] font-bold tracking-tightest">{profile.name}</span>
         <span className="text-[13px] text-brand-sub">{profile.railRole}</span>
@@ -46,7 +46,7 @@ export function MobileTopBar() {
       */}
       <nav
         aria-label="주요 메뉴"
-        className="sticky top-0 z-10 grid grid-cols-[repeat(3,minmax(min-content,1fr))] overflow-x-auto border-b border-rule bg-paper text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dt:hidden"
+        className="sticky top-0 z-10 grid grid-cols-[repeat(3,minmax(min-content,1fr))] overflow-x-auto border-b border-rule bg-paper text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden dt:hidden print:hidden"
       >
         {NAV_ITEMS.map((item) => {
           const active = isNavActive(item.href, location);

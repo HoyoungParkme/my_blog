@@ -68,7 +68,7 @@ function ProfileBlock() {
               href={profile.resumeUrl}
               className="rounded border border-ink bg-ink px-4 py-2 text-paper hover:border-accent hover:bg-accent hover:text-paper"
             >
-              이력서 PDF
+              경력기술서 PDF
             </a>
           )}
           <a

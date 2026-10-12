@@ -231,3 +231,23 @@
     filter: none;
   }
 }
+
+/*
+ * 인쇄(PDF) 설정. 경력기술서와 프로젝트 상세 PDF가 이 규칙으로 찍힌다 (`npm run pdf`).
+ * A4 · 여백 14mm. 페이지 배경은 흰색으로 두고, 카드 배경·글머리표 점 같은 색은 그대로 찍는다.
+ */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

@@ -31,10 +31,18 @@ export const profile = {
   github: "https://github.com/HoyoungParkme",
   photo: myPhoto,
   /**
-   * 이력서 PDF 경로. public/ 아래에 파일을 넣고 경로를 채우면 About에 버튼이 나타난다.
-   * TODO: 이력서 PDF 준비 후 "resume.pdf" 등으로 교체.
+   * 경력기술서 PDF 경로. 값이 있으면 About에 버튼이 나타난다.
+   * 파일은 `npm run pdf`가 경력기술서 화면(/resume, 개발 서버 전용)을 인쇄해 public/pdf/에 만든다.
    */
-  resumeUrl: "",
+  resumeUrl: "/pdf/resume.pdf",
+  /** 경력기술서 맨 위 핵심역량. 근거가 되는 프로젝트가 있는 강점만 쓴다. */
+  coreSkills: [
+    "GraphRAG 기반 Agent를 설계해 BI·문서 검색·레거시 전환에 적용",
+    "FastAPI·LangGraph 백엔드부터 React 화면까지 혼자 구현",
+    "1인으로 만든 PoC를 본사업·후속 사업으로 연결",
+  ],
+  /** 경력기술서 핵심역량 아래 기술 한 줄 */
+  coreTech: ["Python", "FastAPI", "LangGraph", "Neo4j", "pgvector", "React", "Tableau"],
 };
 
 export const experiences: HistoryEntry[] = [
@@ -80,6 +88,7 @@ export const competitions: HistoryEntry[] = [
 ];
 
 export const education: HistoryEntry[] = [
+  { term: "2026.09 – 현재", name: "온디바이스 AI와 AX", detail: "정보통신산업진흥원" },
   { term: "2025.10 – 2025.11", name: "온디바이스 AI", detail: "정보통신산업진흥원" },
   { term: "2025.05 – 2025.07", name: "데이터 엔지니어링", detail: "정보통신산업진흥원" },
   { term: "2024.11 – 2024.12", name: "블록체인", detail: "정보통신산업진흥원" },

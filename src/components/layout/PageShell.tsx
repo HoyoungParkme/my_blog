@@ -23,7 +23,7 @@ export function PageShell({ children }: { children: ReactNode }) {
       <div className="flex flex-1 flex-col dt:ml-rail">
         <main className="flex-1">{children}</main>
         {/* 모바일 연락처는 상단이 아니라 페이지 끝에 둔다 */}
-        <div className="border-t border-rule dt:hidden">
+        <div className="border-t border-rule dt:hidden print:hidden">
           <RailFooter />
         </div>
       </div>

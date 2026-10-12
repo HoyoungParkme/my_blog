@@ -15,7 +15,7 @@ import { AgentFlow } from "@/components/common/AgentFlow";
 import { DetailLayout, DetailSection, SidebarBlock } from "@/components/common/DetailLayout";
 import { usePageTitle } from "@/components/layout/usePageTitle";
 import { findProject, findProjectNeighbors, type Project } from "@/content/projects";
-import { NOT_FOUND_NAME } from "@/content/siteMeta";
+import { NOT_FOUND_NAME, SITE_URL } from "@/content/siteMeta";
 import NotFound from "@/pages/NotFound";
 
 /**
@@ -48,6 +48,12 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
         {project.title}
       </h1>
       <p className="mt-2.5 text-[17px] text-ink-muted">{project.summary}</p>
+      {/* 인쇄(PDF)에서는 사이드바가 빠지므로 기간·소속·역할·스택과 주소를 제목 아래에 한 줄로 둔다 */}
+      <p className="mt-2 hidden text-sm text-ink-faint print:block">
+        {[project.period, project.org, project.roleShort, project.tags.join(" · ")].join("  |  ")}
+        <br />
+        {SITE_URL.replace(/^https?:\/\//, "")}/projects/{project.slug}
+      </p>
 
       <GlanceCard project={project} />
 
@@ -79,7 +85,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
           {project.highlights && project.highlights.length > 0 && (
             <ul className="mb-8 flex flex-col gap-5">
               {project.highlights.map((item) => (
-                <li key={item.title} className="border-l-2 border-rule pl-4">
+                <li key={item.title} className="break-inside-avoid border-l-2 border-rule pl-4">
                   <div className="font-semibold text-ink">{item.title}</div>
                   <p className="mt-1 [text-wrap:pretty]">{item.body}</p>
                 </li>
@@ -120,7 +126,7 @@ function GlanceCard({ project }: { project: Project }) {
   return (
     <section
       aria-label="한눈에 보기"
-      className="mt-8 flex flex-col gap-4 rounded-md border border-rule bg-paper p-4 dt:px-[22px] dt:py-5"
+      className="mt-8 flex break-inside-avoid flex-col gap-4 rounded-md border border-rule bg-paper p-4 dt:px-[22px] dt:py-5"
     >
       <div className="text-[13px] font-semibold tracking-overline text-ink-faint">한눈에 보기</div>
       {contribution && <GlanceRow label="기여">{contribution}</GlanceRow>}
@@ -188,42 +194,48 @@ function Sidebar({
         </dl>
       </SidebarBlock>
 
-      {(project.links?.github || project.links?.demo || project.links?.video) && (
-        <SidebarBlock>
-          <div className="flex flex-col gap-2 font-semibold">
-            {project.links.github && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded border border-ink px-3.5 py-2.5 text-center"
-              >
-                GitHub ↗
-              </a>
-            )}
-            {project.links.demo && (
-              <a
-                href={project.links.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded border border-ink px-3.5 py-2.5 text-center"
-              >
-                데모 / 발표자료 ↗
-              </a>
-            )}
-            {project.links.video && (
-              <a
-                href={project.links.video}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded border border-ink px-3.5 py-2.5 text-center"
-              >
-                시연 영상 ↗
-              </a>
-            )}
-          </div>
-        </SidebarBlock>
-      )}
+      <SidebarBlock>
+        <div className="flex flex-col gap-2 font-semibold">
+          {/* 파일은 `npm run pdf`가 이 화면을 인쇄해 public/pdf/projects/에 만든다 */}
+          <a
+            href={`/pdf/projects/${project.slug}.pdf`}
+            download
+            className="rounded border border-ink px-3.5 py-2.5 text-center"
+          >
+            PDF 받기 ↓
+          </a>
+          {project.links?.github && (
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded border border-ink px-3.5 py-2.5 text-center"
+            >
+              GitHub ↗
+            </a>
+          )}
+          {project.links?.demo && (
+            <a
+              href={project.links.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded border border-ink px-3.5 py-2.5 text-center"
+            >
+              데모 / 발표자료 ↗
+            </a>
+          )}
+          {project.links?.video && (
+            <a
+              href={project.links.video}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded border border-ink px-3.5 py-2.5 text-center"
+            >
+              시연 영상 ↗
+            </a>
+          )}
+        </div>
+      </SidebarBlock>
 
       <SidebarBlock label="목차">
         <div className="flex flex-col gap-1.5 text-ink-muted">

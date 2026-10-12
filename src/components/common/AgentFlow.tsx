@@ -82,7 +82,7 @@ export function AgentFlow({ flow }: { flow: Flow }) {
             type="button"
             onClick={() => setActive(0)}
             disabled={active !== null}
-            className="shrink-0 rounded border border-ink px-3 py-1.5 text-[13px] font-semibold leading-none text-ink hover:border-accent hover:text-accent disabled:border-rule disabled:text-ink-faint"
+            className="shrink-0 rounded border border-ink px-3 py-1.5 text-[13px] font-semibold leading-none text-ink hover:border-accent hover:text-accent disabled:border-rule disabled:text-ink-faint print:hidden"
           >
             {active !== null ? "재생 중" : "다시 재생"}
           </button>
@@ -105,7 +105,7 @@ export function AgentFlow({ flow }: { flow: Flow }) {
 
 function StepRow({ step, number, status }: { step: FlowStep; number: number; status: Status }) {
   return (
-    <li className="grid grid-cols-[28px_minmax(0,1fr)_auto] items-baseline gap-x-3 border-b border-rule py-3.5">
+    <li className="grid break-inside-avoid grid-cols-[28px_minmax(0,1fr)_auto] items-baseline gap-x-3 border-b border-rule py-3.5">
       <span className="text-sm tabular-nums text-ink-faint">{number}</span>
       <div className={status === "waiting" ? "opacity-40 transition-opacity duration-300" : "transition-opacity duration-300"}>
         <div className="font-semibold text-ink">{step.title}</div>

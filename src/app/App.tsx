@@ -17,6 +17,7 @@ import NotFound from "@/pages/NotFound";
 import PostDetail from "@/pages/PostDetail";
 import ProjectDetail from "@/pages/ProjectDetail";
 import Projects from "@/pages/Projects";
+import Resume from "@/pages/Resume";
 
 function AppRoutes() {
   return (
@@ -36,6 +37,8 @@ function AppRoutes() {
       <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={PostDetail} />
+      {/* 경력기술서 인쇄 원본. 개발 서버에서만 연다 — 배포 빌드에서는 이 줄과 화면 코드가 빠진다 */}
+      {import.meta.env.DEV && <Route path="/resume" component={Resume} />}
       <Route component={NotFound} />
     </Switch>
   );
