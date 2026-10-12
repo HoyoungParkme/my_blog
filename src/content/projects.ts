@@ -421,6 +421,11 @@ export function findProject(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);
 }
 
+/** 투입 전인 프로젝트인지. 기간이 `YYYY.MM 투입 예정`이면 아직 경력이 아니다. */
+export function isPlanned(project: Project): boolean {
+  return project.period.includes("예정");
+}
+
 /** 업무 프로젝트(대회 출품작 제외). 배열 순서(최신순)를 따른다. */
 export const workProjects = projects.filter((project) => project.kind !== "contest");
 

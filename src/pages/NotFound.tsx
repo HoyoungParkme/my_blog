@@ -30,7 +30,7 @@ export default function NotFound() {
           Projects
         </Link>
         <Link href="/blog" className="rounded border border-ink px-4 py-2">
-          Blog
+          Troubleshooting
         </Link>
       </div>
     </section>

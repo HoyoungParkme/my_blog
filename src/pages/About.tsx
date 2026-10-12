@@ -24,14 +24,17 @@ import {
   profile,
   type HistoryEntry,
 } from "@/content/profile";
-import { workProjects, type Project } from "@/content/projects";
+import { isPlanned, workProjects, type Project } from "@/content/projects";
 
-/** About에 노출할 업무 프로젝트 개수. 넘치면 "전체 보기"로 넘긴다. 대회 출품작은 대회 섹션에서 링크로 연결한다. */
+/**
+ * About에 노출할 업무 프로젝트 개수. 넘치면 "전체 보기"로 넘긴다. 대회 출품작은 대회 섹션에서 링크로 연결한다.
+ * 투입 전(예정) 프로젝트는 내용이 비어 있어 첫 화면에서는 뺀다. Projects 목록에는 그대로 나온다.
+ */
 const SHOWN_COUNT = 3;
 
 export default function About() {
   usePageTitle();
-  const shown = workProjects.slice(0, SHOWN_COUNT);
+  const shown = workProjects.filter((p) => !isPlanned(p)).slice(0, SHOWN_COUNT);
 
   return (
     <section className="mx-auto max-w-about px-5 pb-24 pt-12 dt:px-16 dt:pt-[88px]">

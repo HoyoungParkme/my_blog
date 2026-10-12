@@ -23,15 +23,11 @@ import {
   profile,
   type HistoryEntry,
 } from "@/content/profile";
-import { findProject, workProjects, type Project } from "@/content/projects";
+import { findProject, isPlanned, workProjects, type Project } from "@/content/projects";
 import { SITE_URL } from "@/content/siteMeta";
 
 /** 자세히 쓰는 대표 프로젝트. 최신순으로 둔다. */
-const FEATURED_SLUGS = [
-  "refinery-master-data-cleansing",
-  "tableau-ai-agent",
-  "casino-anomaly-detection",
-];
+const FEATURED_SLUGS = ["graphrag-bi-agent", "tableau-ai-agent", "casino-anomaly-detection"];
 
 /** "https://" 없이 보여 줄 사이트 주소 */
 const SITE_HOST = SITE_URL.replace(/^https?:\/\//, "");
@@ -41,9 +37,7 @@ export default function Resume() {
 
   const featured = FEATURED_SLUGS.map(findProject).filter((p): p is Project => Boolean(p));
   // 투입 전인 프로젝트는 경력이 아니라서 뺀다
-  const others = workProjects.filter(
-    (p) => !FEATURED_SLUGS.includes(p.slug) && !p.period.includes("예정"),
-  );
+  const others = workProjects.filter((p) => !FEATURED_SLUGS.includes(p.slug) && !isPlanned(p));
 
   return (
     <div className="mx-auto my-10 w-[210mm] bg-sheet px-[14mm] py-[14mm] text-[12.5px] leading-[1.5] text-ink-body shadow-sm print:m-0 print:w-auto print:p-0 print:shadow-none">
@@ -113,7 +107,9 @@ function ResumeHeader() {
           경력기술서
         </span>
       </h1>
-      <p className="mt-2 font-semibold text-ink">{profile.railRole}</p>
+      <p className="mt-2 font-semibold text-ink">
+        {profile.railRole} · 경력 {careerLength(experiences[0].term)}
+      </p>
       <p className="mt-1 text-[12px] text-ink-muted">
         {profile.email} · {githubHost} · {SITE_HOST}
       </p>
@@ -244,6 +240,19 @@ function HistoryLines({ entries }: { entries: HistoryEntry[] }) {
       ))}
     </ul>
   );
+}
+
+/**
+ * 재직 기간을 "n년 m개월"로 만든다. 인쇄하는 날 기준이라 PDF를 다시 만들면 따라 늘어난다.
+ *
+ * Args:
+ *   term: 경력 기간 (`YYYY.MM – 현재` 형식). 앞의 시작 연월만 쓴다.
+ */
+function careerLength(term: string): string {
+  const [year, month] = term.split(" ")[0].split(".").map(Number);
+  const today = new Date();
+  const months = (today.getFullYear() - year) * 12 + (today.getMonth() + 1 - month);
+  return `${Math.floor(months / 12)}년 ${months % 12}개월`;
 }
 
 function BulletList({ items }: { items: string[] }) {
