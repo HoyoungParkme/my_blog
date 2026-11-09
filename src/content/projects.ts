@@ -356,6 +356,19 @@ export const projects: Project[] = [
   },
 ];
 
+/**
+ * 합치거나 지운 프로젝트의 옛 slug → 새 주소.
+ * 예전에 공유한 링크가 404가 되지 않게, 화면(App.tsx)과 빌드(routeHtmlPlugin)가 이 표로 새 주소로 보낸다.
+ * 새 주소가 사이트에 없으면 빌드가 멈춘다.
+ */
+export const movedProjects: Record<string, string> = {
+  // 2026.11 이력서 기준으로 Tableau AI 에이전트 1건으로 합침
+  "graphrag-bi-agent": "/projects/tableau-ai-agent",
+  "tableau-ai-poc": "/projects/tableau-ai-agent",
+  // 2026.11 이력서에 없어 삭제
+  "financial-ad-review-agent": "/projects",
+};
+
 /** slug로 프로젝트 하나를 찾는다. 없으면 undefined. */
 export function findProject(slug: string): Project | undefined {
   return projects.find((project) => project.slug === slug);

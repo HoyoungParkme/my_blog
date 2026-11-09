@@ -19,7 +19,7 @@ import path from "node:path";
 import type { Plugin } from "vite";
 
 import { toPost } from "../src/content/postParser";
-import { projects } from "../src/content/projects";
+import { movedProjects, projects } from "../src/content/projects";
 import {
   BLOG_DESCRIPTION,
   DEFAULT_DESCRIPTION,
@@ -39,7 +39,7 @@ interface RouteMeta {
   description: string;
   /** 상세 페이지는 article, 나머지는 website */
   type: "website" | "article";
-  /** 대표 주소가 다를 때만 지정한다. `/about`은 첫 화면(`/`)으로 합쳐졌다. */
+  /** 대표 주소가 다를 때만 지정한다. `/about`은 첫 화면(`/`)으로, 합쳐진 프로젝트의 옛 주소는 새 주소로 합쳐졌다. */
   canonicalPath?: string;
   /** 검색 결과에서 뺄 페이지(404) */
   noindex?: boolean;
@@ -70,7 +70,7 @@ function collectRoutes(root: string): RouteMeta[] {
     .filter((file) => file.endsWith(".md"))
     .map((file) => toPost(file, fs.readFileSync(path.join(postDir, file), "utf-8")));
 
-  return [
+  const routes: RouteMeta[] = [
     HOME,
     { ...HOME, path: "/about", canonicalPath: "/" },
     {
@@ -104,6 +104,17 @@ function collectRoutes(root: string): RouteMeta[] {
       type: "article" as const,
     })),
   ];
+
+  // 합치거나 지운 프로젝트의 옛 주소: /about처럼 옮겨 간 페이지의 메타를 쓰고 대표 주소를 새 주소로 둔다 (sitemap에서는 빠진다)
+  const movedRoutes = Object.entries(movedProjects).map(([slug, to]) => {
+    const target = routes.find((route) => route.path === to);
+    if (!target) {
+      throw new Error(`movedProjects의 새 주소가 사이트에 없습니다: ${slug} → ${to}`);
+    }
+    return { ...target, path: `/projects/${slug}`, canonicalPath: to };
+  });
+
+  return [...routes, ...movedRoutes];
 }
 
 /** meta 태그 속성값에 넣기 위해 특수문자를 바꾼다. */
