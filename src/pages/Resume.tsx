@@ -26,8 +26,8 @@ import {
 import { findProject, isPlanned, workProjects, type Project } from "@/content/projects";
 import { SITE_URL } from "@/content/siteMeta";
 
-/** 자세히 쓰는 대표 프로젝트. 최신순으로 둔다. */
-const FEATURED_SLUGS = ["graphrag-bi-agent", "tableau-ai-agent", "casino-anomaly-detection"];
+/** 자세히 쓰는 대표 프로젝트. 이력서의 "내세울 수 있는 성과" 3건과 맞춘다. 최신순으로 둔다. */
+const FEATURED_SLUGS = ["refinery-master-data-cleansing", "tableau-ai-agent", "commerce-mall-poc"];
 
 /** "https://" 없이 보여 줄 사이트 주소 */
 const SITE_HOST = SITE_URL.replace(/^https?:\/\//, "");

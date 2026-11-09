@@ -37,9 +37,10 @@ export const profile = {
   resumeUrl: "/pdf/resume.pdf",
   /** 경력기술서 맨 위 핵심역량. 근거가 되는 프로젝트가 있는 강점만 쓴다. */
   coreSkills: [
-    "GraphRAG 기반 Agent를 설계해 BI·문서 검색·레거시 전환에 적용",
-    "FastAPI·LangGraph 백엔드부터 React 화면까지 혼자 구현",
-    "1인으로 만든 PoC를 본사업·후속 사업으로 연결",
+    "발굴·사업화: 현업 시스템 운영 중 찾은 AI 과제를 PoC와 사내 연구로 검증해 본 프로젝트로 연결",
+    "구축: 고객사가 허용한 LLM과 이미 쓰는 DB 안에서 챗봇·RAG·에이전트 설계·개발",
+    "데이터 분석: 현업과 리스크 판단 지표를 정의해 대시보드로 구현, 공공데이터 생존분석·공간분석으로 빅데이터 대회 결선",
+    "현장 적용: 엑셀·OneDrive 같은 기존 작업 방식을 바꾸지 않고 그 위에 올리는 설계",
   ],
   /** 경력기술서 핵심역량 아래 기술 한 줄 */
   coreTech: ["Python", "FastAPI", "LangGraph", "Neo4j", "pgvector", "React", "Tableau"],
@@ -75,25 +76,30 @@ export const certifications: HistoryEntry[] = [
 
 /**
  * 대회. term은 진출 결과가 발표된 달이다.
- * AI 챔피언: 본선 심사 통과 = 1차 결선 진출 40팀(일반 20 / 국내 AI 20, 2026.08.21 공식 공지). 국내 AI 트랙 지원 122팀. 부산 Big Data 활용 대회: 서류평가 통과 14팀 = 본선 진출(2026.09 발표).
+ * AI 챔피언: 본선 심사 통과 = 1차 결선 진출 40팀(일반 20 / 국내 AI 20, 2026.08.21 공식 공지). 국내 AI 트랙 지원 122팀. 2026.11 결선 진행 중.
+ * 부산 Big Data 활용 대회: 결선 진출(2026.09, 부산테크노파크). 명칭·주최는 본인 이력서(2026.11) 기준.
  */
 export const competitions: HistoryEntry[] = [
-  { term: "2026.09", name: "2026년 Big Data 활용 대회 본선 진출", detail: "부산 빅데이터혁신센터" },
+  {
+    term: "2026.09",
+    name: "2026년 Big Data 활용 대회 결선 진출",
+    detail: "부산테크노파크 · 빅데이터 분석·시각화 부문, 부산 상권 빈 점포 위험 진단",
+  },
   {
     term: "2026.08",
-    name: "2026 AI 챔피언 대회 1차 결선 진출",
+    name: "2026 AI 챔피언 대회 국내 AI 트랙 1차 결선 진출",
     detail: "과학기술정보통신부",
     href: "/projects/insurance-claim-assistant",
   },
 ];
 
 export const education: HistoryEntry[] = [
-  { term: "2026.09 – 현재", name: "온디바이스 AI와 AX", detail: "정보통신산업진흥원" },
-  { term: "2025.10 – 2025.11", name: "온디바이스 AI", detail: "정보통신산업진흥원" },
+  { term: "2026.09 – 2026.10", name: "온디바이스 AI와 AX", detail: "정보통신산업진흥원" },
+  { term: "2025.10 – 2025.11", name: "온디바이스 AI와 앱 개발", detail: "정보통신산업진흥원" },
   { term: "2025.05 – 2025.07", name: "데이터 엔지니어링", detail: "정보통신산업진흥원" },
-  { term: "2024.11 – 2024.12", name: "블록체인", detail: "정보통신산업진흥원" },
-  { term: "2024.11", name: "인공지능 (DQN)", detail: "정보통신산업진흥원" },
-  { term: "2024.06", name: "인공지능 (언어)", detail: "정보통신산업진흥원" },
+  { term: "2024.11 – 2024.12", name: "WEB 3.0 기반 블록체인 서비스 개발", detail: "정보통신산업진흥원" },
+  { term: "2024.11", name: "인공지능 강화학습 DQN", detail: "정보통신산업진흥원" },
+  { term: "2024.06", name: "인공지능 자연어처리", detail: "정보통신산업진흥원" },
   {
     term: "2024.03 – 2024.05",
     name: "빅데이터 기반 비즈니스 분석가 양성과정",

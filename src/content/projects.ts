@@ -21,7 +21,7 @@
  * - links(github/demo)는 공개 가능한 저장소나 데모가 있을 때만 채운다.
  */
 
-import { graphragBiFlow, insuranceClaimFlow, type AgentFlow } from "./agentFlows";
+import { insuranceClaimFlow, type AgentFlow } from "./agentFlows";
 
 /** 케이스 스터디 상단에 노출되는 지표 카드 한 칸. */
 export interface ProjectMetric {
@@ -75,42 +75,34 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: "financial-ad-review-agent",
-    title: "국내 대형 지방 금융그룹 AI Agent 개발",
-    year: "2026",
-    org: "디포커스",
-    period: "2026.12 투입 예정",
-    roleShort: "광고 심의 Agent 개발",
-    tags: ["AI Agent"],
-    summary: "업무 케이스별로 여러 Agent를 만드는 프로젝트. 그중 광고 심의 어시스턴트 Agent를 맡을 예정",
-    role:
-      "업무 케이스별로 여러 Agent를 만드는 프로젝트에서 광고 심의 어시스턴트 Agent를 맡을 예정입니다. 2026년 12월에 투입합니다.",
-  },
-  {
     slug: "refinery-master-data-cleansing",
-    title: "국내 대형 정유사 기준정보 정비",
+    title: "국내 대형 정유사 SAP 기준정보 정비 클렌징 플랫폼",
     year: "2026",
     org: "디포커스",
     period: "2026.10 – 현재",
-    roleShort: "PL · 설계 · 개발",
+    roleShort: "설계 · 개발",
     tags: ["SAP", "Python", "FastAPI", "LangGraph", "React"],
     summary:
-      "SAP 버전 업그레이드에 맞춰 기준정보 6종을 사내 규칙대로 검사·정제하는 데이터 클렌징 플랫폼. 규칙으로 가르지 못한 값은 Agent가 검토",
+      "엑셀로 하던 SAP 기준정보 6종 검증을 사내 규칙의 시스템 검사로 옮기는 클렌징 플랫폼. 규칙으로 가르지 못한 값은 Agent가 검토",
     problem:
       "SAP 버전 업그레이드에 맞춰 기준정보 6종의 테이블을 정비해야 했습니다. 지금까지는 담당자마다 데이터를 하나하나 엑셀로 내려받아 비교·검증해서, 같은 사내 규칙도 사람마다 다르게 적용됐습니다.",
     role:
-      "100여 명이 참여하는 기준정보 정비 프로젝트에서 개발자 2명 중 PL을 맡아, 사내 규칙대로 데이터를 정제하는 클렌징 플랫폼을 설계하고 개발하고 있습니다.",
-    contribution: "100여 명 규모 프로젝트에서 개발자 2명 중 PL",
+      "100여 명이 참여하는 기준정보 정비 프로젝트에서 개발자 2명 중 한 명으로, 사내 규칙대로 데이터를 정제하는 클렌징 플랫폼을 설계하고 개발하고 있습니다.",
+    contribution: "100여 명 규모 프로젝트에서 개발자 2명 중 1명",
     tasks: [
       "문서로만 있던 사내 기준정보 규칙을 시스템이 검사할 수 있는 규칙으로 옮겨 관리",
       "기준정보 데이터에서 규칙 위반과 중복을 자동으로 검출",
       "LoV(값 목록)를 규칙 기반으로 자동 추출·분류하고, 규칙으로 분류되지 않은 값만 Agent가 사내 규칙 기준으로 검토",
-      "정제 제안을 담당자가 확인·승인하는 검토 화면 개발",
+      "OneDrive 공유·엑셀로 일하던 흐름을 플랫폼에 연결하고, 엑셀 가져오기·내보내기와 담당자 승인 화면 개발",
     ],
     highlights: [
       {
         title: "규칙으로 먼저, Agent는 규칙이 못 가른 것만",
         body: "LoV 추출과 분류는 규칙으로 먼저 처리하고, 규칙으로 분류되지 않은 값만 Agent가 사내 규칙에 적힌 기준으로 검토하게 했습니다. 규칙으로 처리한 결과는 왜 그렇게 나왔는지 설명할 수 있고 비용도 적게 듭니다. Agent는 규칙이 가르지 못한 값에만 씁니다.",
+      },
+      {
+        title: "현업이 일하던 방식은 바꾸지 않는다",
+        body: "담당자들은 OneDrive로 엑셀 파일을 주고받으며 기준정보를 검증하고 있었습니다. 이 흐름은 그대로 두고 플랫폼에 엑셀 가져오기·내보내기를 붙여, 일하는 방식은 그대로 둔 채 검사만 시스템으로 옮겼습니다.",
       },
     ],
   },
@@ -136,11 +128,11 @@ export const projects: Project[] = [
       "진단서·영수증 같은 사고 서류에서 Upstage IE로 핵심 정보를 뽑아 대화 입력을 자동으로 채움",
       "채팅 화면 개발과 Azure 배포",
     ],
-    // AI Festa 부스 일정 출처: AI CHAMPION 공지 "[AI Festa] 전시 부스 안내" (운영 2026.10.6 ~ 10.8)
+    // AI Festa 부스 일정·결선 진행 상황 출처: 본인 이력서(2026.11). 예전 값(2026.10.6 ~ 10.8)은 이력서 기준으로 고쳤다.
     outcomes: [
-      "2026 AI 챔피언 대회 국내 AI 트랙 1차 결선 진출 (지원 122팀 중 20팀)",
+      "2026 AI 챔피언 대회 국내 AI 트랙 1차 결선 진출 (지원 122팀 중 20팀), 11월 결선 진행 중",
       "5개 보험사 실손 약관을 추출해 검색 데이터로 적재",
-      "AI Festa 전국민 AI 경진대회 특별관 부스에서 시연 (2026.10.6 – 10.8)",
+      "AI Festa 특별관 부스에서 시연 (2026.11.3 – 11.5)",
     ],
     highlights: [
       {
@@ -169,50 +161,44 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "graphrag-bi-agent",
-    title: "GraphRAG 기반 BI 에이전트 플랫폼",
+    slug: "tableau-ai-agent",
+    title: "대시보드 증감 사유 분석 Tableau AI 에이전트",
     year: "2026",
     org: "디포커스",
-    period: "2026.05 – 현재",
-    roleShort: "PL · 설계 · 개발",
-    tags: ["GraphRAG", "Neo4j", "LangGraph", "FastAPI", "React", "Tableau"],
+    period: "2025.08 – 2026.09",
+    roleShort: "PoC·연구 설계 · 개발",
+    tags: ["Tableau", "langchain_tableau", "LangGraph", "PostgreSQL", "pgvector", "FastAPI"],
     summary:
-      "명세서로 데이터 카탈로그와 스키마 그래프를 자동으로 만들고, 자연어 질문을 분석해 차트·보고서로 보여주는 BI 에이전트 플랫폼",
+      "대시보드 숫자가 왜 오르고 내렸는지 자연어로 묻는 Tableau AI 에이전트. PoC 2건과 사내 연구를 거쳐 본 프로젝트로 확정",
     problem:
-      "사내 DB에서 필요한 데이터를 질문 하나로 찾고 바로 차트로 보고 싶었습니다. 검색 방식은 키워드를 맞추는 렉시컬 검색에서 RAG로 넘어왔지만, RAG로도 테이블과 스키마 사이의 관계는 풀리지 않았습니다. 값이 어느 테이블에 있고 무엇과 이어지는지 알아야 정확한 데이터를 꺼낼 수 있었습니다.",
+      "현업은 대시보드 숫자가 왜 바뀌었는지를 엑셀로 따로 정리해 공유하고 있었습니다. 이 일을 AI에게 맡기려 하자, 사람은 화면을 보고 묻는데 AI는 데이터 소스만 본다는 간극이 드러났습니다. 화면에 보이는 숫자나 여러 데이터에 걸친 질문에 답하려면 대시보드의 구조부터 AI가 알아야 했습니다.",
     role:
-      "PL로서 전체 구조를 설계하고, 분석을 맡는 에이전트 서버(FastAPI)와 웹 화면(React)을 개발했습니다. 공개 API와 업무 기반(Spring)은 동료가 맡았습니다.",
-    contribution: "2명 팀 PL — 설계와 에이전트 서버·웹 화면 담당 (공개 API 서버는 동료)",
+      "PoC 2건을 혼자 설계·개발하고, 그 결과를 사내 연구로 이어 가 본 프로젝트 착수까지 연결했습니다. 본 프로젝트에서는 에이전트 파트를 맡습니다.",
+    contribution: "PoC 2건 1인 설계·개발, 사내 연구 2명, 본 프로젝트 에이전트 파트",
     tasks: [
-      "ERD 이미지·정의서 엑셀을 멀티모달 에이전트가 읽어 데이터 카탈로그 초안을 자동으로 채우는 기능 구축",
-      "카탈로그로 Neo4j 스키마 그래프(GraphRAG)를 자동 생성",
-      "컬럼 이름·설명·실제 값을 비교해 테이블 관계를 추천하고, 운영자가 승인하면 그래프에 더하는 흐름 구현",
-      "자연어 질문을 카탈로그·그래프 문맥으로 SQL로 바꿔 실행·분석하는 LangGraph 에이전트 서버(FastAPI) 개발",
-      "분석 결과를 차트·보고서로 보여주는 React 웹 화면 개발과 Tableau 연동",
+      "PoC① 대기업 그룹사(2025.08 – 09): 사내 LLM과 langchain_tableau로 대시보드 질의 챗봇을 만들고, 데이터 소스마다 tool을 만드는 구조로는 화면 숫자·여러 데이터에 걸친 질문을 풀 수 없다는 한계 확인",
+      "PoC② 대형 물류 기업(2026.01 – 03): Tableau MCP 대신 Metadata API·REST로 대시보드 구조와 값을 하루 1회 적재",
+      "Qdrant 대신 고객사가 이미 쓰는 PostgreSQL에 pgvector로 검색을 통일하고, LangGraph(ReAct) 에이전트 구현",
+      "사내 연구(2026.06 – 09, 2명): GraphRAG·멀티모달·워크북 XML 세 방식을 비교해 워크북 XML 구조 적재를 채택",
     ],
     outcomes: [
-      "카탈로그 → GraphRAG → 자연어 분석 → 차트·보고서까지 1단계 핵심 기능 구현",
-      "Tableau 연동 완료, SAP 연동 진행 중",
-      "국내 대형 물류 기업 Tableau AI 경험을 바탕으로 만들어, 그 Tableau AI에 GraphRAG 기능으로 붙임",
-      "고객사 데모·제안에 사용",
+      "PoC② 고객사 임원 검토 통과, 사내 연구로 연결",
+      "본 프로젝트 착수 확정 (2026.12 – 2027.02), 목표는 증감 사유 분석 자동화",
     ],
     highlights: [
       {
-        title: "사람에게는 데이터에 없는 것만 묻는다",
-        body: "카탈로그 초안은 ERD 이미지와 정의서 엑셀을 멀티모달 에이전트가 읽어 자동으로 채우고, 고유성·카디널리티처럼 데이터에서 잴 수 있는 성질은 시스템이 직접 잽니다. 사람이 적는 항목이 늘수록 카탈로그는 비어 가고, 잘못 적은 값이 그대로 오답이 되기 때문입니다. 사람은 업무 용어·지표 정의·코드 의미처럼 데이터에 없는 지식만 검토합니다.",
+        title: "새 인프라 대신 고객사가 이미 쓰는 것 위에",
+        body: "Tableau MCP나 별도 벡터 DB(Qdrant)를 새로 들이는 대신, 고객사가 허용한 LLM과 이미 쓰는 PostgreSQL(pgvector)로 구성하고 데이터는 고객사 배치 주기에 맞춰 하루 1회 적재했습니다. 새 인프라를 깔지 않았기 때문에 고객사가 받아들일 수 있었습니다.",
       },
       {
-        title: "관계는 이름으로 찾고 값으로 확인한다",
-        body: "컬럼 이름이 같아도 코드 체계가 다른 경우(상태 코드)가 있고, 값이 겹쳐도 조인 키가 아닌 경우(생년월일)가 있었습니다. 그래서 이름·의미 유사도로 후보를 넓히고, 날짜·지표 컬럼은 역할로 먼저 거른 뒤, 실제 값이 겹치는지를 최종 근거로 삼았습니다.",
+        title: "구조는 Metadata API, 값은 REST",
+        body: "대시보드·시트·데이터 소스 구조는 Metadata API(GraphQL)로, 실제 값은 REST로 가져오도록 나눴습니다. 한쪽만 썼다면 구조 탐색이나 실데이터 접근 중 하나가 막혔을 구조였습니다.",
       },
     ],
-    result:
-      "가장 크게 배운 것은 GraphRAG를 사람이 손으로 채우지 않아도 된다는 점입니다. 에이전트가 데이터 사전(DD) 같은 명세서를 읽어 데이터 카탈로그를 만들고, 그 카탈로그로 구조화된 노드 계층을 세운 뒤, “이 컬럼과 저 컬럼은 같은 것을 가리키니 묶자”는 관계까지 스스로 추천하게 하면 그래프 구성 자체를 자동으로 돌릴 수 있었습니다.",
-    flow: graphragBiFlow,
   },
   {
     slug: "commerce-mall-poc",
-    title: "국내 대형 IT 서비스 기업 쇼핑몰 PoC",
+    title: "국내 대형 IT 서비스 기업 B2B 구매 포털 PoC",
     year: "2026",
     org: "디포커스",
     period: "2026.04 – 2026.05",
@@ -239,44 +225,11 @@ export const projects: Project[] = [
       "AI 기능 자체는 이미 충분히 만들 수 있었습니다. 중요한 것은 사용자가 실제로 필요로 하는 지점에 맞춰 AI 기술을 고르고 넣는 일이었습니다.",
   },
   {
-    slug: "tableau-ai-agent",
-    title: "국내 대형 물류 기업 Tableau AI",
-    year: "2026",
-    org: "디포커스",
-    period: "2026.01 – 2026.04",
-    roleShort: "AI 아키텍처 설계 · 개발",
-    tags: ["FastAPI", "LangGraph", "pgvector", "GraphQL", "Tableau", "React"],
-    summary:
-      "자연어 질의를 대시보드 인사이트로 바꾸는 Tableau 연동 에이전트",
-    problem:
-      "대시보드는 이미 있는데 정작 필요한 숫자를 찾으려면 어느 시트를 봐야 하는지부터 알아야 했습니다. Tableau의 메타데이터와 데이터 소스를 에이전트가 이해할 수 있는 형태로 끌어오는 것이 먼저 풀어야 할 문제였습니다.",
-    role:
-      "Tableau 대시보드와 연동되는 LLM 에이전트를 혼자 설계하고 개발했습니다.",
-    contribution: "1인 개발 (설계부터 개발까지 전담)",
-    tasks: [
-      "Tableau 메타데이터는 GraphQL, 실데이터는 REST로 가져오는 하이브리드 연동 구현",
-      "pgvector 벡터 검색과 GraphRAG로 질문에 맞는 대시보드·데이터 소스를 찾는 검색 파이프라인 구성",
-      "자연어 질문에서 대시보드 인사이트를 뽑는 LangGraph 에이전트를 FastAPI 서버로 구현",
-      "질의와 결과를 보여주는 React 화면 개발",
-    ],
-    outcomes: [
-      "후속 사업으로 이어짐 (2026.12 착수 예정)",
-    ],
-    highlights: [
-      {
-        title: "메타데이터는 GraphQL, 실데이터는 REST",
-        body: "Tableau의 대시보드·시트·데이터 소스 구조는 GraphQL로, 실제 값은 REST로 가져오도록 나눴습니다. 한쪽만 썼다면 스키마 탐색이나 실데이터 접근 중 하나가 막혔을 구조였습니다.",
-      },
-    ],
-    result:
-      "이 프로젝트에서 정리한 GraphRAG 접근을 한 고객사에 묶어 두지 않고, 범용 BI 에이전트 플랫폼으로 따로 개발해 다시 이 Tableau AI에 붙였습니다. 한 프로젝트를 위해 만든 기능도 구조를 떼어 두면 다른 곳에 다시 쓰는 제품이 될 수 있다는 것을 배웠습니다.",
-  },
-  {
     slug: "casino-anomaly-detection",
     title: "국내 대형 카지노 테이블 게임 이상탐지",
     year: "2025",
     org: "디포커스",
-    period: "2025.11 – 2026.04",
+    period: "2025.11 – 2026.01",
     roleShort: "모델 설계 · 학습 · 플랫폼 개발",
     tags: ["YOLOv8", "Python", "PyTorch", "OpenCV", "FastAPI", "React"],
     summary: "YOLOv8 파인튜닝과 ROI 공간 분석, 학습 데이터를 위한 레이블링 플랫폼까지 혼자 개발",
@@ -293,7 +246,7 @@ export const projects: Project[] = [
     ],
     outcomes: [
       "내부 인력 6명이 이 레이블링 플랫폼으로 학습 데이터 제작",
-      "고객사 시연·검수 완료",
+      "개발 완료 후 고객사 시연·검수 (2026.04까지)",
       "고객사 대표이사 지시로 DX팀과 도입 협의까지 진행했으나, 비용 문제로 도입은 보류",
     ],
     highlights: [
@@ -307,24 +260,32 @@ export const projects: Project[] = [
   },
   {
     slug: "llm-sentiment-analysis",
-    title: "국내 ERP 솔루션 기업 LLM 서비스 감정분석 고도화",
+    title: "자사 LLM 챗봇 서비스(ERP 탑재) 유지보수·고도화",
     year: "2025",
     org: "디포커스",
-    period: "2025.10 – 2025.12",
-    roleShort: "풀스택 개발",
-    tags: ["Python", "Django", "Vanilla JS", "OpenAI"],
+    period: "2025.08 – 2025.12",
+    roleShort: "유지보수 · 추가 개발",
+    tags: ["Python", "Django", "PostgreSQL", "pgbouncer", "OpenAI"],
     summary:
-      "고객 문의·상담 내용의 감정을 LLM으로 분석하는 API와 대시보드를 기존 LLM 서비스에 더한 고도화",
+      "ERP에 가젯으로 들어간 자사 LLM 챗봇의 백엔드를 넘겨받아, 반복 장애의 원인을 고치고 감정분석 기능을 고도화",
     role:
-      "2명 팀에서 풀스택 개발을 맡아, 고객 문의·상담 감정분석 API와 대시보드를 만들고 LLM 호출을 비동기로 처리했습니다.",
-    contribution: "2명 팀에서 풀스택 개발",
+      "ERP 가젯형 LLM 챗봇의 백엔드를 인수해 유지보수하면서, 반복되던 장애를 해결하고 3명 팀에서 감정분석 API·대시보드 고도화를 맡았습니다. 2025.12 이후로도 유지보수를 이어 가고 있습니다.",
+    contribution: "백엔드 유지보수 담당, 감정분석 고도화는 3명 팀",
     tasks: [
-      "고객 문의·상담 내용의 감정을 LLM으로 분석하는 감정분석 API 개발 (Django)",
-      "감정분석 결과를 보여주는 대시보드 화면 개발",
+      "ERP 가젯형 LLM 챗봇 백엔드를 인수해 유지보수",
+      "컨테이너가 반복해서 교체되던 장애의 원인(DB 커넥션 풀 고갈)을 찾아, pgbouncer 도입과 컨테이너 분리로 해결",
+      "고객 문의·상담 감정분석 API와 대시보드 고도화 (2025.10 – 12, Django)",
       "LLM 호출을 비동기로 처리해 서비스 응답과 분리",
     ],
     outcomes: [
-      "고객사 LLM 서비스에 반영돼 운영",
+      "감정분석 고도화가 서비스에 반영돼 운영",
+      "2025.12 이후에도 유지보수 계속",
+    ],
+    highlights: [
+      {
+        title: "재시작으로 넘기지 않고 원인을 찾는다",
+        body: "컨테이너가 반복해서 교체되는 장애를 재시작으로 넘기지 않고 추적해, DB 커넥션 풀이 고갈되는 것이 원인임을 확인했습니다. pgbouncer로 커넥션을 모으고 컨테이너를 나눠 해결했습니다.",
+      },
     ],
   },
   {
@@ -359,27 +320,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "tableau-ai-poc",
-    title: "국내 대기업 Tableau AI PoC",
-    year: "2025",
-    org: "디포커스",
-    period: "2025.08 – 2025.09",
-    roleShort: "풀스택 개발",
-    tags: ["Java", "Spring Boot", "Vue 2", "Python", "FastAPI", "Tableau VDS API"],
-    summary:
-      "그룹사 사내 LLM과 Tableau VDS API를 연동해 질의 결과를 표와 차트로 보여준 PoC",
-    role:
-      "혼자 풀스택으로 개발해, 그룹사 사내 LLM과 Tableau VDS API를 연동하고 질의 결과를 표와 차트로 보여주는 화면을 만들었습니다.",
-    contribution: "1인 개발",
-    tasks: [
-      "그룹사 사내 LLM과 Tableau VDS API를 연동해 질의 결과를 가져오는 서버 개발 (Spring Boot·FastAPI)",
-      "질의 결과를 표와 차트로 보여주는 화면 개발 (Vue 2)",
-    ],
-    outcomes: [
-      "고객사 시연 완료",
-    ],
-  },
-  {
     slug: "logistics-risk-tableau",
     title: "국내 대형 물류 기업 리스크 관리·BI 대시보드",
     year: "2024",
@@ -405,7 +345,7 @@ export const projects: Project[] = [
     outcomes: [
       "현업이 대시보드를 운영에 사용",
       "리스크 관리 이후 외부데이터 자산화·SCM 대시보드 추가 개발로 이어짐",
-      "이 고객사와의 BI 작업이 2026년 Tableau AI 프로젝트로 이어짐",
+      "증감 사유를 엑셀로 작성·공유하던 운영에서 AI 분석 자동화 니즈를 확인해, 2026년 Tableau AI 에이전트로 이어짐",
     ],
     highlights: [
       {
@@ -415,6 +355,19 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+/**
+ * 합치거나 지운 프로젝트의 옛 slug → 새 주소.
+ * 예전에 공유한 링크가 404가 되지 않게, 화면(App.tsx)과 빌드(routeHtmlPlugin)가 이 표로 새 주소로 보낸다.
+ * 새 주소가 사이트에 없으면 빌드가 멈춘다.
+ */
+export const movedProjects: Record<string, string> = {
+  // 2026.11 이력서 기준으로 Tableau AI 에이전트 1건으로 합침
+  "graphrag-bi-agent": "/projects/tableau-ai-agent",
+  "tableau-ai-poc": "/projects/tableau-ai-agent",
+  // 2026.11 이력서에 없어 삭제
+  "financial-ad-review-agent": "/projects",
+};
 
 /** slug로 프로젝트 하나를 찾는다. 없으면 undefined. */
 export function findProject(slug: string): Project | undefined {

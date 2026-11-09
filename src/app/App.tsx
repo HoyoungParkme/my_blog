@@ -10,6 +10,7 @@
 import { Redirect, Route, Router as WouterRouter, Switch, useLocation } from "wouter";
 
 import { PageShell } from "@/components/layout/PageShell";
+import { movedProjects } from "@/content/projects";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import About from "@/pages/About";
 import Blog from "@/pages/Blog";
@@ -40,6 +41,12 @@ function AppRoutes() {
       <Route path="/projects/contests">
         <Projects group="contest" />
       </Route>
+      {/* 합치거나 지운 프로젝트의 옛 주소는 새 주소로 보낸다. 이것도 상세(:slug)보다 먼저 둔다 */}
+      {Object.entries(movedProjects).map(([slug, to]) => (
+        <Route key={slug} path={`/projects/${slug}`}>
+          <Redirect to={to} replace />
+        </Route>
+      ))}
       <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={PostDetail} />
