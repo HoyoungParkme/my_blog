@@ -33,7 +33,7 @@ import {
 } from "../src/content/siteMeta";
 
 interface RouteMeta {
-  /** 주소 경로. 예: `/projects/graphrag-bi-agent` */
+  /** 주소 경로. 예: `/projects/tableau-ai-agent` */
   path: string;
   title: string;
   description: string;
