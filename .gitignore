@@ -2,6 +2,10 @@ node_modules
 dist
 # 배포 때 npm run pdf가 만드는 PDF (경력기술서·프로젝트 상세)
 public/pdf/
+
+# 전달용 이력서의 개인정보와 그 PDF (공개 저장소라 올리지 않음). 형식 예시 파일만 올린다
+private/*
+!private/cv-private.example.json
 .DS_Store
 .playwright-mcp/
 

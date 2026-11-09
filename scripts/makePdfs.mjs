@@ -2,7 +2,8 @@
  * PDF 만들기
  *
  * 파일 경로: scripts/makePdfs.mjs
- * 목적: 경력기술서와 프로젝트 상세 화면을 A4 PDF로 인쇄해 public/pdf/에 둔다. 배포하면 그대로 올라간다.
+ * 목적: 경력기술서·이력서와 프로젝트 상세 화면을 A4 PDF로 인쇄해 public/pdf/에 둔다. 배포하면 그대로 올라간다.
+ *       private/cv-private.json이 있으면 개인정보를 넣은 전달용 이력서를 private/에 따로 만든다(배포 안 됨).
  * 주요 기능:
  *   - 개발 서버(vite)를 잠깐 띄운다. 경력기술서 화면(/resume)은 개발 서버에서만 열리기 때문이다
  *   - 시스템 Chrome 헤드리스의 --print-to-pdf로 /resume과 /projects/<slug>를 인쇄한다
@@ -23,6 +24,9 @@ const PORT = 5180;
 const BASE = `http://localhost:${PORT}`;
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 const OUT_DIR = path.join(ROOT, "public/pdf");
+/** 전달용 이력서의 개인정보 파일과 그 PDF를 두는 곳 (git 제외) */
+const PRIVATE_DIR = path.join(ROOT, "private");
+const PRIVATE_PROFILE = path.join(PRIVATE_DIR, "cv-private.json");
 
 /** projects.ts에서 slug 목록을 읽는다. 블록마다 들여쓰기 4칸의 `slug: "…"` 한 줄이 있다. */
 function readProjectSlugs() {
@@ -75,6 +79,11 @@ try {
   await waitForServer(BASE, 30_000);
   console.log("PDF 인쇄:");
   printPdf(`${BASE}/resume`, path.join(OUT_DIR, "resume.pdf"));
+  // 이력서 공개용은 사이트에 올라가고, 전달용(개인정보 포함)은 개인정보 파일이 있는 본인 컴퓨터에서만 private/에 만든다
+  printPdf(`${BASE}/cv`, path.join(OUT_DIR, "cv.pdf"));
+  if (fs.existsSync(PRIVATE_PROFILE)) {
+    printPdf(`${BASE}/cv/full`, path.join(PRIVATE_DIR, "박호영_이력서.pdf"));
+  }
 
   const projectDir = path.join(OUT_DIR, "projects");
   fs.rmSync(projectDir, { recursive: true, force: true });

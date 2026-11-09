@@ -14,6 +14,7 @@ import { movedProjects } from "@/content/projects";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import About from "@/pages/About";
 import Blog from "@/pages/Blog";
+import Cv from "@/pages/Cv";
 import NotFound from "@/pages/NotFound";
 import PostDetail from "@/pages/PostDetail";
 import ProjectDetail from "@/pages/ProjectDetail";
@@ -52,6 +53,17 @@ function AppRoutes() {
       <Route path="/blog/:slug" component={PostDetail} />
       {/* 경력기술서 인쇄 원본. 개발 서버에서만 연다 — 배포 빌드에서는 이 줄과 화면 코드가 빠진다 */}
       {import.meta.env.DEV && <Route path="/resume" component={Resume} />}
+      {/* 이력서 인쇄 원본. /cv는 공개용, /cv/full은 개인정보까지 넣은 전달용. 경력기술서처럼 개발 서버에서만 연다 */}
+      {import.meta.env.DEV && (
+        <Route path="/cv">
+          <Cv />
+        </Route>
+      )}
+      {import.meta.env.DEV && (
+        <Route path="/cv/full">
+          <Cv full />
+        </Route>
+      )}
       <Route component={NotFound} />
     </Switch>
   );
