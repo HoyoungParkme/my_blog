@@ -44,6 +44,66 @@ export const profile = {
   ],
   /** 경력기술서 핵심역량 아래 기술 한 줄 */
   coreTech: ["Python", "FastAPI", "LangGraph", "Neo4j", "pgvector", "React", "Tableau"],
+  /** 이력서 PDF 경로. 경력기술서와 같이 `npm run pdf`가 이력서 화면(/cv)을 인쇄해 만든다. */
+  cvUrl: "/pdf/cv.pdf",
+  /** 이력서 이름 아래 한 줄 소개 */
+  cvHeadline: "현업이 쓰던 방식 위에 AI를 올려 실제로 쓰이게 만드는 AI 엔지니어",
+};
+
+/** 이력서의 재직 상세. 지금은 회사가 하나라 한 덩어리로 둔다. */
+export const employment = {
+  company: "디포커스",
+  business: "IT 서비스 · 데이터/AI 솔루션",
+  term: "2024.07 – 현재",
+  position: "선임",
+  departments: ["Data Biz 본부 AI팀 (2025.08 – 현재)", "BI팀 (2024.07 – 2025.07)"],
+  duties: "AI 서비스 기획·개발(풀스택), 자사 LLM 서비스 유지보수",
+};
+
+/** 이력서 "주요 성과" 한 건. href는 근거가 되는 프로젝트 상세 주소다. */
+export interface Achievement {
+  title: string;
+  period: string;
+  points: string[];
+  href: string;
+}
+
+/** 이력서 "주요 성과". 출처: 본인 이력서(2026.11)의 "경력사항 중 내세울 수 있는 성과" */
+export const keyAchievements: Achievement[] = [
+  {
+    title: "대시보드 증감 사유 분석 AI 에이전트, PoC에서 본 프로젝트까지",
+    period: "2025.08 – 2026.09 (본 프로젝트 2026.12 착수)",
+    points: [
+      "화면을 보는 사람과 데이터만 보는 AI의 간극을 문제로 정의",
+      "고객사 LLM·배치 주기·기존 DB에 맞춘 AI 환경 구축",
+      "PoC 2건과 사내 연구를 설계·개발, 고객사 임원 검토 통과 후 본 프로젝트 수주",
+    ],
+    href: "/projects/tableau-ai-agent",
+  },
+  {
+    title: "간접재 구매 포털 AI 기능 설계·개발, 본사업 전환",
+    period: "2026.04 – 2026.05",
+    points: [
+      "멀티턴 상품 검색 챗봇, 텍스트·이미지 유사도로 중복 상품 검토",
+      "견적 초안 작성·과거 낙찰가 대비 단가 적정성 판단, 구매요청서 문구 자동 작성",
+    ],
+    href: "/projects/commerce-mall-poc",
+  },
+  {
+    title: "정유사 SAP 기준정보 6종 검증 자동화 플랫폼 개발",
+    period: "2026.10 – 현재",
+    points: [
+      "엑셀로 하던 기준정보 6종 검증을 사내 규칙의 시스템 검사로 전환",
+      "OneDrive 공유·엑셀 작업 흐름을 그대로 연결, 엑셀 가져오기·내보내기 지원",
+    ],
+    href: "/projects/refinery-master-data-cleansing",
+  },
+];
+
+export const military: HistoryEntry = {
+  term: "2017.07 – 2019.04",
+  name: "육군 만기 제대",
+  detail: "병장",
 };
 
 export const experiences: HistoryEntry[] = [

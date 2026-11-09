@@ -74,6 +74,11 @@ function ProfileBlock() {
               경력기술서 PDF
             </a>
           )}
+          {profile.cvUrl && (
+            <a href={profile.cvUrl} className="rounded border border-ink px-4 py-2">
+              이력서 PDF
+            </a>
+          )}
           <a
             href={profile.github}
             target="_blank"

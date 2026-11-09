@@ -1,0 +1,7 @@
+{
+  "phone": "010-0000-0000",
+  "birth": "YYYY.MM.DD",
+  "address": "주소",
+  "highSchool": { "term": "YYYY.MM – YYYY.MM", "name": "OO고등학교", "detail": "졸업" },
+  "gpa": "0.00 / 4.5"
+}
