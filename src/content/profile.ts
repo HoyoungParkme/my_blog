@@ -72,11 +72,11 @@ export interface Achievement {
 export const keyAchievements: Achievement[] = [
   {
     title: "대시보드 증감 사유 분석 AI 에이전트, PoC에서 본 프로젝트까지",
-    period: "2025.08 – 2026.09 (본 프로젝트 2026.12 착수)",
+    period: "2026.01 – 2026.09 (본 프로젝트 2026.12 착수)",
     points: [
       "화면을 보는 사람과 데이터만 보는 AI의 간극을 문제로 정의",
       "고객사 LLM·배치 주기·기존 DB에 맞춘 AI 환경 구축",
-      "PoC 2건과 사내 연구를 설계·개발, 고객사 임원 검토 통과 후 본 프로젝트 수주",
+      "PoC와 사내 연구를 설계·개발, 고객사 임원 검토 통과 후 본 프로젝트 수주",
     ],
     href: "/projects/tableau-ai-agent",
   },

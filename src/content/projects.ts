@@ -175,31 +175,30 @@ export const projects: Project[] = [
     title: "대시보드 증감 사유 분석 Tableau AI 에이전트",
     year: "2026",
     org: "디포커스",
-    period: "2025.08 – 2026.09",
+    period: "2026.01 – 03, 2026.06 – 09",
     roleShort: "PoC·연구 설계 · 개발",
-    tags: ["Tableau", "langchain_tableau", "LangGraph", "PostgreSQL", "pgvector", "FastAPI"],
+    tags: ["Tableau", "LangGraph", "PostgreSQL", "pgvector", "FastAPI"],
     summary:
-      "대시보드 숫자가 왜 오르고 내렸는지 자연어로 묻는 Tableau AI 에이전트. PoC 2건과 사내 연구를 거쳐 본 프로젝트로 확정",
+      "대시보드 숫자가 왜 오르고 내렸는지 자연어로 묻는 Tableau AI 에이전트. PoC와 사내 연구를 거쳐 본 프로젝트로 확정",
     problem:
       "현업은 대시보드 숫자가 왜 바뀌었는지를 엑셀로 따로 정리해 공유하고 있었습니다. 이 일을 AI에게 맡기려 하자 두 가지 간극이 드러났습니다. 하나는 사람은 화면을 보고 묻는데 AI는 데이터 소스만 본다는 것입니다. 화면의 숫자는 필터와 집계를 거친 값이라, 원본 데이터만 받아서는 같은 숫자가 나오지 않습니다. 다른 하나는 증감 사유 자체가 데이터 안에 없다는 것입니다. 현업 담당자는 수출량이 떨어지면 그 원인을 데이터가 아니라 바깥 소식에서 찾고 있었습니다.",
     role:
-      "PoC 2건을 혼자 설계·개발하고, 그 결과를 사내 연구로 이어 가 본 프로젝트 착수까지 연결했습니다. 본 프로젝트에서는 에이전트 파트를 맡습니다.",
-    contribution: "PoC 2건 1인 설계·개발, 사내 연구 2명, 본 프로젝트 에이전트 파트",
+      "PoC를 혼자 설계·개발하고, 그 결과를 사내 연구로 이어 가 본 프로젝트 착수까지 연결했습니다. 본 프로젝트에서는 에이전트 파트를 맡습니다.",
+    contribution: "PoC 1인 설계·개발, 사내 연구 2명, 본 프로젝트 에이전트 파트",
     tasks: [
-      "PoC① 대기업 그룹사(2025.08 – 09): 고객사가 제안한 langchain_tableau와 사내 LLM으로 대시보드 질의 챗봇을 만들고, 이 구조로는 화면 숫자·여러 데이터에 걸친 질문을 풀 수 없다는 한계 확인",
-      "PoC② 대형 물류 기업(2026.01 – 03): Tableau MCP 대신 Metadata API·REST로 대시보드 구조와 값을 하루 1회 적재하고, langchain_tableau 없이 LangGraph(ReAct) 에이전트를 직접 구현",
+      "PoC 대형 물류 기업(2026.01 – 03): Tableau MCP 대신 Metadata API·REST로 대시보드 구조와 값을 하루 1회 적재하고, langchain_tableau 없이 LangGraph(ReAct) 에이전트를 직접 구현",
       "검색은 Qdrant 대신 고객사가 이미 쓰는 PostgreSQL에 pgvector로 통일",
       "사내에 모아 둔 뉴스 데이터를 API로 연결해, 숫자가 변한 기간의 기사를 찾아 증감 사유로 붙이는 흐름 구현",
       "사내 연구(2026.06 – 09, 2명): GraphRAG·멀티모달·워크북 XML 세 방식을 비교해 워크북 XML 구조 적재를 채택",
     ],
     outcomes: [
-      "PoC② 고객사 임원 검토 통과, 사내 연구로 연결",
+      "PoC 고객사 임원 검토 통과, 사내 연구로 연결",
       "본 프로젝트 착수 확정 (2026.12 – 2027.02), 목표는 증감 사유 분석 자동화",
     ],
     highlights: [
       {
         title: "Tableau가 주는 도구로는 화면을 볼 수 없었다",
-        body: "langchain_tableau는 tool 하나가 데이터 소스 하나에 묶이고, 호출마다 인증·메타데이터 조회·질의 작성을 다시 합니다. 데이터 소스 두 개에 걸친 질문을 못 받고, 원본에 직접 질의하니 화면의 필터·집계를 거친 숫자와도 맞지 않았습니다. Tableau MCP는 같은 정보를 REST·Metadata API로도 받을 수 있는데 tool로 그때그때 불러 느렸고, 화면 데이터와 데이터 소스 필드를 이어 줄 정보가 없어 서로 맞춰지지 않았습니다. 그래서 라이브러리를 버리고 API로 직접 받아 LangGraph 에이전트를 만들었습니다.",
+        body: "Tableau가 제공하는 langchain_tableau는 tool 하나가 데이터 소스 하나에 묶이고, 호출마다 인증·메타데이터 조회·질의 작성을 다시 합니다. 데이터 소스 두 개에 걸친 질문을 못 받고, 원본에 직접 질의하니 화면의 필터·집계를 거친 숫자와도 맞지 않았습니다. Tableau MCP는 같은 정보를 REST·Metadata API로도 받을 수 있는데 tool로 그때그때 불러 느렸고, 화면 데이터와 데이터 소스 필드를 이어 줄 정보가 없어 서로 맞춰지지 않았습니다. 그래서 라이브러리를 버리고 API로 직접 받아 LangGraph 에이전트를 만들었습니다.",
       },
       {
         title: "새 인프라 대신 고객사가 이미 쓰는 것 위에",
@@ -326,37 +325,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "cobol-java-migration",
-    title: "국내 대형 자동차 부품사 COBOL → Java 전환",
-    year: "2025",
-    org: "디포커스",
-    period: "2025.09 – 2025.10",
-    roleShort: "백엔드 · 파이프라인 개발",
-    tags: ["COBOL", "Java", "Python", "Neo4j", "LangGraph", "FastAPI"],
-    summary:
-      "화면 명세서가 없는 COBOL 서비스를 에이전트로 문서화하고, 그 명세를 바탕으로 Java 전환 문서를 만드는 파이프라인",
-    problem:
-      "고객사는 COBOL로 작성된 서비스를 Java로 옮기려 했지만, 현재 서비스의 화면 명세서가 없었습니다. 무엇을 옮겨야 하는지부터 문서로 정리해야 했고, 고객사는 이 과정을 에이전트로 해 달라고 요청했습니다.",
-    role:
-      "3명 팀에서 백엔드를 맡아, COBOL 소스를 문서로 되살리고 그 문서를 Java 전환 문서로 옮기는 두 파이프라인을 개발했습니다.",
-    contribution: "3명 팀에서 백엔드(파이프라인) 개발",
-    tasks: [
-      "COBOL 소스를 파싱하는 파이프라인 개발",
-      "프로그램·사본(copybook)·화면 같은 COBOL 구성 요소의 관계를 Neo4j 그래프(GraphRAG)로 구성",
-      "파싱 결과와 그래프를 바탕으로 에이전트(LangGraph)가 COBOL 화면 명세서를 작성하는 흐름 구현",
-      "COBOL 명세서를 Java 버전 문서로 옮기는 변환 자동화 파이프라인 개발",
-    ],
-    outcomes: [
-      "고객사 시연·검수 완료",
-    ],
-    highlights: [
-      {
-        title: "코드보다 문서를 먼저 되살린다",
-        body: "명세서가 없는 레거시를 코드에서 바로 번역하는 대신, 현재 동작을 화면 명세서로 먼저 되살리고 그 문서를 전환의 기준으로 삼았습니다. 무엇을 옮겨야 하는지부터 문서로 합의해야 했기 때문입니다.",
-      },
-    ],
-  },
-  {
     slug: "logistics-risk-tableau",
     title: "국내 대형 물류 기업 리스크 관리·BI 대시보드",
     year: "2024",
@@ -404,6 +372,8 @@ export const movedProjects: Record<string, string> = {
   "tableau-ai-poc": "/projects/tableau-ai-agent",
   // 2026.11 이력서에 없어 삭제
   "financial-ad-review-agent": "/projects",
+  // 2026.11.14 이력서에 없어 삭제
+  "cobol-java-migration": "/projects",
 };
 
 /** slug로 프로젝트 하나를 찾는다. 없으면 undefined. */
