@@ -37,8 +37,15 @@ function ProjectRow({ project }: { project: Project }) {
       href={`/projects/${project.slug}`}
       className="grid grid-cols-1 items-start gap-1.5 border-b border-rule py-5 dt:grid-cols-[132px_minmax(0,1fr)_auto] dt:items-baseline dt:gap-6"
     >
-      <span className="whitespace-nowrap text-sm tabular-nums text-ink-faint">
-        {project.period}
+      {/* 기간이 둘이면(예: "2026.01 – 03, 2026.06 – 09") 132px 칸을 넘어 제목과 겹친다.
+          데스크톱에서는 기간마다 줄을 나누고, 한 칸짜리 모바일에서는 쉼표로 이어 한 줄에 둔다. */}
+      <span className="text-sm tabular-nums text-ink-faint">
+        {project.period.split(", ").map((part, index, parts) => (
+          <span key={part} className="whitespace-nowrap dt:block">
+            {part}
+            {index < parts.length - 1 && <span className="dt:hidden">, </span>}
+          </span>
+        ))}
       </span>
       <div>
         <div className="text-base font-semibold">{project.title}</div>
