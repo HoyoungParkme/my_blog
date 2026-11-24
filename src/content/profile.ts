@@ -137,7 +137,7 @@ export const certifications: HistoryEntry[] = [
 
 /**
  * 대회. term은 진출 결과가 발표된 달이다.
- * AI 챔피언: 본선 심사 통과 = 1차 결선 진출 40팀(일반 20 / 국내 AI 20, 2026.08.21 공식 공지). 국내 AI 트랙 지원 122팀. 최종 20위(본인 이력서 2026.11 기준).
+ * AI 챔피언: 본선 심사 통과 = 1차 결선 진출 40팀(일반 20 / 국내 AI 20, 2026.08.21 공식 공지). 지원은 일반 트랙 281팀, 국내 AI 트랙 122팀으로 합쳐 403팀(과기정통부 발표). 최종 20위(본인 이력서 2026.11 기준).
  * 부산 Big Data 활용 대회: 결선 진출(2026.09, 부산테크노파크). 명칭·주최는 본인 이력서(2026.11) 기준.
  */
 export const competitions: HistoryEntry[] = [
@@ -149,7 +149,7 @@ export const competitions: HistoryEntry[] = [
   {
     term: "2026.08",
     name: "2026 AI 챔피언 대회 국내 AI 트랙 최종 20위",
-    detail: "과학기술정보통신부 · 지원 122팀",
+    detail: "과학기술정보통신부 · 전체 지원 403팀",
     href: "/projects/insurance-claim-assistant",
   },
 ];
