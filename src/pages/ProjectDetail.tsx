@@ -75,19 +75,19 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
       <div className="mt-9 text-base leading-[1.75] text-ink-body">
         {project.problem && (
           <DetailSection id="sec-0" title="배경과 문제">
-            <p className="mb-8 [text-wrap:pretty]">{project.problem}</p>
+            <Prose text={project.problem} className="mb-8" />
           </DetailSection>
         )}
 
         <DetailSection id="sec-1" title="내가 한 일">
-          <p className="mb-4 [text-wrap:pretty]">{project.role}</p>
+          <Prose text={project.role} className="mb-4" />
           {/* 대표 프로젝트만 쓰는 핵심 결정 목록. 없으면 렌더하지 않는다 */}
           {project.highlights && project.highlights.length > 0 && (
             <ul className="mb-8 flex flex-col gap-5">
               {project.highlights.map((item) => (
                 <li key={item.title} className="break-inside-avoid border-l-2 border-rule pl-4">
                   <div className="font-semibold text-ink">{item.title}</div>
-                  <p className="mt-1 [text-wrap:pretty]">{item.body}</p>
+                  <Prose text={item.body} className="mt-1" />
                 </li>
               ))}
             </ul>
@@ -107,7 +107,7 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
 
         {project.result && (
           <DetailSection id="sec-2" title={sectionTitle(SECTIONS[3], project)}>
-            <p className="[text-wrap:pretty]">{project.result}</p>
+            <Prose text={project.result} />
           </DetailSection>
         )}
       </div>
@@ -154,17 +154,54 @@ function GlanceRow({ label, children }: { label: string; children: ReactNode }) 
   );
 }
 
+/**
+ * 본문 문단. 글에 빈 줄("\n\n")이 있으면 문단을 나눠 그린다.
+ * 한 덩어리로 길게 이어진 글은 화면에서 읽기 어려워서, 콘텐츠에서 문단을 나눌 수 있게 했다.
+ */
+function Prose({ text, className = "" }: { text: string; className?: string }) {
+  return (
+    <div className={`flex flex-col gap-3 ${className}`}>
+      {text.split("\n\n").map((paragraph) => (
+        <p key={paragraph} className="[text-wrap:pretty]">
+          {paragraph}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * 목록 한 줄을 "라벨"과 "내용"으로 나눈다.
+ * "고객·벤더: 원본 통합 → …"처럼 짧은 라벨로 시작하는 줄만 나눈다. 라벨이 길거나 화살표가 들어 있으면 문장으로 본다.
+ */
+function splitLead(item: string): { lead?: string; rest: string } {
+  const at = item.indexOf(": ");
+  if (at < 1 || at > 28 || item.slice(0, at).includes("→")) return { rest: item };
+  return { lead: item.slice(0, at), rest: item.slice(at + 2) };
+}
+
 function BulletList({ items }: { items: string[] }) {
   return (
-    <ul className="flex flex-col gap-1.5">
-      {items.map((item) => (
-        <li
-          key={item}
-          className="relative pl-3.5 [text-wrap:pretty] before:absolute before:left-0.5 before:top-[0.72em] before:h-1 before:w-1 before:rounded-full before:bg-ink-faint before:content-['']"
-        >
-          {item}
-        </li>
-      ))}
+    <ul className="flex flex-col gap-2">
+      {items.map((item) => {
+        const { lead, rest } = splitLead(item);
+        const steps = rest.split(" → ");
+        return (
+          <li
+            key={item}
+            className="relative pl-3.5 [text-wrap:pretty] before:absolute before:left-0.5 before:top-[0.72em] before:h-1 before:w-1 before:rounded-full before:bg-ink-faint before:content-['']"
+          >
+            {/* 라벨은 굵게, 단계 사이 화살표는 흐리게 해서 한 줄 안에서 덩어리가 보이게 한다 */}
+            {lead && <span className="font-semibold text-ink">{lead}: </span>}
+            {steps.map((step, index) => (
+              <span key={`${index}-${step}`}>
+                {index > 0 && <span className="text-ink-faint"> → </span>}
+                {step}
+              </span>
+            ))}
+          </li>
+        );
+      })}
     </ul>
   );
 }
