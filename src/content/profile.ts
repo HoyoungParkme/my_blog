@@ -40,10 +40,10 @@ export const profile = {
     "발굴·사업화: 현업 시스템 운영 중 찾은 AI 과제를 PoC와 사내 연구로 검증해 본 프로젝트로 연결",
     "구축: 고객사가 허용한 LLM과 이미 쓰는 DB 안에서 챗봇·RAG·에이전트 설계·개발",
     "데이터 분석: 현업과 리스크 판단 지표를 정의해 대시보드로 구현, 공공데이터 생존분석·공간분석으로 빅데이터 대회 결선",
-    "현장 적용: 엑셀·OneDrive 같은 기존 작업 방식을 바꾸지 않고 그 위에 올리는 설계",
+    "현장 적용: 엑셀 같은 기존 작업 방식을 바꾸지 않고 그 위에 올리는 설계",
   ],
   /** 경력기술서 핵심역량 아래 기술 한 줄 */
-  coreTech: ["Python", "FastAPI", "LangGraph", "Neo4j", "pgvector", "React", "Tableau"],
+  coreTech: ["Python", "FastAPI", "LangGraph", "MCP", "Neo4j", "pgvector", "React", "Tableau"],
   /** 이력서 PDF 경로. 경력기술서와 같이 `npm run pdf`가 이력서 화면(/cv)을 인쇄해 만든다. */
   cvUrl: "/pdf/cv.pdf",
   /** 이력서 이름 아래 한 줄 소개 */
@@ -72,11 +72,11 @@ export interface Achievement {
 export const keyAchievements: Achievement[] = [
   {
     title: "대시보드 증감 사유 분석 AI 에이전트, PoC에서 본 프로젝트까지",
-    period: "2026.01 – 2026.09 (본 프로젝트 2026.12 착수)",
+    period: "2026.01 – 03, 2026.06 – 09 (본 프로젝트 2026.12 예정)",
     points: [
       "화면을 보는 사람과 데이터만 보는 AI의 간극을 문제로 정의",
       "고객사 LLM·배치 주기·기존 DB에 맞춘 AI 환경 구축",
-      "PoC와 사내 연구를 설계·개발, 고객사 임원 검토 통과 후 본 프로젝트 수주",
+      "PoC와 사내 연구를 설계·개발, 고객사 임원 검토 통과 후 본 프로젝트 착수 확정",
     ],
     href: "/projects/tableau-ai-agent",
   },
@@ -85,7 +85,7 @@ export const keyAchievements: Achievement[] = [
     period: "2026.04 – 2026.05",
     points: [
       "멀티턴 상품 검색 챗봇, 텍스트·이미지 유사도로 중복 상품 검토",
-      "견적 초안 작성·과거 낙찰가 대비 단가 적정성 판단, 구매요청서 문구 자동 작성",
+      "견적 요청서 초안과 구매요청서 문구 자동 작성, 과거 견적의 단가 분포로 단가 적정성 판단",
     ],
     href: "/projects/commerce-mall-poc",
   },
@@ -93,8 +93,9 @@ export const keyAchievements: Achievement[] = [
     title: "정유사 SAP 기준정보 6종 검증 자동화 플랫폼 개발",
     period: "2026.10 – 현재",
     points: [
-      "엑셀로 하던 기준정보 6종 검증을 사내 규칙의 시스템 검사로 전환",
-      "OneDrive 공유·엑셀 작업 흐름을 그대로 연결, 엑셀 가져오기·내보내기 지원",
+      "엑셀로 하던 기준정보 6종 검증을 사내 규칙의 시스템 검사와 AI 검토로 전환",
+      "규칙 변경·변환 규칙 구현·조회 Agent와 MCP 서버 개발",
+      "고객사 사내망에 배포, 담당자들이 정비 작업에 사용 중",
     ],
     href: "/projects/refinery-master-data-cleansing",
   },
@@ -136,7 +137,7 @@ export const certifications: HistoryEntry[] = [
 
 /**
  * 대회. term은 진출 결과가 발표된 달이다.
- * AI 챔피언: 본선 심사 통과 = 1차 결선 진출 40팀(일반 20 / 국내 AI 20, 2026.08.21 공식 공지). 국내 AI 트랙 지원 122팀. 2026.11 결선 진행 중.
+ * AI 챔피언: 본선 심사 통과 = 1차 결선 진출 40팀(일반 20 / 국내 AI 20, 2026.08.21 공식 공지). 국내 AI 트랙 지원 122팀. 최종 20위(본인 이력서 2026.11 기준).
  * 부산 Big Data 활용 대회: 결선 진출(2026.09, 부산테크노파크). 명칭·주최는 본인 이력서(2026.11) 기준.
  */
 export const competitions: HistoryEntry[] = [
@@ -147,8 +148,8 @@ export const competitions: HistoryEntry[] = [
   },
   {
     term: "2026.08",
-    name: "2026 AI 챔피언 대회 국내 AI 트랙 1차 결선 진출",
-    detail: "과학기술정보통신부",
+    name: "2026 AI 챔피언 대회 국내 AI 트랙 최종 20위",
+    detail: "과학기술정보통신부 · 지원 122팀",
     href: "/projects/insurance-claim-assistant",
   },
 ];
